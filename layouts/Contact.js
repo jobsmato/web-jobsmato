@@ -14,7 +14,7 @@ const Contact = ({ data }) => {
           <div className="animate lg:col-5">
             <ImageFallback
               className="mx-auto lg:pr-10"
-              src="/images/vectors/contact.png"
+              src="images/vectors/contact.png"
               width={497}
               height={397}
               alt=""
