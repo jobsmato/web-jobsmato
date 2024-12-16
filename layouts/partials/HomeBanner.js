@@ -157,7 +157,12 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   {markdownify(
                     bannerData.title,
                     "h1",
-                    "mb-8 banner-title opacity-0"
+                    "mb-8 banner-title text-primary opacity-0"
+                  )}
+                                    {markdownify(
+                    bannerData.paragraph,
+                    "h5",
+                    "mb-8 banner-title text-primary opacity-0"
                   )}
                   <div className="banner-btn opacity-0">
                     <Link
@@ -168,11 +173,11 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     </Link>
                   </div>
                 </div>
-                <div className="col-10">
+                <div className="col-7">
                   <ImageFallback
                     className="banner-img opacity-0"
                     src={bannerData.image}
-                    width={1170}
+                    width={800}
                     height={666}
                     priority={true}
                     alt=""

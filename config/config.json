@@ -1,12 +1,12 @@
 {
   "site": {
-    "title": "Andromeda Light Nextjs",
+    "title": "Jobsmato Light Nextjs",
     "base_url": "/",
     "favicon": "/images/favicon.png",
     "logo": "/images/logo.svg",
     "logo_width": "240",
     "logo_height": "34",
-    "logo_text": "Andromeda"
+    "logo_text": "Jobsmato"
   },
 
   "settings": {
@@ -18,8 +18,8 @@
   "params": {
     "tag_manager_id": "",
     "contact_form_action": "#",
-    "footer_content": "Lorem ipsum dolor sit sed dmi amet, consectetur adipiscing. Cdo tellus, sed condimentum volutpat.",
-    "copyright": "Designed & Developed By [Themefisher](https:www.themefisher.com)"
+    "footer_content": "An innovative solution for HR professionals seeking stability.",
+    "copyright": "Designed & Developed By [Ashvi Technology Solutions](https:www.ashvi.tech)"
   },
 
   "contact_info": {
@@ -30,7 +30,7 @@
 
   "nav_button": {
     "enable": true,
-    "label": "Download Now",
+    "label": "Get Enrolled",
     "link": "https://themefisher.com/products/andromeda-light-nextjs"
   },
 
@@ -42,10 +42,10 @@
 
   "call_to_action": {
     "enable": true,
-    "title": "Get Andromeda Now",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas </br> Werat viverra id et aliquet. vulputate egestas sollicitudin.",
+    "title": "Enroll with Jobsmato Now",
+    "content": "Enroll with us and Fill your details .</br> We will take care of the rest.",
     "button": {
-      "label": "Download The Theme",
+      "label": "Get Enrolled",
       "link": "https://themefisher.com/products/andromeda-light-nextjs"
     }
   },

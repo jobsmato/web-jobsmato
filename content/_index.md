@@ -1,68 +1,69 @@
 ---
 banner:
-  title: "Andromeda is the most intuitive </br> way to prototype Designs"
-  image: /images/banner-app.png
+  title: "Connecting Employers With </br> Untapped Talent!"
+  paragraph: "An innovative solution for HR professionals seeking stability."
+  image: /images/4151017-removebg.png  
+
   link:
-    label: Get Premium Version
+    label: Enroll Now
     href: "https://themefisher.com/products/andromeda-nextjs"
 
 ##brands
 brands:
-  - /images/brands/01-colored.png
-  - /images/brands/02-colored.png
-  - /images/brands/03-colored.png
-  - /images/brands/04-colored.png
-  - /images/brands/05-colored.png
-  - /images/brands/06-colored.png
-  - /images/brands/04-colored.png
-  - /images/brands/05-colored.png
-  - /images/brands/06-colored.png
+  - /images/brands/aaveg-removebg-preview.png
+  - /images/brands/fivt-logo-removebg-preview.png
+  - /images/brands/wheelseye.png
+  - /images/brands/badho.png
+  - /images/brands/logo_name.png
 
 #features
 features:
   sub_title: SPECIAL FEATURES
-  title: Elements To </br> Get You Started
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas </br> Werat viverra id et aliquet. vulputate egestas sollicitudin.
+  title: Training and </br> Development Programs
+  description: Comprehensive training solutions to enhance candidate capabilities.
   list:
-    - icon: 'lock' # feather icon: https://feathericons.com/
-      title: Updated Security
-      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque enim id diam ornare volutpat in sagitis, aliquet. Arcu cursus
-    - icon: 'wind'
-      title: Magnetic Turning
-      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque enim id diam ornare volutpat in sagitis, aliquet. Arcu cursus
-    - icon: 'shield'
-      title: Secured & up-to-date
-      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque enim id diam ornare volutpat in sagitis, aliquet. Arcu cursus
-    - icon: 'link'
-      title: Instant Link Sharing
-      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque enim id diam ornare volutpat in sagitis, aliquet. Arcu cursus
-    - icon: 'lock'
-      title: Updated Security
-      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque enim id diam ornare volutpat in sagitis, aliquet. Arcu cursus
-    - icon: 'wind'
-      title: Magnetic Turning
-      content: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque enim id diam ornare volutpat in sagitis, aliquet. Arcu cursus
+    - icon: 'book' # feather icon: https://feathericons.com/
+      title: Targeted Training Programs
+      content:  JobsMato provides specialized training tailored to meet specific industry needs.
+    - icon: 'bar-chart'
+      title: Enhancing Skills
+      content: Focus on developing essential skills that prepare candidates for their roles.
+    - icon: 'server'
+      title: Industry Standards
+      content: Training content is designed to meet current industry benchmarks and requirements.
+    - icon: 'settings'
+      title:  Technical Training
+      content: Offers in-depth technical training relevant to various job roles.
+    - icon: 'users'
+      title: Soft Skills Training
+      content: Emphasizes the importance of soft skills for professional success.
+    - icon: 'target'
+      title: Industry-Specific Training
+      content:  Provides training focused on the unique demands of different industries.
+    - icon: 'truck'
+      title: Candidates equipped from day one
+      content:   Equips candidates with necessary tools and knowledge to succeed immediately.
 
 #intro
 intro:
-  title: Built Exclusively For You
-  subtitle: SHORT INTRO VIDEO
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas </br> Werat viverra id et aliquet. vulputate egestas sollicitudin.
+  title: The Jobsmato Approach
+  subtitle: Process
+  description: Connecting Candidates With The Untapped Talent.
   thumbnail: "/images/video-popup.jpg"
   video_id: dyZcRRWiuuw
 
 #speciality
 speciality:
   primary:
-    title: You Will Not Miss Your All Misunderstandings
-    subtitle: PRIMARY SPECIALITY
-    description: Protect your design vision and leave nothing up to interpretation with interaction recipes. Quickly share and access all your team members interactions by using libraries, ensuring consistency throughout the.
-    image: /images/features-01.png
+    title: Increasing Workforce Stability
+    subtitle: 
+    description: Sourcing from even small cities effectively boost workforces stability by tapping into diverse talent pools, leading to significantly longer tenures within the company.
+    image: /images/favicon.png
   secondary:
-    title: Say Hello To No-Code The Advance Creation
-    subtitle: SECONDARY SPECIALITY
-    description: From the simplest of interactions to those that use Excel-gradeing formulas, ProtoPie can handle them all. Make mind-blowing of New interactions everyday without ever having to write any new code.
-    image: /images/features-02.png
+    title: Post Placement Analysis
+    subtitle: 
+    description: Get Data-Driven Insigts to confirm the success of recuritment stratergy.
+    image: /images/dash2.png
 
 
 #Testimonial

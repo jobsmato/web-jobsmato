@@ -10,7 +10,7 @@ const SpecialFeatures = ({ speciality }) => {
             <ImageFallback
               className="mx-auto"
               src={speciality.primary.image}
-              width={575}
+              width={300}
               height={511}
               alt="primary speciality"
             />

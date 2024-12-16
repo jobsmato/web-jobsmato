@@ -53,10 +53,12 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+        
         {/* copyright */}
         <div className=" py-6 text-center">
           {markdownify(copyright, "p", "footer-copy-write")}
         </div>
+
       </div>
     </footer>
   );

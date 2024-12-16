@@ -15,9 +15,90 @@ const ShortIntro = ({ intro }) => {
               {markdownify(intro.title, "h2", "mt-4 section-title")}
               {markdownify(intro.description, "p", "mt-10")}
             </div>
-            <div className="mx-auto mt-10 h-full max-h-[394px] w-full max-w-[716px]">
-              <VideoPopup id={intro.video_id} thumbnail={intro.thumbnail} />
-            </div>
+            <div class="p-4 mb-4 text-lg text-center leading-tight first-letter:capitalize font-medium dark:text-gray-100">
+  </div>
+  <div class="mx-auto w-fit grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-1 gap-6">
+  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_2967.png" />
+    <div class="bg-gray-100 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease dark:bg-gray-700">
+      <div class="p-6">
+        <div class="capitalize flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-blue-600 text-lg font-bold">Identify Potential Candidates</h2>
+            <p class="dark:text-gray-100">We meticulously search for Candidates within smaller cities to find hidden talent</p>
+          </div>
+        </div>
+        <div class="block mt-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_3016.png" />
+    <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
+      <div class="p-6">
+        <div class="capitalize flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-blue-600 text-lg font-bold">Providing Necessary Training</h2>
+            <p class="dark:text-gray-100">Candidates get targeted training to ensure that they possesd requried skills</p>
+          </div>
+        </div>
+        <div class="block mt-4">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_3017.png" />
+    <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
+      <div class="p-6">
+        <div class="capitalize flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-blue-600 text-lg font-bold">Ensuing Candidates match job criteria</h2>
+            <p class="dark:text-gray-100">We rigrously assess candidates to match specific need of employers</p>
+          </div>
+        </div>
+        <div class="block mt-4">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="block mt-8">
+  </div>
+  <div class="mx-auto w-fit grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-2 gap-6">
+  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_1854.png" />
+    <div class="bg-gray-100 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease dark:bg-gray-700">
+      <div class="p-6">
+        <div class="capitalize flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-blue-600 text-lg font-bold">Using Advance Algorithms for candidate matching</h2>
+            <p class="dark:text-gray-100">Our Technology utilizes Algorithms to align candidates with sutiable job openings </p>
+          </div>
+        </div>
+        <div class="block mt-4">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_2040.png" />
+    <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
+      <div class="p-6">
+        <div class="capitalize flex items-center justify-between gap-4">
+          <div>
+            <h2 class="text-blue-600 text-lg font-bold">Ensuring seamless and efficient hiring process</h2>
+            <p class="dark:text-gray-100">We streamine the process to facilate quicker and more effective recuritment</p>
+          </div>
+        </div>
+        <div class="block mt-4">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
           </div>
           <div className="bg-theme absolute left-0 top-0 w-full">
             <Circle
