@@ -5,6 +5,7 @@ import ImageFallback from "@layouts/components/ImageFallback";
 import { gsap } from "@lib/gsap";
 import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
+
 import { useEffect } from "react";
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -98,32 +99,32 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               className="circle left-[10%] top-12"
               width={32}
               height={32}
-              fill={false}
             />
             <Circle
-              className="circle left-[2.5%] top-[29%]"
+              className="circle left-[2.5%] top-[60%]"
               width={85}
               height={85}
+              fill={false}
             />
             <Circle
               className="circle bottom-[48%] left-[22%]"
               width={20}
               height={20}
+            fill={false}
             />
             <Circle
               className="circle bottom-[37%] left-[15%]"
               width={47}
               height={47}
-              fill={false}
             />
             <Circle
-              className="circle bottom-[13%] left-[6%]"
+              className="circle bottom-[53%] left-[6%]"
               width={62}
               height={62}
               fill={false}
             />
             <Circle
-              className="circle right-[12%] top-[15%]"
+              className="circle right-[6%] top-[15%]"
               width={20}
               height={20}
             />
@@ -143,11 +144,14 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               className="circle right-[33%] top-[54%]"
               width={20}
               height={20}
+              fill={false}
+
             />
             <Circle
               className="circle bottom-[20%] right-[3%]"
               width={65}
               height={65}
+
             />
           </div>
           <div className="row overflow-hidden rounded-2xl">
@@ -162,14 +166,20 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                                     {markdownify(
                     bannerData.paragraph,
                     "h5",
-                    "mb-8 banner-title text-primary opacity-0"
+                    "mb-8 banner-title text-grey opacity-0"
                   )}
-                  <div className="banner-btn opacity-0">
+                  <div className="banner-btn space-x-7 opacity-0">
                     <Link
                       className="btn btn-primary"
                       href={bannerData.link.href}
                     >
                       {bannerData.link.label}
+                    </Link>
+                    <Link
+                      className="btn btn-primary"
+                      href={bannerData.link2.href}
+                    >
+                      {bannerData.link2.label}
                     </Link>
                   </div>
                 </div>

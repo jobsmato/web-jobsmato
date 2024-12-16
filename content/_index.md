@@ -5,8 +5,12 @@ banner:
   image: /images/4151017-removebg.png  
 
   link:
-    label: Enroll Now
-    href: "https://themefisher.com/products/andromeda-nextjs"
+    label: Need job?
+    href: "/candidate"
+  link2:
+    label: Need Hire?
+    href: "/company"
+
 
 ##brands
 brands:
