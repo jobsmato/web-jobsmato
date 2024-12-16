@@ -1,12 +1,10 @@
 {
   "name": "andromeda-light-nextjs",
   "description": "",
-   "homepage": "https://jobsmato.github.io/web-jobsmato/",
+  "homepage": "https://jobsmato.github.io/web-jobsmato/",
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
-   "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "export": "next build && next export",
