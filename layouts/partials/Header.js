@@ -48,7 +48,7 @@ const Header = () => {
         }`}
         ref={headerRef}
       >
-        <nav className="navbar container-xl">
+        <nav className="navbar container-xl md:container-lg">
           {/* logo */}
           <div className="order-0">
             <Logo src={logo} />
@@ -56,7 +56,7 @@ const Header = () => {
 
           <ul
             id="nav-menu"
-            className={`navbar-nav order-2 w-full justify-center lg:order-1 md:w-auto md:space-x-2 lg:flex ${
+            className={`navbar-nav order-2 w-2/3 justify-left lg:order-1 md:w-auto md:space-x-2 lg:flex ${
               !showMenu && "hidden"
             }`}
           >
@@ -110,7 +110,7 @@ const Header = () => {
               </li>
             )}
           </ul>
-          <div className="order-1 ml-auto flex items-center md:ml-0">
+          <div className="order-1 ml-auto right-10 flex items-center md:ml-0">
             {config.nav_button.enable && (
               <Link
                 className="btn btn-primary hidden lg:flex"
