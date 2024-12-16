@@ -43,7 +43,7 @@ const Header = () => {
     <>
       <div className="header-height-fix"></div>
       <header
-        className={`header ${sticky && "header-sticky"} ${
+        className={`header w-screen ${sticky && "header-sticky w-screen"} ${
           direction === 1 && "unpinned"
         }`}
         ref={headerRef}
