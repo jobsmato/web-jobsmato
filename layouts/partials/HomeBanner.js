@@ -91,7 +91,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   }, []);
 
   return (
-    <section className="section banner pt-0">
+    <section className="section banner pt-0 w-screen">
       <div className="container-xl">
         <div className="relative">
           <div className="bg-theme banner-bg col-12 absolute left-0 top-0">
