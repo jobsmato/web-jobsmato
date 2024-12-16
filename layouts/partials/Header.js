@@ -22,7 +22,7 @@ const Header = () => {
   //sticky header
   useEffect(() => {
     const header = headerRef.current;
-    const headerHeight = header.clientHeight + 200;
+    const headerHeight = header.clientHeight;
     let prevScroll = 0;
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
@@ -110,7 +110,7 @@ const Header = () => {
               </li>
             )}
           </ul>
-          <div className="order-1 mr-8 flex items-center md:mr-8">
+          <div className="order-1 mr-20 flex items-center md:mr-20">
             {config.nav_button.enable && (
               <Link
                 className="btn btn-primary hidden lg:flex"
