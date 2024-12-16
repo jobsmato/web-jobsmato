@@ -5,6 +5,21 @@
       "url": "/"
     },
     {
+      "name": "Enrollment",
+      "url": "",
+      "hasChildren": true,
+      "children": [
+        {
+          "name": "Candidate",
+          "url": "/candidate"
+        },
+        {
+          "name": "Company",
+          "url": "/company"
+        }
+      ]
+    },
+    {
       "name": "About",
       "url": "/about"
     },
