@@ -1,9 +1,12 @@
 {
   "name": "andromeda-light-nextjs",
   "description": "",
+   "homepage": "https://jobsmato.github.io/web-jobsmato/",
   "version": "2.0.0",
   "license": "MIT",
   "scripts": {
+   "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "export": "next build && next export",
@@ -40,6 +43,7 @@
     "date-fns-tz": "^3.1.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "gh-pages": "^6.2.0",
     "jshint": "^2.13.6",
     "postcss": "^8.4.42",
     "prettier": "^3.3.3",
