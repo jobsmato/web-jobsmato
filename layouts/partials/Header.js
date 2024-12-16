@@ -22,7 +22,7 @@ const Header = () => {
   //sticky header
   useEffect(() => {
     const header = headerRef.current;
-    const headerHeight = header.clientHeight + 200;
+    const headerHeight = header.clientHeight;
     let prevScroll = 0;
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
@@ -43,12 +43,12 @@ const Header = () => {
     <>
       <div className="header-height-fix"></div>
       <header
-        className={`header ${sticky && "header-sticky"} ${
+        className={`header w-screen ${sticky && "header-sticky w-screen"} ${
           direction === 1 && "unpinned"
         }`}
         ref={headerRef}
       >
-        <nav className="navbar container-xl md:container-lg">
+        <nav className="navbar container-xl sm:lg">
           {/* logo */}
           <div className="order-0">
             <Logo src={logo} />
@@ -56,7 +56,7 @@ const Header = () => {
 
           <ul
             id="nav-menu"
-            className={`navbar-nav order-2 w-2/3 justify-left lg:order-1 md:w-auto md:space-x-2 lg:flex ${
+            className={`navbar-nav order-2 w-full justify-center lg:order-1 md:w-auto md:space-x-2 lg:flex ${
               !showMenu && "hidden"
             }`}
           >
@@ -110,7 +110,7 @@ const Header = () => {
               </li>
             )}
           </ul>
-          <div className="order-1 ml-auto right-10 flex items-center md:ml-0">
+          <div className="order-1 mr-20 flex items-center md:mr-20">
             {config.nav_button.enable && (
               <Link
                 className="btn btn-primary hidden lg:flex"
