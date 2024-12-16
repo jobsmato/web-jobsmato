@@ -110,7 +110,7 @@ const Header = () => {
               </li>
             )}
           </ul>
-          <div className="order-1 ml-auto flex items-center md:ml-0">
+          <div className="order-1 mr-8 flex items-center md:mr-8">
             {config.nav_button.enable && (
               <Link
                 className="btn btn-primary hidden lg:flex"
