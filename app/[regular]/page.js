@@ -33,7 +33,9 @@ const RegularPages = async ({ params }) => {
         <About data={pageData} />
       ) : layout === "contact" ? (
         <Contact data={pageData} />
-      ) : (
+      ): layout === "contact" ? (
+        <Contact data={pageData} />
+      ) :  (
         <Default data={pageData} />
       )}
     </GSAPWrapper>
