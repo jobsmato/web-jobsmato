@@ -81,14 +81,14 @@ const Banner = ({ title }) => {
             <ImageFallback
               priority={true}
               fill={true}
-              src="images/vectors/single-banner-wave-1.svg"
+              src="/images/vectors/single-banner-wave-1.svg"
               sizes="100vw"
               alt=""
             />
             <ImageFallback
               priority={true}
               fill={true}
-              src="images/vectors/single-banner-wave-2.svg"
+              src="/images/vectors/single-banner-wave-2.svg"
               sizes="100vw"
               alt=""
             />

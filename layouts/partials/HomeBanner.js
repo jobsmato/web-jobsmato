@@ -159,8 +159,6 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               width={65}
               height={65}
               fill={false}
-
-
             />
           </div>
           <div className="row overflow-hidden rounded-2xl">

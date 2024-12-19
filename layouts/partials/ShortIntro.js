@@ -19,7 +19,7 @@ const ShortIntro = ({ intro }) => {
   </div>
   <div class="mx-auto w-fit grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-1 gap-6">
   <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_2967.png" />
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/vectors/rb_2967.png" />
     <div class="bg-gray-100 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease dark:bg-gray-700">
       <div class="p-6">
         <div class="capitalize flex items-center justify-between gap-4">
@@ -35,7 +35,7 @@ const ShortIntro = ({ intro }) => {
   </div>
 
   <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_3016.png" />
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_3016.png" />
     <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
       <div class="p-6">
         <div class="capitalize flex items-center justify-between gap-4">
@@ -50,7 +50,7 @@ const ShortIntro = ({ intro }) => {
     </div>
   </div>
   <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_3017.png" />
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_3017.png" />
     <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
       <div class="p-6">
         <div class="capitalize flex items-center justify-between gap-4">
@@ -69,7 +69,7 @@ const ShortIntro = ({ intro }) => {
   </div>
   <div class="mx-auto w-fit grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-2 gap-6">
   <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_1854.png" />
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_1854.png" />
     <div class="bg-gray-100 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease dark:bg-gray-700">
       <div class="p-6">
         <div class="capitalize flex items-center justify-between gap-4">
@@ -84,7 +84,7 @@ const ShortIntro = ({ intro }) => {
     </div>
   </div>
   <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="images/vectors/rb_2040.png" />
+    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_2040.png" />
     <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
       <div class="p-6">
         <div class="capitalize flex items-center justify-between gap-4">

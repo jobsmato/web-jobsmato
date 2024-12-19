@@ -22,7 +22,7 @@ const Testimonial = ({ testimonial }) => {
             <div className="row items-center justify-center">
               <div className="hidden lg:col-3 xl:col-4 lg:block">
                 <ImageFallback
-                  src="images/testimonials-01.png"
+                  src="/images/testimonials-01.png"
                   width={455}
                   height={522}
                   alt="testimonials"
@@ -83,7 +83,7 @@ const Testimonial = ({ testimonial }) => {
               </div>
               <div className="hidden lg:col-3 xl:col-4 lg:block">
                 <ImageFallback
-                  src="images/testimonials-02.png"
+                  src="/images/testimonials-02.png"
                   width={455}
                   height={522}
                   alt="testimonials"
