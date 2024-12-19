@@ -31,8 +31,8 @@ const RegularPages = async ({ params }) => {
         <NotFound data={pageData} />
       ) : layout === "about" ? (
         <About data={pageData} />
-      ) : layout === "contact" ? (
-        <Contact data={pageData} />
+      ) : layout === "candidate" ? (
+        <CandidateOnboarding data={pageData} />
       ): layout === "contact" ? (
         <Contact data={pageData} />
       ) :  (
