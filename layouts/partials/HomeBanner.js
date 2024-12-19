@@ -91,7 +91,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   }, []);
 
   return (
-    <section className="section banner pt-0">
+    <section className="section banner pt-0 w-screen">
       <div className="container-xl">
         <div className="relative">
           <div className="bg-theme banner-bg col-12 absolute left-0 top-0">
@@ -99,6 +99,8 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               className="circle left-[10%] top-12"
               width={32}
               height={32}
+              fill={false}
+
             />
             <Circle
               className="circle left-[2.5%] top-[60%]"
@@ -116,17 +118,22 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               className="circle bottom-[37%] left-[15%]"
               width={47}
               height={47}
+              fill={false}
+
             />
             <Circle
               className="circle bottom-[53%] left-[6%]"
               width={62}
               height={62}
               fill={false}
+
             />
             <Circle
               className="circle right-[6%] top-[15%]"
               width={20}
               height={20}
+              fill={false}
+
             />
             <Circle
               className="circle right-[2%] top-[30%]"
@@ -151,7 +158,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               className="circle bottom-[20%] right-[3%]"
               width={65}
               height={65}
-
+              fill={false}
             />
           </div>
           <div className="row overflow-hidden rounded-2xl">

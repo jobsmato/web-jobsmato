@@ -31,7 +31,7 @@
   "nav_button": {
     "enable": true,
     "label": "Get Enrolled",
-    "link": "https://themefisher.com/products/andromeda-light-nextjs"
+    "link": "/enrollment"
   },
 
   "metadata": {
@@ -46,7 +46,7 @@
     "content": "Enroll with us and Fill your details .</br> We will take care of the rest.",
     "button": {
       "label": "Get Enrolled",
-      "link": "https://themefisher.com/products/andromeda-light-nextjs"
+      "link": "/enrollment"
     }
   },
 
