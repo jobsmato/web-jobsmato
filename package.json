@@ -11,6 +11,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@preline/select": "^2.6.0",
     "disqus-react": "^1.1.5",
     "feather-icons-react": "^0.7.0",
     "github-slugger": "^2.0.0",
