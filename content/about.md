@@ -6,8 +6,13 @@ draft: false
 ## about us
 about_us:
   subtitle: WHO WE ARE
-  title: Hello, We’re Jobsmato Here For Your Help
-  content: Your online Health & Fitness companion that offers free assistance on its Facebook Group and provides quality paid guided personal training packages by and through website. We are the first ever, online manifesto in Bangladesh to make place you will select when you think of getting fit
+  title: Hello, We’re Jobsmato 
+  content: At Jobsmato, we’re dedicated to transforming job searching into a seamless and rewarding experience. Our mission is simple to connect talented individuals with opportunities that inspire growth and success. 
+  
+  content1: We combine cutting-edge technology with a deep understanding of the job market to deliver personalized recommendations tailored to your skills, experience, and career goals. 
+  
+  content2: Whether you’re just starting your journey or aiming for the next big step, we’re here to help you every step of the way. Discover a platform where talent meets opportunity, and your future begins.
+
   image: /images/about/01.jpg
 
 ## our works

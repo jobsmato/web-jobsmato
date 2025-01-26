@@ -1,7 +1,8 @@
 ---
 banner:
   title: "Your Career Journey,"
-  paragraph: "An innovative solution for HR professionals seeking stability."
+  paragraph1: "Discover thousands of opportunities tailored to your skills and aspirations."
+  paragraph: "Whether you're taking the first step or advancing your career, we've got you covered."
   image: /images/home1.png
 
   link:

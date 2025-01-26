@@ -222,12 +222,17 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   {markdownify(
                     "Simplified!",
                     "h1",
-                    "mb-4 banner-title text-primary opacity-0"
+                    "mb-4 banner-title text-primary opacity-0 "
                   )}
                                     {markdownify(
+                    bannerData.paragraph1,
+                    "h6",
+                    "mb-0 banner-title text-grey opacity-0 justify-left whitespace-pre-wrap break-words"
+                  )}
+                  {markdownify(
                     bannerData.paragraph,
-                    "h5",
-                    "mb-4 banner-title text-grey opacity-0"
+                    "h6",
+                    "mb-4 banner-title text-grey opacity-0 justify-left whitespace-pre-wrap break-words"
                   )}
                   <div className="banner-btn space-x-7 opacity-0">
                     <Link

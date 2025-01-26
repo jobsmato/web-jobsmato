@@ -24,7 +24,7 @@
       "url": "/about"
     },
     {
-      "name": "Terms & Conditions",
+      "name": "FAQ",
       "url": "/terms-policy"
     },
     {
@@ -38,11 +38,11 @@
       "url": "/about"
     },
     {
-      "name": "Blog",
-      "url": "/blog"
+      "name": "Contact",
+      "url": "/contact"
     },
     {
-      "name": "Terms & Conditions",
+      "name": "FAQ",
       "url": "/terms-policy"
     }
   ]
