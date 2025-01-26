@@ -81,7 +81,7 @@ speciality:
 testimonial:
   title: OUR TESTIMONIALS
   subtitle: Don’t Take Our Word For It
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas </br> Werat viverra id et aliquet. vulputate egestas sollicitudin.
+  description: Our success stories
   list:
     - author: Hamender Sharma
       avatar: /images/t1.jpeg
