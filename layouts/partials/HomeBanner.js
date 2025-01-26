@@ -91,7 +91,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   }, []);
 
   return (
-    <section className="section banner pt-0 w-screen h-[900px] overflow-hidden">
+    <section className="section banner pt-0 w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]">
       <div className="container-xl ">
         <div className="relative bg-white">
           <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background ">
@@ -106,7 +106,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg  xl:top-[1%] xl:left-[95%] left-[10%] top-[1%] "
+                    className="banner-img opacity-0 relative rounded-lg  xl:top-[1%] xl:left-[95%] md:left-[15%] md:top-[1%]  hidden md:block "
                     src="/images/home1.png"
                     width={200}
                     height={300}
@@ -115,7 +115,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg xl:top-[-10%]  xl:left-[80%]  left-[40%] top-[-16%] "
+                    className="banner-img opacity-0 relative rounded-lg xl:top-[-10%]  xl:left-[80%]  md:left-[30%] md:top-[-25%]  left-[30%] top-[10%]"
                     src="/images/home2.jpg"
                     width={200}
                     height={300}
@@ -124,7 +124,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
                   
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg xl:top-[-16%] xl:left-[95%] left-[70%] top-[-32%] "
+                    className="banner-img opacity-0 relative rounded-lg xl:top-[-16%] xl:left-[95%] md:left-[45%] md:top-[-48%]  left-[50%] top-[-50%]"
                     src="/images/home3.jpg"
                     width={200}
                     height={300}
@@ -149,11 +149,11 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
 
                 </div>
-                <div className="banner-content absolute col-12 xl:col-10 pb-10 pt-80 text-Left">
+                <div className="banner-content absolute col-12 xl:col-10 pb-10 pt-80 text-Left ">
                   {markdownify(
                     bannerData.title,
                     "h1",
-                    "mb-0 banner-title text-primary opacity-0"
+                    "mb-0 banner-title text-primary opacity-0 text-wrap"
                   )}
                   {markdownify(
                     "Simplified!",
@@ -163,12 +163,12 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                                     {markdownify(
                     bannerData.paragraph1,
                     "h6",
-                    "mb-0 banner-title text-grey opacity-0 justify-left whitespace-pre-wrap break-words"
+                    "mb-0 banner-title text-grey opacity-0 justify-left"
                   )}
                   {markdownify(
                     bannerData.paragraph,
                     "h6",
-                    "mb-4 banner-title text-grey opacity-0 justify-left whitespace-pre-wrap break-words"
+                    "mb-4 banner-title text-grey opacity-0 justify-left "
                   )}
                   <div className="banner-btn space-x-7 opacity-0">
                     <Link
