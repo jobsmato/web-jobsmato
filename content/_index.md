@@ -81,26 +81,26 @@ testimonial:
       avatar: /images/t1.jpeg
       profession: Field Sales Execuitve, ApniBus
       content: I found a field sales role that not only challenges me but also allows me to showcase my skills. The process with Jobsmato was fast, simple, and effective. I would recommend JobsMato to anyone looking for jobs.
-    - author: David Cameron
+    - author: Divyanshi gupta
       avatar: /images/t2.jpeg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
+      profession: BDE, Wheelseye Technology
+      content: Starting my journey as a Business Development Executive was daunting, but Jobsmato made it so easy! They connected me with the right opportunities, and the process was smooth and efficient. Thanks to them, I landed my first BDE role where I’m learning and growing every day.
+    - author: Khatri Yash
       avatar: /images/t3.jpeg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
+      profession: ASM, Wheelseye Logistics
+      content: Jobmato team helped me identify leadership opportunities that aligned perfectly with my experience and aspirations. There personalised suggestions made the process smooth and efficient. Thanks to JobsMato, I secured an Area Sales Manager role where I can lead with impact and drive results.
+    - author: Ritik Raj
       avatar: /images/t4.jpeg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
+      profession: Customer Support, India Assist
+      content: As an experienced customer support professional, I was looking for a role that allowed me to grow and make an impact. Jobsmato connected me with a company that values my expertise and provides opportunities for professional development. The process was quick and hassle-free!
+    - author: Laxmi
       avatar: /images/t5.jpeg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
+      profession: Tele Sales Executive, One Point One Solutions
+      content: I was struggling to find the right telesales job until I came across Jobsmato. Their personalized recommendations and seamless process made all the difference. I now work in a role that challenges me and allows me to grow in my career.
+    - author: Piyush Sharma
       avatar: /images/t6.jpeg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
+      profession: Software Developer, ApniBus
+      content: I’ve had a fantastic learning experience with JosMato. The platform provides top-notch resources and support that have really helped me improve my skills.
 
 
 ---
