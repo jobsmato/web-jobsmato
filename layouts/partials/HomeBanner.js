@@ -91,84 +91,18 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   }, []);
 
   return (
-    <section className="section banner pt-0 w-screen h-85">
+    <section className="section banner pt-0 w-screen h-[900px] overflow-hidden">
       <div className="container-xl ">
         <div className="relative bg-white">
-          <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background">
-            {/* <Circle
-              className="circle left-[10%] top-12 filter blur-sm "
-              width={32}
-              height={32}
-              fill={false}
+          <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background ">
 
-            />
-            <Circle
-              className="circle left-[2.5%] top-[60%] filter blur-sm"
-              width={85}
-              height={85}
-              fill={false}
-            />
-            <Circle
-              className="circle bottom-[48%] left-[22%] filter blur-sm"
-              width={20}
-              height={20}
-            fill={false}
-            />
-            <Circle
-              className="circle bottom-[37%] left-[15%] filter blur-sm"
-              width={47}
-              height={47}
-              fill={false}
-
-            />
-            <Circle
-              className="circle bottom-[53%] left-[6%] filter blur-sm"
-              width={62}
-              height={62}
-              fill={false}
-
-            />
-            <Circle
-              className="circle right-[6%] top-[15%] filter blur-sm"
-              width={20}
-              height={20}
-              fill={false}
-
-            />
-
-            <Circle
-              className="circle right-[2%] top-[30%] filter blur-sm"
-              width={73}
-              height={73}
-              fill={false}
-            /> 
-
-            <Circle
-              className="circle right-[19%] top-[48%] filter blur-sm"
-              width={37}
-              height={37}
-              fill={false}
-            /> 
-            <Circle
-              className="circle right-[33%] top-[54%] filter blur-sm"
-              width={20}
-              height={20}
-              fill={false}
-
-            />
-            <Circle
-              className="circle bottom-[20%] right-[3%] filter blur-sm"
-              width={65}
-              height={65}
-              fill={false}
-            /> */}
 
           </div>
-          <div className="row  rounded-2xl">
+          <div className="row  rounded-2xl ">
             <div className="col-12">
-              <div className="row relative justify-center pb-10">
+              <div className="row relative justify-center pb-10 ">
               
-                <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300 ">
+                <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300  ">
 
 
                   <ImageFallback
@@ -190,7 +124,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
                   
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg xl:top-[-16%] xl:left-[95%] left-[70%] top-[-32%]"
+                    className="banner-img opacity-0 relative rounded-lg xl:top-[-16%] xl:left-[95%] left-[70%] top-[-32%] "
                     src="/images/home3.jpg"
                     width={200}
                     height={300}
@@ -198,7 +132,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-fill rounded-lg xl:top-[-28%] xl:left-[80%] left-[70%] top-[-20%]"
+                    className="banner-img opacity-0 relative object-fill rounded-lg xl:top-[-28%] xl:left-[80%] left-[70%] top-[-20%] hidden xl:block "
                     src="/images/home5.jpg"
                     width={200}
                     height={300}
@@ -206,7 +140,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0  relative rounded-lg xl:top-[-60%] xl:left-[65%] left-[40%] top-[-32%]"
+                    className="banner-img opacity-0  relative rounded-lg xl:top-[-60%] xl:left-[65%] left-[40%] top-[-32%] hidden xl:block"
                     src="/images/home6.jpg"
                     width={200}
                     height={300}
@@ -215,7 +149,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
 
                 </div>
-                <div className="banner-content absolute col-10 pb-10 pt-80 text-Left">
+                <div className="banner-content absolute col-12 xl:col-10 pb-10 pt-80 text-Left">
                   {markdownify(
                     bannerData.title,
                     "h1",
@@ -250,18 +184,14 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                       {bannerData.link2.label}
                     </Link> */}
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="row relative border-y border-border py-1">
-            <div className="animate from-right col-12">
+                  <div className="row relative  py-5 mt-1">
+            <div className="animate from-right col-10 border-y ">
               <Swiper
                 loop={true}
                 slidesPerView={3}
                 breakpoints={{
                   992: {
-                    slidesPerView: 5,
+                    slidesPerView: 4,
                   },
                 }}
                 spaceBetween={20}
@@ -288,6 +218,12 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               </Swiper>
             </div>
           </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
