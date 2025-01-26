@@ -91,10 +91,10 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   }, []);
 
   return (
-    <section className="section banner pt-0 w-screen">
+    <section className="section banner pt-0 w-screen h-85">
       <div className="container-xl ">
-        <div className="relative">
-          <div className="bg-white banner-bg col-12 absolute left-0 top-0 blur-background">
+        <div className="relative bg-white">
+          <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background">
             {/* <Circle
               className="circle left-[10%] top-12 filter blur-sm "
               width={32}
@@ -171,7 +171,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                 <div className="banner-images relative pb-10">
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg  top-[1%] left-[95%]"
+                    className="banner-img opacity-0 relative rounded-lg  xl:top-[1%] xl:left-[95%] sm:left-[10%] sm:top-[1%]"
                     src="/images/home1.png"
                     width={200}
                     height={300}
@@ -179,7 +179,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg top-[-10%]  left-[80%]"
+                    className="banner-img opacity-0 relative rounded-lg xl:top-[-10%]  xl:left-[80%]  sm:left-[40%] sm:top-[-16%] "
                     src="/images/home2.jpg"
                     width={200}
                     height={300}
@@ -188,7 +188,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
                   
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg top-[-16%] left-[95%]"
+                    className="banner-img opacity-0 relative rounded-lg xl:top-[-16%] xl:left-[95%] sm:left-[70%] sm:top-[-32%]"
                     src="/images/home3.jpg"
                     width={200}
                     height={300}
@@ -196,7 +196,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-fill rounded-lg top-[-28%] left-[80%]"
+                    className="banner-img opacity-0 relative object-fill rounded-lg xl:top-[-28%] xl:left-[80%] sm:left-[70%] sm:top-[-20%]"
                     src="/images/home5.jpg"
                     width={200}
                     height={300}
@@ -204,7 +204,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0  relative rounded-lg top-[-60%] left-[65%]"
+                    className="banner-img opacity-0  relative rounded-lg xl:top-[-60%] xl:left-[65%] sm:left-[40%] sm:top-[-32%]"
                     src="/images/home6.jpg"
                     width={200}
                     height={300}
@@ -249,12 +249,10 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     </Link> */}
                   </div>
                 </div>
-
-                
               </div>
             </div>
           </div>
-          <div className="row relative border-y border-border py-5">
+          <div className="row relative border-y border-border py-1">
             <div className="animate from-right col-12">
               <Swiper
                 loop={true}

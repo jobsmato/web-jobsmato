@@ -20,7 +20,7 @@ const Testimonial = ({ testimonial }) => {
         <div className="animate row mt-10 items-center justify-center">
           <div className="xl:col-11">
             <div className="row items-center justify-center">
-              <div className="md:col-7 lg:col-6 xl:col-4">
+              <div className="md:col-5 lg:col-6 xl:col-10">
                 {
                   <Swiper
                     modules={[Pagination, Autoplay]}
@@ -46,10 +46,10 @@ const Testimonial = ({ testimonial }) => {
                           
                           <div className="mt-7 inline-block rounded-md bg-body p-7 shadow-[0_10px_50px_rgba(0,0,0,.08)] md:mt-5 lg:mt-8 xl:mt-5">
                             <ImageFallback
-                              className="mx-auto "
+                              className="mx-auto rounded-full"
                               src={item.avatar}
-                              width={200}
-                              height={90}
+                              width={100}
+                              height={80}
                               priority={true}
                               alt={item.author}
                             />
