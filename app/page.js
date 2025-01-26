@@ -19,7 +19,6 @@ const Home = async () => {
       <HomeBanner banner={banner} brands={brands} />
       <Features features={features} />
       <ShortIntro intro={intro} />
-      <SpecialFeatures speciality={speciality} />
       <Testimonial testimonial={testimonial} />
       <Cta />
     </GSAPWrapper>

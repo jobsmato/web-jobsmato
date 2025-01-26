@@ -1,8 +1,8 @@
 ---
 banner:
-  title: "Connecting Employers With </br> Untapped Talent!"
+  title: "Your Career Journey,"
   paragraph: "An innovative solution for HR professionals seeking stability."
-  image: /images/4151017-removebg.png  
+  image: /images/home1.png
 
   link:
     label: Need job?
@@ -76,37 +76,30 @@ testimonial:
   subtitle: Don’t Take Our Word For It
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas </br> Werat viverra id et aliquet. vulputate egestas sollicitudin.
   list:
+    - author: Hamender Sharma
+      avatar: /images/t1.jpeg
+      profession: Field Sales Execuitve, ApniBus
+      content: I found a field sales role that not only challenges me but also allows me to showcase my skills. The process with Jobsmato was fast, simple, and effective. I would recommend JobsMato to anyone looking for jobs.
     - author: David Cameron
-      avatar: /images/user-img/01.jpg
+      avatar: /images/t2.jpeg
       profession: CEO, Nexuspay
       content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
     - author: David Cameron
-      avatar: /images/user-img/02.jpg
+      avatar: /images/t3.jpeg
       profession: CEO, Nexuspay
       content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
     - author: David Cameron
-      avatar: /images/user-img/03.jpg
+      avatar: /images/t4.jpeg
       profession: CEO, Nexuspay
       content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
     - author: David Cameron
-      avatar: /images/user-img/04.png
+      avatar: /images/t5.jpeg
       profession: CEO, Nexuspay
       content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
     - author: David Cameron
-      avatar: /images/user-img/05.jpg
+      avatar: /images/t6.jpeg
       profession: CEO, Nexuspay
       content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
-      avatar: /images/user-img/06.jpg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
-      avatar: /images/user-img/07.jpg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
-    - author: David Cameron
-      avatar: /images/user-img/08.jpg
-      profession: CEO, Nexuspay
-      content: Lorem ipsum dolor amet, conseetur adipiscing elit. Ornare quam porta arcu congue felis volutpat. Vitae lectudbfs pellentesque vitae dolor
+
 
 ---

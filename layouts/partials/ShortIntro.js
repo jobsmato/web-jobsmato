@@ -3,9 +3,54 @@
 import Circle from "@layouts/components/Circle";
 import VideoPopup from "@layouts/components/VideoPopup";
 import { markdownify } from "@lib/utils/textConverter";
+import React, { useState } from "react";
+
 
 const ShortIntro = ({ intro }) => {
-  return (
+  const [activeCard, setActiveCard] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const cards = [
+    {
+      id: 1,
+      title: "Identify Potential Candidates",
+      description: "Identify Potential Candidates",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475"
+    },
+    {
+      id: 2,
+      title: "Providing Necessary Training",
+      description: "Candidates get targeted training to ensure that they possesd requried skills",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40"
+    },
+    {
+      id: 3,
+      title: "Ensuing Candidates match job criteria",
+      description: "We rigrously assess candidates to match specific need of employers",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+    },
+    {
+      id: 4,
+      title: "Using Advance Algorithms for candidate matching",
+      description: "Our Technology utilizes Algorithms to align candidates with sutiable job openings",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa"
+    },
+    {
+      id: 5,
+      title: "Ensuring seamless and efficient hiring process",
+      description: "We streamine the process to facilate quicker and more effective recuritment",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa"
+    }
+  ]
+
+  const handleCardClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    setActiveCard(cards[currentIndex].id);
+  };
+ 
+  return(
+   
+
+    
     <section className="section pt-0">
       <div className="container-xl">
         <div className="relative px-4 py-[70px]">
@@ -15,89 +60,54 @@ const ShortIntro = ({ intro }) => {
               {markdownify(intro.title, "h2", "mt-4 section-title")}
               {markdownify(intro.description, "p", "mt-10")}
             </div>
-            <div class="p-4 mb-4 text-lg text-center leading-tight first-letter:capitalize font-medium dark:text-gray-100">
-  </div>
+          <div class="p-4 mb-4 text-lg text-center leading-tight first-letter:capitalize font-medium dark:text-gray-100">
+        </div>
+        <div className="min-h-80 bg-none p-1 flex items-top justify-center ">
+          <div className="relative w-full max-w-4xl mb-15 ">
+            {cards.map((card, index) => (
+              <div
+                key={card.id}
+                onClick={handleCardClick}
+                onKeyPress={(e) => e.key === "Enter" && handleCardClick()}
+                tabIndex={0}
+                className={`
+                  absolute w-full bg-white rounded-2xl shadow-lg transition-all duration-500 ease-in-out
+                  transform cursor-pointer flex overflow-hidden
+                  ${activeCard === card.id ? "scale-105 z-50" : `scale-100 z-${30 - index}`}
+                  ${activeCard && activeCard !== card.id ? "opacity-50" : "opacity-100"}
+                  ${getCardPosition(index, cards.length, activeCard === card.id)}
+                  hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500
+                `}
+                style={{
+                  transform: `
+                    translateY(${activeCard === card.id ? "0" : `${index * 20}px`})
+                    ${activeCard === card.id ? "scale(1.05)" : "scale(1)"}
+                  `,
+                  transition: "transform 0.5s ease-in-out"
+                }}
+              >
+                <div className="relative w-1/2">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+                </div>
+                <div className="p-6 w-1/2 flex flex-col justify-center">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="text-gray-600">{card.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+    </div>
   <div class="mx-auto w-fit grid grid-cols-1 lg:grid-cols-3 sm:grid-cols-1 gap-6">
-  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/vectors/rb_2967.png" />
-    <div class="bg-gray-100 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease dark:bg-gray-700">
-      <div class="p-6">
-        <div class="capitalize flex items-center justify-between gap-4">
-          <div>
-            <h2 class="text-blue-600 text-lg font-bold">Identify Potential Candidates</h2>
-            <p class="dark:text-gray-100">We meticulously search for Candidates within smaller cities to find hidden talent</p>
-          </div>
-        </div>
-        <div class="block mt-4">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_3016.png" />
-    <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
-      <div class="p-6">
-        <div class="capitalize flex items-center justify-between gap-4">
-          <div>
-            <h2 class="text-blue-600 text-lg font-bold">Providing Necessary Training</h2>
-            <p class="dark:text-gray-100">Candidates get targeted training to ensure that they possesd requried skills</p>
-          </div>
-        </div>
-        <div class="block mt-4">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_3017.png" />
-    <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
-      <div class="p-6">
-        <div class="capitalize flex items-center justify-between gap-4">
-          <div>
-            <h2 class="text-blue-600 text-lg font-bold">Ensuing Candidates match job criteria</h2>
-            <p class="dark:text-gray-100">We rigrously assess candidates to match specific need of employers</p>
-          </div>
-        </div>
-        <div class="block mt-4">
-        </div>
-      </div>
-    </div>
-  </div>
   </div>
   <div class="block mt-8">
-  </div>
-  <div class="mx-auto w-fit grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-2 gap-6">
-  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_1854.png" />
-    <div class="bg-gray-100 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease dark:bg-gray-700">
-      <div class="p-6">
-        <div class="capitalize flex items-center justify-between gap-4">
-          <div>
-            <h2 class="text-blue-600 text-lg font-bold">Using Advance Algorithms for candidate matching</h2>
-            <p class="dark:text-gray-100">Our Technology utilizes Algorithms to align candidates with sutiable job openings </p>
-          </div>
-        </div>
-        <div class="block mt-4">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="relative group bg-white h-[400px] shadow-lg rounded-2xl overflow-hidden">
-    <img class="w-full h-full group-hover:h-64 object-cover rounded-2xl transition-all delay-150 duration-300 ease" src="/images/vectors/rb_2040.png" />
-    <div class="bg-gray-100 dark:bg-gray-700 w-full h-40 absolute left-0 bottom-0 -mb-44 group-hover:mb-0 rounded-b-2xl transition-all delay-150 duration-300 ease">
-      <div class="p-6">
-        <div class="capitalize flex items-center justify-between gap-4">
-          <div>
-            <h2 class="text-blue-600 text-lg font-bold">Ensuring seamless and efficient hiring process</h2>
-            <p class="dark:text-gray-100">We streamine the process to facilate quicker and more effective recuritment</p>
-          </div>
-        </div>
-        <div class="block mt-4">
-        </div>
-      </div>
-    </div>
-  </div>
   </div>
           </div>
           <div className="bg-theme absolute left-0 top-0 w-full">
@@ -119,7 +129,7 @@ const ShortIntro = ({ intro }) => {
               height={47}
               fill={false}
             />
-            <Circle
+            <Circle 
               className="bottom-[6%] left-[6%]"
               width={62}
               height={62}
@@ -148,7 +158,16 @@ const ShortIntro = ({ intro }) => {
         </div>
       </div>
     </section>
+    
+    
   );
+};
+
+
+const getCardPosition = (index, totalCards, isActive) => {
+  if (isActive) return "";
+  const baseTransform = index * 2;
+  return `transform translate-y-[${baseTransform}rem]`;
 };
 
 export default ShortIntro;
