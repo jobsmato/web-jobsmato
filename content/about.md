@@ -55,7 +55,7 @@ clients:
   - /images/brands/badho.png
   - /images/brands/logo_name.png
   - /images/brands/solar.png
-  - /images/brands/1point.png
+  - /images/brands/1Point.png
   - /images/brands/ApniBus.png
   - /images/brands/IndiaAssist.png
 
