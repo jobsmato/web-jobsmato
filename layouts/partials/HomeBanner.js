@@ -168,16 +168,18 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
             <div className="col-12">
               <div className="row relative justify-center pb-10">
               
-                <div className="banner-images relative pb-10">
+                <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300 ">
+
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg  xl:top-[1%] xl:left-[95%] sm:left-[10%] sm:top-[1%]"
+                    className="banner-img opacity-0 relative rounded-lg  xl:top-[1%] xl:left-[95%] sm:left-[10%] sm:top-[1%] "
                     src="/images/home1.png"
                     width={200}
                     height={300}
                     priority={true}
                     alt=""
                   />
+
                   <ImageFallback
                     className="banner-img opacity-0 relative rounded-lg xl:top-[-10%]  xl:left-[80%]  sm:left-[40%] sm:top-[-16%] "
                     src="/images/home2.jpg"
