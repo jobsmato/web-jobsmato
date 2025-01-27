@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const ImageFallback = (props) => {
-  const { src, fallback,className, ...rest } = props;
+  const { src, fallback,className,sizes, ...rest } = props;
   const [imgSrc, setImgSrc] = useState(src);
 
   useEffect(() => {
@@ -16,6 +16,8 @@ const ImageFallback = (props) => {
       {...rest}
       className={className}
       src={imgSrc}
+      sizes={sizes} // Handles different sizes for different screen sizes
+
       onError={() => {
         setImgSrc(fallback);
       }}

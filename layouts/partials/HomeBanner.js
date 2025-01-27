@@ -103,20 +103,21 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
             <div className="col-12">
               <div className="row relative justify-center pb-10 ">
               
-                <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300 object-cover ">
+                <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300  ">
 
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-cover  rounded-lg w-[130] h-[172] left-[70%] top-[15%] sm:w-[130] sm:h-[172] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170] xl:h-[224]   "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130] h-[172] left-[70%] top-[15%] sm:w-[130] sm:h-[172] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170] xl:h-[224]   "
                     src="/images/home1.png"
                     width={100}
                     height={200}
                     priority={true}
+
                     alt=""
                   />
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-cover  rounded-lg w-[130] h-[172] left-[40%] top-[5%]  sm:w-[130] sm:h-[172] sm:top-[4%] sm:left-[46%] md:left-[46%] md:top-[1%] md:w-[150] md:h-[198px] lg:left-[65%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[170] xl:h-[224]    "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130] h-[172] left-[40%] top-[5%]  sm:w-[130] sm:h-[172] sm:top-[4%] sm:left-[46%] md:left-[46%] md:top-[1%] md:w-[150] md:h-[198px] lg:left-[65%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[170] xl:h-[224]    "
                     src="/images/home2.jpg"
                     width={100}
                     height={200}
@@ -125,7 +126,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
                   
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-cover  rounded-lg w-[130] h-[172] left-[70%] top-[-4%]  sm:w-[130] sm:h-[172] sm:top-[-7%] sm:left-[65%] md:left-[63%] md:top-[-7%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[170] xl:h-[224] "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130] h-[172] left-[70%] top-[-4%]  sm:w-[130] sm:h-[172] sm:top-[-7%] sm:left-[65%] md:left-[63%] md:top-[-7%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[170] xl:h-[224] "
                     src="/images/home3.jpg"
                     width={100}
                     height={200}
@@ -133,7 +134,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-cover  w-[130] h-[172] rounded-lg left-[40%] top-[-14%] sm:w-[130] sm:h-[172] sm:top-[-15%] sm:left-[46%] md:left-[46%] md:top-[-18%] md:w-[150] md:h-[198px] lg:left-[65%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[170] xl:h-[224]   "
+                    className="banner-img opacity-0 relative  w-[130] h-[172] rounded-lg left-[40%] top-[-14%] sm:w-[130] sm:h-[172] sm:top-[-15%] sm:left-[46%] md:left-[46%] md:top-[-18%] md:w-[150] md:h-[198px] lg:left-[65%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[170] xl:h-[224]   "
                     src="/images/home5.jpg"
                     width={100}
                     height={200}
@@ -142,7 +143,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
                   {/**/}
                   <ImageFallback
-                    className="banner-img opacity-0  relative object-cover  rounded-lg w-[130] h-[172]  left-[10%] top-[-40%] sm:w-[130] sm:h-[172] sm:top-[-45%] sm:left-[27%] md:left-[29%] md:top-[-50%] md:w-[150] md:h-[198px] lg:left-[52%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[170] xl:h-[224]  "
+                    className="banner-img opacity-0  relative  rounded-lg w-[130] h-[172]  left-[10%] top-[-40%] sm:w-[130] sm:h-[172] sm:top-[-45%] sm:left-[27%] md:left-[29%] md:top-[-50%] md:w-[150] md:h-[198px] lg:left-[52%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[170] xl:h-[224]  "
                     src="/images/home6.jpg"
                     width={100}
                     height={200}
