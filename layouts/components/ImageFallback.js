@@ -18,7 +18,7 @@ const ImageFallback = (props) => {
   >
     <Image
       {...rest}
-      className="object-cover rounded-lg"
+      className="banner-img object-cover rounded-lg "
       src={imgSrc}
       sizes={sizes} // Handles different sizes for different screen sizes
       onError={() => {

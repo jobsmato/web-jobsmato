@@ -111,6 +111,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     src="/images/home1.png"
                     width={200}
                     height={360}
+                    sizes="(max-width: 130px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority={true}
                     alt=""
                   />
