@@ -3,6 +3,8 @@
 import Circle from "@layouts/components/Circle";
 import ImageFallback from "@layouts/components/ImageFallback";
 import ImageFallback1 from "@layouts/components/ImageFallback1";
+import useScreenSize from './ScreenSize';
+
 
 import { gsap } from "@lib/gsap";
 import { markdownify } from "@lib/utils/textConverter";
@@ -94,7 +96,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
   return (
     //w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]
-    <section className="section banner pt-0 w-[500px] h-[1200px] sm:w-[760px] sm:h-[1200px] md:w-[990px] md:h-[1250px] lg:w-[1280px] lg:h-[1300px] xl:w-[1527px] xl:h-[1300px] 2xl:w-[1900px] 2xl:h-[1300px] ">
+    <section className="section banner pt-0 w-[${screenSize}] h-[1200px] sm:w-[${screenSize.width}] sm:h-[1200px] md:w-[${screenSize.width}] md:h-[1250px] lg:w-[${screenSize.width}] lg:h-[1300px] xl:w-[${screenSize.width}] xl:h-[1300px] 2xl:w-[${screenSize.width}] 2xl:h-[1300px] ">
       <div className="container-xl ">
         <div className="relative bg-white">
           <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background ">
