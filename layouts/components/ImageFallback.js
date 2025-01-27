@@ -12,16 +12,21 @@ const ImageFallback = (props) => {
   }, [src]);
 
   return (
+    <div
+    className={responsiveSizes || className} // Supports responsive height/width via classes
+    style={{ position: "relative" }}
+  >
     <Image
       {...rest}
-      className={className}
+      className="object-cover"
       src={imgSrc}
       sizes={sizes} // Handles different sizes for different screen sizes
-
       onError={() => {
         setImgSrc(fallback);
       }}
     />
+        </div>
+
   );
 };
 

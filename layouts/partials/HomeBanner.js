@@ -107,12 +107,11 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative   rounded-lg w-[130] h-[172] left-[70%] top-[15%] sm:w-[130] sm:h-[172] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170] xl:h-[224]   "
+                    className="banner-img opacity-0 relative  rounded-lg w-[130] h-[172] left-[70%] top-[15%] sm:w-[130] sm:h-[172] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170] xl:h-[224]   "
                     src="/images/home1.png"
                     width={200}
                     height={360}
                     priority={true}
-
                     alt=""
                   />
 
