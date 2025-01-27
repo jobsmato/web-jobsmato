@@ -18,8 +18,9 @@ banner:
 
 ##brands
 brands:
-  - /images/brands/aaveg-removebg-preview.png
-  - /images/brands/fivt-logo-removebg-preview.png
+  subtitle: OUR CLIENTS
+  title: Trusted By Many Companies
+  brands:
   - /images/brands/wheelseye.png
   - /images/brands/badho.png
   - /images/brands/logo_name.png

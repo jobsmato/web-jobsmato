@@ -96,7 +96,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
   return (
     //w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]
-    <section className="section banner pt-0 w-[${screenSize}] h-[1300px] sm:w-[${screenSize.width}] sm:h-[1300px] md:w-[${screenSize.width}] md:h-[1300px] lg:w-[${screenSize.width}] lg:h-[1300px] xl:w-[${screenSize.width}] xl:h-[1300px] 2xl:w-[${screenSize.width}] 2xl:h-[1300px] ">
+    <section className="section banner pt-0 w-[${screenSize}] h-[900px]  ">
       <div className="container-xl ">
         <div className="relative bg-white">
           <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background ">
@@ -192,7 +192,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     </Link> */}
                   </div>
                  
-                  <div className="row relative pt-[6rem] sm:pt-[6rem] md:pt-[10rem] lg:pt-[15rem] xl:pt-[15rem] py-5 mt-1">
+                  {/* <div className="row relative pt-[6rem] sm:pt-[6rem] md:pt-[10rem] lg:pt-[15rem] xl:pt-[15rem] py-5 mt-1">
             <div className="animate from-right col-11 border-y ">
               <Swiper
                 loop={true}
@@ -225,7 +225,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                 ))}
               </Swiper>
             </div>
-          </div>
+          </div> */}
                 </div>
 
 
