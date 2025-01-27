@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const ImageFallback = (props) => {
-  const { src, fallback,className,sizes, ...rest } = props;
+  const { src, fallback,className,sizes,responsiveSizes ...rest } = props;
   const [imgSrc, setImgSrc] = useState(src);
 
   useEffect(() => {
