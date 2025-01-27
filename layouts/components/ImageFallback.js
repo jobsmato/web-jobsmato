@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const ImageFallback = (props) => {
-  const { src, fallback,className,sizes,responsiveSizes, ...rest } = props;
+  const { src, fallback,className,sizes, ...rest } = props;
   const [imgSrc, setImgSrc] = useState(src);
 
   useEffect(() => {
@@ -13,14 +13,13 @@ const ImageFallback = (props) => {
 
   return (
     <div
-    className={responsiveSizes || className} // Supports responsive height/width via classes
+    className={className} // Supports responsive height/width via classes
     style={{ position: "relative" }}
   >
     <img
       {...rest}
-      className="banner-img object-cover rounded-lg "
+      className={className}
       src={imgSrc}
-      sizes={sizes} // Handles different sizes for different screen sizes
       onError={() => {
         setImgSrc(fallback);
       }}
