@@ -18,10 +18,9 @@ const ImageFallback = (props) => {
   >
     <Image
       {...rest}
-      className="object-cover"
+      className="object-cover rounded-lg"
       src={imgSrc}
       sizes={sizes} // Handles different sizes for different screen sizes
-      fill
       onError={() => {
         setImgSrc(fallback);
       }}
