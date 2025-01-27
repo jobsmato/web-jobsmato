@@ -109,34 +109,34 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
 
                   <ImageFallback1
-                    className="banner-img opacity-0 relative  rounded-lg w-[130px] h-[172px] left-[70%] top-[15%] sm:w-[130px] sm:h-[172px] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150] md:h-[210px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170] xl:h-[245]   "
+                    className="banner-img opacity-0 relative  rounded-lg w-[130px] h-[172px] left-[70%] top-[15%] sm:w-[130px] sm:h-[172px] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[160] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[190] xl:h-[224]   "
                     src="/images/home1.png"
 
                     alt=""
                   />
 
                   <ImageFallback1
-                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[40%] top-[5%]  sm:w-[130px] sm:h-[172px] sm:top-[4%] sm:left-[46%] md:left-[46%] md:top-[1%] md:w-[150] md:h-[210px] lg:left-[65%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[170] xl:h-[245]    "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[40%] top-[5%]  sm:w-[130px] sm:h-[172px] sm:top-[4%] sm:left-[46%] md:left-[46%] md:top-[1%] md:w-[160] md:h-[198px] lg:left-[65%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[190] xl:h-[224]    "
                     src="/images/home2.jpg"
 
                     alt=""
                   />
                   
                   <ImageFallback1
-                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[70%] top-[-4%]  sm:w-[130px] sm:h-[172px] sm:top-[-7%] sm:left-[65%] md:left-[63%] md:top-[-7%] md:w-[150] md:h-[210px] lg:left-[78%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[170] xl:h-[245] "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[70%] top-[-4%]  sm:w-[130px] sm:h-[172px] sm:top-[-7%] sm:left-[65%] md:left-[63%] md:top-[-7%] md:w-[160] md:h-[198px] lg:left-[78%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[190] xl:h-[224] "
                     src="/images/home3.jpg"
 
                     alt=""
                   />
                   <ImageFallback1
-                    className="banner-img opacity-0 relative  w-[130px] h-[172px] rounded-lg left-[40%] top-[-14%] sm:w-[130px] sm:h-[172px] sm:top-[-15%] sm:left-[46%] md:left-[46%] md:top-[-18%] md:w-[150] md:h-[210px] lg:left-[65%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[170] xl:h-[245]   "
+                    className="banner-img opacity-0 relative  w-[130px] h-[172px] rounded-lg left-[40%] top-[-14%] sm:w-[130px] sm:h-[172px] sm:top-[-15%] sm:left-[46%] md:left-[46%] md:top-[-18%] md:w-[160] md:h-[198px] lg:left-[65%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[190] xl:h-[224]   "
                     src="/images/home5.jpg"
 
                     alt=""
                   />
                   {/**/}
                   <ImageFallback1
-                    className="banner-img opacity-0  relative  rounded-lg w-[130px] h-[172px]  left-[10%] top-[-40%] sm:w-[130px] sm:h-[172px] sm:top-[-45%] sm:left-[27%] md:left-[29%] md:top-[-50%] md:w-[150] md:h-[210px] lg:left-[52%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[170] xl:h-[245]  "
+                    className="banner-img opacity-0  relative  rounded-lg w-[130px] h-[172px]  left-[10%] top-[-40%] sm:w-[130px] sm:h-[172px] sm:top-[-45%] sm:left-[27%] md:left-[29%] md:top-[-50%] md:w-[160] md:h-[198px] lg:left-[52%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[190] xl:h-[224]  "
                     src="/images/home6.jpg"
 
                     alt=""
