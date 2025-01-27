@@ -11,7 +11,7 @@ import { getListPage } from "@lib/contentParser";
 const Home = async () => {
   const homepage = await getListPage("content/_index.md");
   const { frontmatter } = homepage;
-  const { banner, brands, features, intro, speciality, testimonial } =
+  const { banner, brands, features, intro, speciality, testimonial,clients } =
     frontmatter;
   return (
     <GSAPWrapper>
