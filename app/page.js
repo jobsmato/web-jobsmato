@@ -7,6 +7,7 @@ import SeoMeta from "@layouts/partials/SeoMeta";
 import ShortIntro from "@layouts/partials/ShortIntro";
 import SpecialFeatures from "@layouts/partials/SpecialFeatures";
 import Testimonial from "@layouts/partials/Testimonial";
+import InfiniteTestimonialSlider from "@layouts/partials/TestiomonialsNew";
 import { getListPage } from "@lib/contentParser";
 
 const Home = async () => {
@@ -23,6 +24,7 @@ const Home = async () => {
       <ShortIntro intro={intro} />
       {/* <SpecialFeatures speciality={speciality} /> */}
       <Testimonial testimonial={testimonial} />
+      <InfiniteTestimonialSlider />
       <Cta />
     </GSAPWrapper>
   );

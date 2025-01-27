@@ -56,7 +56,7 @@ features:
       title: Industry-Specific Training
       content:  Provides training focused on the unique demands of different industries.
     - icon: 'truck'
-      title: Candidates equipped from day one
+      title:  Equipped Candidates
       content:   Equips candidates with necessary tools and knowledge to succeed immediately.
 
 #intro

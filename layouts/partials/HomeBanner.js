@@ -6,6 +6,7 @@ import ImageFallback1 from "@layouts/components/ImageFallback1";
 import useScreenSize from './ScreenSize';
 
 
+
 import { gsap } from "@lib/gsap";
 import { markdownify } from "@lib/utils/textConverter";
 import Link from "next/link";
@@ -109,7 +110,6 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               
                 <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300  ">
 
-
                   <ImageFallback1
                     className="banner-img opacity-0 relative  rounded-lg w-[130px] h-[172px] left-[70%] top-[15%] sm:w-[130px] sm:h-[172px] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150px] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170px] xl:h-[224px]   "
                     src="/images/home1.png"
@@ -191,41 +191,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                       {bannerData.link2.label}
                     </Link> */}
                   </div>
-                 
-                  {/* <div className="row relative pt-[6rem] sm:pt-[6rem] md:pt-[10rem] lg:pt-[15rem] xl:pt-[15rem] py-5 mt-1">
-            <div className="animate from-right col-11 border-y ">
-              <Swiper
-                loop={true}
-                slidesPerView={3}
-                breakpoints={{
-                  992: {
-                    slidesPerView: 4,
-                  },
-                }}
-                spaceBetween={20}
-                modules={[Autoplay]}
-                autoplay={{ delay: 3000 }}
-              >
-                {brands.map((brand, index) => (
-                  <SwiperSlide
-                    className=" h-20 cursor-pointer px-1 py-1  lg:px-10"
-                    key={"brand-" + index}
-                  >
-                    <div className="relative h-full">
-                      <ImageFallback
-                        className="object-contain"
-                        src={brand}
-                        sizes="140vw"
-                        alt=""
-                        fill={true}
-                        priority={true}
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div> */}
+
                 </div>
 
 
