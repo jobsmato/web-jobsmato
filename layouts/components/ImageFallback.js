@@ -16,7 +16,7 @@ const ImageFallback = (props) => {
     className={responsiveSizes || className} // Supports responsive height/width via classes
     style={{ position: "relative" }}
   >
-    <Image
+    <img
       {...rest}
       className="banner-img object-cover rounded-lg "
       src={imgSrc}
