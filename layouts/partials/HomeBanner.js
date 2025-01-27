@@ -184,12 +184,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     >
                       {bannerData.link.label}
                     </Link>
-                    {/* <Link
-                      className="btn btn-primary"
-                      href={bannerData.link2.href}
-                    >
-                      {bannerData.link2.label}
-                    </Link> */}
+     
                   </div>
 
                 </div>
