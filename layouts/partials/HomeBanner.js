@@ -192,7 +192,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     </Link> */}
                   </div>
                  
-                  <div className="row relative pt-[6rem] sm:pt-[6rem] md:pt-[6rem] lg:pt-[9rem] xl:pt-[15rem] py-5 mt-1">
+                  <div className="row relative pt-[6rem] sm:pt-[6rem] md:pt-[10rem] lg:pt-[15rem] xl:pt-[15rem] py-5 mt-1">
             <div className="animate from-right col-11 border-y ">
               <Swiper
                 loop={true}
