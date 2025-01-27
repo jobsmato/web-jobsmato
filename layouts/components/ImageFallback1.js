@@ -12,7 +12,7 @@ const ImageFallback = (props) => {
   }, [src]);
 
   return (
-    <Image
+    <img
       {...rest}
       className={className}
       src={imgSrc}
@@ -20,6 +20,7 @@ const ImageFallback = (props) => {
         setImgSrc(fallback);
       }}
     />
+
   );
 };
 
