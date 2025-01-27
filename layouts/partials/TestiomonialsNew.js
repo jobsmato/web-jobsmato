@@ -96,10 +96,17 @@ const InfiniteTestimonialSlider = () => {
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => {
+    // Ensure this runs only in the browser
+    if (typeof window !== "undefined") {
       setWindowWidth(window.innerWidth);
-    };
-   
+
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
 
