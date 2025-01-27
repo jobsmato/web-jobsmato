@@ -1,8 +1,11 @@
 ---
 banner:
   title: "Your Career Journey,"
-  paragraph1: "Discover thousands of opportunities tailored to your skills and aspirations."
-  paragraph: "Whether you're taking the first step or advancing your career, we've got you covered."
+  paragraph: "Discover thousands of opportunities tailored"
+  paragraph1: "to your skills and aspirations."
+  paragraph2: "Whether you're taking the first step or advancing"
+  paragraph3: " your career,we've got you covered."
+
   image: /images/home1.png
 
   link:

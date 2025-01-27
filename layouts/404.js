@@ -4,7 +4,7 @@ const NotFound = ({ data }) => {
   const { frontmatter, content } = data;
 
   return (
-    <section className="section">
+    <section className="section pt-[10rem]">
       <div className="container">
         <div className="flex h-[40vh] items-center justify-center">
           <div className="text-center">

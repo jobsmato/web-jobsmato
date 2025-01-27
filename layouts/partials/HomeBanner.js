@@ -91,7 +91,8 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   }, []);
 
   return (
-    <section className="section banner pt-0 w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]">
+    //w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]
+    <section className="section banner pt-0 w-[500px] h-[1200px] sm:w-[760px] sm:h-[1200px] md:w-[990px] md:h-[1250px] lg:w-[1280px] lg:h-[1300px] xl:w-[1527px] xl:h-[1300px] 2xl:w-[1900px] 2xl:h-[1300px] ">
       <div className="container-xl ">
         <div className="relative bg-white">
           <div className="bg-theme banner-bg  col-12 absolute left-0 top-0 blur-background ">
@@ -106,7 +107,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg  xl:top-[1%] xl:left-[95%] md:left-[15%] md:top-[1%]  hidden md:block "
+                    className="banner-img opacity-0 relative rounded-lg w-[130] h-[172] left-[70%] top-[15%] sm:w-[130] sm:h-[172] sm:top-[12%] sm:left-[65%] md:left-[63%] md:top-[12%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170] xl:h-[224]   "
                     src="/images/home1.png"
                     width={200}
                     height={300}
@@ -115,7 +116,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
 
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg xl:top-[-10%]  xl:left-[80%]  md:left-[30%] md:top-[-25%]  left-[30%] top-[10%]"
+                    className="banner-img opacity-0 relative rounded-lg w-[130] h-[172] left-[40%] top-[5%]  sm:w-[130] sm:h-[172] sm:top-[4%] sm:left-[46%] md:left-[46%] md:top-[1%] md:w-[150] md:h-[198px] lg:left-[65%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[170] xl:h-[224]     "
                     src="/images/home2.jpg"
                     width={200}
                     height={300}
@@ -124,7 +125,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
                   
                   <ImageFallback
-                    className="banner-img opacity-0 relative rounded-lg xl:top-[-16%] xl:left-[95%] md:left-[45%] md:top-[-48%]  left-[50%] top-[-50%]"
+                    className="banner-img opacity-0 relative rounded-lg w-[130] h-[172] left-[70%] top-[-4%]  sm:w-[130] sm:h-[172] sm:top-[-7%] sm:left-[65%] md:left-[63%] md:top-[-7%] md:w-[150] md:h-[198px] lg:left-[78%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[170] xl:h-[224]  "
                     src="/images/home3.jpg"
                     width={200}
                     height={300}
@@ -132,15 +133,16 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                     alt=""
                   />
                   <ImageFallback
-                    className="banner-img opacity-0 relative object-fill rounded-lg xl:top-[-28%] xl:left-[80%] left-[70%] top-[-20%] hidden xl:block "
+                    className="banner-img opacity-0 relative object-fill w-[130] h-[172] rounded-lg left-[40%] top-[-14%] sm:w-[130] sm:h-[172] sm:top-[-15%] sm:left-[46%] md:left-[46%] md:top-[-18%] md:w-[150] md:h-[198px] lg:left-[65%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[170] xl:h-[224]   "
                     src="/images/home5.jpg"
                     width={200}
                     height={300}
                     priority={true}
                     alt=""
                   />
+                  {/**/}
                   <ImageFallback
-                    className="banner-img opacity-0  relative rounded-lg xl:top-[-60%] xl:left-[65%] left-[40%] top-[-32%] hidden xl:block"
+                    className="banner-img opacity-0  relative rounded-lg w-[130] h-[172]  left-[10%] top-[-40%] sm:w-[130] sm:h-[172] sm:top-[-45%] sm:left-[27%] md:left-[29%] md:top-[-50%] md:w-[150] md:h-[198px] lg:left-[52%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[170] xl:h-[224] "
                     src="/images/home6.jpg"
                     width={200}
                     height={300}
@@ -149,28 +151,39 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   />
 
                 </div>
-                <div className="banner-content absolute col-12 xl:col-10 pb-10 pt-80 text-Left ">
+                <div className="banner-content absolute col-12 xl:col-10 pb-10 pt-[36rem] lg:pt-[30rem] xl:pt-[24rem]  text-Left ">
                   {markdownify(
                     bannerData.title,
                     "h1",
-                    "mb-0 banner-title text-primary opacity-0 text-wrap"
+                    "mb-0 ml-4 sm:ml-10 xl:ml-0 banner-title text-primary opacity-0 text-wrap"
                   )}
                   {markdownify(
                     "Simplified!",
                     "h1",
-                    "mb-4 banner-title text-primary opacity-0 "
+                    "mb-4 ml-4 sm:ml-10 xl:ml-0 banner-title text-primary opacity-0 "
                   )}
                                     {markdownify(
-                    bannerData.paragraph1,
-                    "h6",
-                    "mb-0 banner-title text-grey opacity-0 justify-left"
-                  )}
-                  {markdownify(
                     bannerData.paragraph,
                     "h6",
-                    "mb-4 banner-title text-grey opacity-0 justify-left "
+                    "mb-0 ml-4 sm:ml-10 xl:ml-0 banner-title text-grey opacity-0 justify-left"
                   )}
-                  <div className="banner-btn space-x-7 opacity-0">
+                  {markdownify(
+                    bannerData.paragraph1,
+                    "h6",
+                    "mb-2 ml-4 sm:ml-10 xl:ml-0  banner-title text-grey opacity-0 justify-left"
+                  )}
+                  {markdownify(
+                    bannerData.paragraph2,
+                    "h6",
+                    "mb-0 ml-4 sm:ml-10 xl:ml-0 banner-title text-grey opacity-0 justify-left "
+                  )}
+                  {markdownify(
+                    bannerData.paragraph3,
+                    "h6",
+                    "mb-4 ml-4 sm:ml-10 xl:ml-0 banner-title text-grey opacity-0 justify-left "
+                  )}
+
+                  <div className="banner-btn ml-4 sm:ml-10 xl:ml-0 space-x-7 opacity-0">
                     <Link
                       className="btn btn-primary"
                       href={bannerData.link.href}
@@ -184,8 +197,9 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                       {bannerData.link2.label}
                     </Link> */}
                   </div>
-                  <div className="row relative  py-5 mt-1">
-            <div className="animate from-right col-10 border-y ">
+                 
+                  <div className="row relative pt-[6rem] sm:pt-[6rem] md:pt-[6rem] lg:pt-[9rem] xl:pt-[15rem] py-5 mt-1">
+            <div className="animate from-right col-11 border-y ">
               <Swiper
                 loop={true}
                 slidesPerView={3}
@@ -200,14 +214,14 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               >
                 {brands.map((brand, index) => (
                   <SwiperSlide
-                    className=" h-20 cursor-pointer px-6 py-6 grayscale  transition hover:grayscale-0 lg:px-10"
+                    className=" h-20 cursor-pointer px-1 py-1  lg:px-10"
                     key={"brand-" + index}
                   >
                     <div className="relative h-full">
                       <ImageFallback
                         className="object-contain"
                         src={brand}
-                        sizes="100vw"
+                        sizes="140vw"
                         alt=""
                         fill={true}
                         priority={true}
@@ -218,14 +232,20 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
               </Swiper>
             </div>
           </div>
-
                 </div>
+
+
               </div>
+              
             </div>
+            
           </div>
+          
 
         </div>
+        
       </div>
+
     </section>
   );
 };

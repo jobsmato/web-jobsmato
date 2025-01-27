@@ -24,7 +24,7 @@ const About = ({ data }) => {
 
   return (
     <>
-      <section className="section pt-0">
+      <section className="section pt-[10rem]">
         <Banner title={title} />
         {/* About */}
         <div className="section container">

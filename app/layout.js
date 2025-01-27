@@ -4,7 +4,7 @@ import config from "@config/config.json";
 import theme from "@config/theme.json";
 import TwSizeIndicator from "@layouts/components/TwSizeIndicator";
 import Footer from "@layouts/partials/Footer";
-import Header from "@layouts/partials/Header";
+import Header from "@layouts/partials/Header/index";
 import "../styles/style.scss";
 
 export default function RootLayout({ children }) {
