@@ -24,7 +24,6 @@ const Home = async () => {
       <ShortIntro intro={intro} />
       {/* <SpecialFeatures speciality={speciality} /> */}
       <Testimonial testimonial={testimonial} />
-      <InfiniteTestimonialSlider />
       <Cta />
     </GSAPWrapper>
   );
