@@ -12,10 +12,6 @@ const ImageFallback = (props) => {
   }, [src]);
 
   return (
-    <div
-    className={className} // Supports responsive height/width via classes
-    style={{ position: "relative" }}
-  >
     <img
       {...rest}
       className={className}
@@ -24,7 +20,6 @@ const ImageFallback = (props) => {
         setImgSrc(fallback);
       }}
     />
-        </div>
 
   );
 };
