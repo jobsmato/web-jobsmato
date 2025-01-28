@@ -99,7 +99,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
     //w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]
     <section className="section banner pt-0 w-[${screenSize}] h-[900px]  ">
               <div
-            className="banner-bg absolute left-0 top-[-7] w-full h-full bg-cover bg-center bg-no-repeat blur-background"
+            className="banner-bg absolute left-0 top-[-25] w-full h-full bg-cover bg-center bg-no-repeat blur-background"
             style={{
               backgroundImage: "url('/images/backgr.jpg')", // Replace with your image path
             }}
