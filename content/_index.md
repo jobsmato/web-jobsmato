@@ -28,6 +28,7 @@ brands:
   - /images/brands/1Point.png
   - /images/brands/ApniBus.png
   - /images/brands/IndiaAssist.png
+  - /images/brands/Ashvi.png
 
 
 

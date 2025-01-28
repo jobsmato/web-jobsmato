@@ -55,7 +55,11 @@ const Footer = () => {
         </div>
         
         {/* copyright */}
-        <div className=" py-6 text-center">
+        <div className="  text-center">
+        <div className="animate px-[10rem] sm:px-[18rem] md:px-[28rem]  xl:px-[38rem] ">
+        <img src="/images/brands/ashvi.svg" width="150" height="60">
+        </img>         
+         </div>
           {markdownify(copyright, "p", "footer-copy-write")}
         </div>
 

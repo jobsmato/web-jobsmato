@@ -10,6 +10,7 @@ const Features = ({ features }) => {
   const paginationRef = useRef(null);
   return (
     <section className="section">
+
       <div className="container text-center">
         <div className="animate">
           <p className="uppercase">{features.sub_title}</p>
