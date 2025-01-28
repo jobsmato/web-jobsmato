@@ -152,9 +152,19 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
 
                 <div className="banner-content absolute col-12 lg:col-11 xl:col-13 pb-10 pt-[36rem] md:pt-[12rem] lg:pt-[4rem] xl:pt-[4rem]  text-Left hidden lg:block ">
-
+{/* 
                 <video src="/videos/find.mp4" width="350" height="100" controls={false} muted  autoPlay loop>
-                </video>
+                </video> */}
+                <lottie-player
+    autoplay
+    controls={false}
+    loop
+    mode="normal"
+    src="/videos/ResumeEvaluation.json"
+    style={{width: "320px",zIndex :'3'}}
+></lottie-player>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
 
                 </div>
                 <div className="banner-content absolute col-12 md:col-11 lg:col-11 xl:col-13 pb-10 pt-[38rem] sm:pt-[36rem] md:pt-[31rem] lg:pt-[26rem] xl:pt-[26rem]  text-Left ">
