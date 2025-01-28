@@ -61,9 +61,11 @@ const testimonials = [
 
 const TestimonialCard = React.memo(({ testimonial }) => {
     return (
+        
       <div className="relative flex flex-col items-center p-4 space-y-2 bg-white rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105">
         {/* Container for the image */}
-        <div className="absolute -top-28 w-56 h-64 overflow-hidden rounded-lg border-4 border-white shadow-lg">
+        
+        <div className="absolute -top-28 w-56 h-64 overflow-hidden rounded-lg  shadow-lg">
           <img
             src={testimonial.photo}
             alt={`${testimonial.name}'s portrait`}
@@ -73,6 +75,9 @@ const TestimonialCard = React.memo(({ testimonial }) => {
               e.target.src = "https://images.unsplash.com/photo-1511367461989-f85a21fda167";
             }}
           />
+        </div> 
+        <div className="absolute -top-0 w-80 h-32 bg-primary overflow-hidden rounded-lg  shadow-lg z-[-10]">
+         
         </div>
   
         {/* Spacer to push content down due to the absolute image */}
@@ -138,7 +143,10 @@ const InfiniteTestimonialSlider = () => {
   }
 
   return (
+    
+    
     <div className="relative max-w-7xl mx-auto px-4 py-16">
+        
       <div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ease-in-out"
         onMouseEnter={() => setIsAutoPlay(false)}
@@ -168,7 +176,9 @@ const InfiniteTestimonialSlider = () => {
       >
         →
       </button>
+
     </div>
+    
   );
 };
 

@@ -54,7 +54,10 @@ const ShortIntro = ({ intro }) => {
 
     
     <section className="section pt-0">
+
       <div className="container-xl">
+
+        
         <div className="relative px-4 py-[70px]">
           <div className="text-center">
             <div className="animate">

@@ -12,13 +12,15 @@ const Contact = ({ data }) => {
       <div className="container">
         <div className="section row items-center justify-center">
           <div className="animate lg:col-5">
-            <ImageFallback
+            {/* <ImageFallback
               className="mx-auto lg:pr-10"
               src="/images/vectors/contact.png"
               width={497}
               height={397}
               alt=""
-            />
+            /> */}
+                            <video src="/videos/contact.mp4" width="497" height="397" controls={false} muted  autoPlay loop>
+                            </video>
           </div>
           <div className="animate lg:col-5">
             <form
@@ -26,7 +28,7 @@ const Contact = ({ data }) => {
               action={config.params.contact_form_action}
               className="contact-form rounded-xl p-6 shadow-[0_4px_25px_rgba(0,0,0,0.05)]"
             >
-              <h2 className="h4 mb-6">Send A Message</h2>
+              <h2 className="h4 mb-6 mb">Send A Message</h2>
               <div className="mb-6">
                 <label
                   className="mb-2 block font-medium text-dark"
