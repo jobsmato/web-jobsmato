@@ -76,7 +76,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
             y: 0,
           },
           {
-            y: position,
+            y: -position,
           },
           "<"
         )
@@ -97,77 +97,68 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
   return (
     //w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]
-    <section className="section banner pt-0 w-[${screenSize.width}] h-[${screenSize.height}]  ">
-              <div
-            className="banner-bg absolute left-0 top-[-40] w-full h-full bg-cover bg-center bg-no-repeat blur-background"
-            style={{
-              backgroundImage: "url('/images/backgr.jpg')", // Replace with your image path
-            }}
-          ></div>
-              
-      <div className="container-xl ">
-        <div className="relative ">
+<section className="section banner pt-0 w-full h-screen overflow-hidden relative">
+  <div
+    className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: "url('/images/backgr.jpg')",
+    }}
+  ></div>
+  <div className="container-xl flex flex-col items-center justify-center h-full">
+    <div className="banner-images relative">
 
-          <div className="row  rounded-2xl ">
-            <div className="col-12">
-              <div className="row relative justify-center pb-10 ">
-              
-                <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300  ">
-
-                  <ImageFallback1
-                    className="banner-img opacity-0 relative  rounded-lg w-[130px] h-[172px] left-[70%] top-[15%] sm:w-[130px] sm:h-[172px] sm:top-[12%] sm:left-[80%] md:left-[83%] md:top-[12%] md:w-[150px] md:h-[198px] lg:left-[88%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170px] xl:h-[224px]   "
+              <ImageFallback1
+                    className="banner-img opacity-0 relative  rounded-lg w-[130px] h-[172px] left-[120%] top-[15%] sm:w-[130px] sm:h-[172px] sm:top-[12%] sm:left-[150%] md:left-[193%] md:top-[20%] md:w-[150px] md:h-[198px] lg:left-[268%] lg:top-[20%] xl:top-[25%] xl:left-[320%] xl:w-[170px] xl:h-[224px]   "
                     src="/images/home1.png"
 
                     alt=""
                   />
 
                   <ImageFallback1
-                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[40%] top-[5%]  sm:w-[130px] sm:h-[172px] sm:top-[4%] sm:left-[61%] md:left-[66%] md:top-[1%] md:w-[150px] md:h-[198px] lg:left-[75%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[170px] xl:h-[224px]    "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[10%] top-[5%]  sm:w-[130px] sm:h-[172px] sm:top-[4%] sm:left-[40%] md:left-[86%] md:top-[5%] md:w-[150px] md:h-[198px] lg:left-[160%] lg:top-[10%] xl:top-[15%] xl:left-[210%] xl:w-[170px] xl:h-[224px]    "
                     src="/images/home2.jpg"
 
                     alt=""
                   />
                   
                   <ImageFallback1
-                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[70%] top-[-4%]  sm:w-[130px] sm:h-[172px] sm:top-[-7%] sm:left-[80%] md:left-[83%] md:top-[-7%] md:w-[150px] md:h-[198px] lg:left-[88%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[170px] xl:h-[224px] "
+                    className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[120%] top-[-4%]  sm:w-[130px] sm:h-[172px] sm:top-[-7%] sm:left-[150%] md:left-[193%] md:top-[1%] md:w-[150px] md:h-[198px] lg:left-[268%] lg:top-[1%] xl:top-[7%] xl:left-[320%] xl:w-[170px] xl:h-[224px] "
                     src="/images/home3.jpg"
 
                     alt=""
                   />
                   <ImageFallback1
-                    className="banner-img opacity-0 relative  w-[130px] h-[172px] rounded-lg left-[40%] top-[-14%] sm:w-[130px] sm:h-[172px] sm:top-[-15%] sm:left-[61%] md:left-[66%] md:top-[-18%] md:w-[150px] md:h-[198px] lg:left-[75%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[170px] xl:h-[224px]   "
+                    className="banner-img opacity-0 relative  w-[130px] h-[172px] rounded-lg left-[10%] top-[-14%] sm:w-[130px] sm:h-[172px] sm:top-[-15%] sm:left-[40%] md:left-[86%] md:top-[-14%] md:w-[150px] md:h-[198px] lg:left-[160%] lg:top-[-9%] xl:top-[-3%] xl:left-[210%] xl:w-[170px] xl:h-[224px]   "
                     src="/images/home5.jpg"
 
                     alt=""
                   />
                   {/**/}
                   <ImageFallback1
-                    className="banner-img opacity-0  relative  rounded-lg w-[130px] h-[172px]  left-[10%] top-[-40%] sm:w-[130px] sm:h-[172px] sm:top-[-45%] sm:left-[42%] md:left-[49%] md:top-[-50%] md:w-[150px] md:h-[198px] lg:left-[62%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[170px] xl:h-[224px]  "
+                    className="banner-img opacity-0  relative  rounded-lg w-[130px] h-[172px]  left-[-100%] top-[-40%] sm:w-[130px] sm:h-[172px] sm:top-[-45%] sm:left-[-70%] md:left-[-20%] md:top-[-45%] md:w-[150px] md:h-[198px] lg:left-[50%] lg:top-[-40%] xl:top-[-30%] xl:left-[102%] xl:w-[170px] xl:h-[224px]  "
                     src="/images/home6.jpg"
 
                     alt=""
                   />
-
-                </div>
-
-
-                <div className="banner-content absolute col-12 lg:col-11 xl:col-13 pb-10 pt-[36rem] md:pt-[12rem] lg:pt-[4rem] xl:pt-[4rem]  text-Left hidden lg:block ">
-{/* 
-                <video src="/videos/find.mp4" width="350" height="100" controls={false} muted  autoPlay loop>
-                </video> */}
-                <lottie-player
-    autoplay
-    controls={false}
-    loop
-    mode="normal"
-    src="/videos/ResumeEvaluation.json"
-    style={{width: "320px",zIndex :'3'}}
-></lottie-player>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+      {/* Add other images */}
+    </div>
+    <div className="banner-content absolute col-12 lg:col-9 xl:col-8 pb-10 pt-[36rem] md:pt-[12rem] lg:pt-[0rem] xl:pt-[0rem] xl:pb-[15rem] text-Left hidden  lg:block  ">
+    {/* 
+                                      <video src="/videos/find.mp4" width="350" height="100" controls={false} muted  autoPlay loop>
+                                      </video> */}
+                                      <lottie-player
+                          autoplay
+                          controls={false}
+                          loop
+                          mode="normal"
+                          src="/videos/ResumeEvaluation.json"
+                          style={{width: "320px",zIndex :'3'}}
+                      ></lottie-player>
+                      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
 
                 </div>
-                <div className="banner-content absolute col-12 md:col-11 lg:col-11 xl:col-13 pb-10 pt-[38rem] sm:pt-[36rem] md:pt-[31rem] lg:pt-[26rem] xl:pt-[26rem]  text-Left ">
+                <div className="banner-content absolute col-12 md:col-11 lg:col-11 xl:col-9 pb-10 pt-[38rem] sm:pt-[36rem] md:pt-[38rem] lg:pt-[32rem] xl:pt-[18rem]  text-Left ">
 
                   
                   {markdownify(
@@ -192,32 +183,131 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                   )}
                   <div className="banner-btn ml-4 sm:ml-10 xl:ml-5 space-x-7 opacity-0">
 
-                    <button
-  class="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
->
-                    <Link
-                      href={bannerData.link.href}
-                    >
-                      {bannerData.link.label}
-                    </Link></button>
+                                          <button
+                        class="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
+                      >
+                                          <Link
+                                            href={bannerData.link.href}
+                                          >
+                                            {bannerData.link.label}
+                                          </Link></button>
      
                   </div>
+    </div>
+  </div>
+</section>
 
-                </div>
 
-
-              </div>
+    // <section className="section banner pt-0 w-[${screenSize.width}] h-screen  ">
+    //           <div
+    //         className="banner-bg absolute left-0 top-[-40] w-full h-full bg-cover bg-center bg-no-repeat blur-background"
+    //         style={{
+    //           backgroundImage: "url('/images/backgr.jpg')", // Replace with your image path
+    //         }}
+    //       ></div>
               
-            </div>
-            
-          </div>
+    //   <div className="container-xl flex flex-col items-center justify-center h-full">
+
+              
+    //             <div className="banner-images relative pb-10 hover:animate-shake transition-transform duration-300  ">
+
+    //               <ImageFallback1
+    //                 className="banner-img opacity-0 relative  rounded-lg w-[130px] h-[172px] left-[70%] top-[15%] sm:w-[130px] sm:h-[172px] sm:top-[12%] sm:left-[80%] md:left-[83%] md:top-[12%] md:w-[150px] md:h-[198px] lg:left-[88%] lg:top-[12%] xl:top-[12%] xl:left-[88%] xl:w-[170px] xl:h-[224px]   "
+    //                 src="/images/home1.png"
+
+    //                 alt=""
+    //               />
+
+    //               <ImageFallback1
+    //                 className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[40%] top-[5%]  sm:w-[130px] sm:h-[172px] sm:top-[4%] sm:left-[61%] md:left-[66%] md:top-[1%] md:w-[150px] md:h-[198px] lg:left-[75%] lg:top-[1%] xl:top-[1%] xl:left-[75%] xl:w-[170px] xl:h-[224px]    "
+    //                 src="/images/home2.jpg"
+
+    //                 alt=""
+    //               />
+                  
+    //               <ImageFallback1
+    //                 className="banner-img opacity-0 relative   rounded-lg w-[130px] h-[172px] left-[70%] top-[-4%]  sm:w-[130px] sm:h-[172px] sm:top-[-7%] sm:left-[80%] md:left-[83%] md:top-[-7%] md:w-[150px] md:h-[198px] lg:left-[88%] lg:top-[-7%] xl:top-[-7%] xl:left-[88%] xl:w-[170px] xl:h-[224px] "
+    //                 src="/images/home3.jpg"
+
+    //                 alt=""
+    //               />
+    //               <ImageFallback1
+    //                 className="banner-img opacity-0 relative  w-[130px] h-[172px] rounded-lg left-[40%] top-[-14%] sm:w-[130px] sm:h-[172px] sm:top-[-15%] sm:left-[61%] md:left-[66%] md:top-[-18%] md:w-[150px] md:h-[198px] lg:left-[75%] lg:top-[-18%] xl:top-[-18%] xl:left-[75%] xl:w-[170px] xl:h-[224px]   "
+    //                 src="/images/home5.jpg"
+
+    //                 alt=""
+    //               />
+    //               {/**/}
+    //               <ImageFallback1
+    //                 className="banner-img opacity-0  relative  rounded-lg w-[130px] h-[172px]  left-[10%] top-[-40%] sm:w-[130px] sm:h-[172px] sm:top-[-45%] sm:left-[42%] md:left-[49%] md:top-[-50%] md:w-[150px] md:h-[198px] lg:left-[62%] lg:top-[-50%] xl:top-[-50%] xl:left-[62%] xl:w-[170px] xl:h-[224px]  "
+    //                 src="/images/home6.jpg"
+
+    //                 alt=""
+    //               />
+
+    //             </div>
+
+
+    //             <div className="banner-content absolute col-12 lg:col-11 xl:col-13 pb-10 pt-[36rem] md:pt-[12rem] lg:pt-[4rem] xl:pt-[4rem]  text-Left hidden lg:block ">
+    //                   {/* 
+    //                                   <video src="/videos/find.mp4" width="350" height="100" controls={false} muted  autoPlay loop>
+    //                                   </video> */}
+    //                                   <lottie-player
+    //                       autoplay
+    //                       controls={false}
+    //                       loop
+    //                       mode="normal"
+    //                       src="/videos/ResumeEvaluation.json"
+    //                       style={{width: "320px",zIndex :'3'}}
+    //                   ></lottie-player>
+    //                   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+    //             </div>
+    //             <div className="banner-content absolute col-12 md:col-11 lg:col-11 xl:col-13 pb-10 pt-[38rem] sm:pt-[36rem] md:pt-[31rem] lg:pt-[26rem] xl:pt-[26rem]  text-Left ">
+
+                  
+    //               {markdownify(
+    //                 bannerData.title,
+    //                 "h1",
+    //                 "mb-0 ml-4  sm:ml-10 xl:ml-5 banner-title text-primary opacity-0 text-wrap"
+    //               )}
+    //               {markdownify(
+    //                 "Simplified!",
+    //                 "h1",
+    //                 "mb-4 ml-4 sm:ml-10 xl:ml-5 banner-title text-primary opacity-0 "
+    //               )}
+    //                                 {markdownify(
+    //                 bannerData.paragraph,
+    //                 "h6",
+    //                 "mb-0 ml-4 sm:ml-10 xl:ml-5 banner-title  font-sans  text-grey opacity-0 justify-left"
+    //               )}
+    //               {markdownify(
+    //                 bannerData.paragraph1,
+    //                 "h6",
+    //                 "mb-4 ml-4 sm:ml-10 xl:ml-5  banner-title font-sans  text-grey opacity-0 justify-left"
+    //               )}
+    //               <div className="banner-btn ml-4 sm:ml-10 xl:ml-5 space-x-7 opacity-0">
+
+    //                                       <button
+    //                     class="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
+    //                   >
+    //                                       <Link
+    //                                         href={bannerData.link.href}
+    //                                       >
+    //                                         {bannerData.link.label}
+    //                                       </Link></button>
+     
+    //               </div>
+
+    //             </div>
+
           
 
-        </div>
         
-      </div>
+    //   </div>
 
-    </section>
+    // </section>
   );
 };
 
