@@ -97,7 +97,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
 
   return (
     //w-[700px] h-[900px] md:w-[1600px] Md:h-[900px]
-    <section className="section banner pt-0 w-[${screenSize}] h-[900px]  ">
+    <section className="section banner pt-0 w-[${screenSize.width}] h-[${screenSize.height}]  ">
               <div
             className="banner-bg absolute left-0 top-[-40] w-full h-full bg-cover bg-center bg-no-repeat blur-background"
             style={{
@@ -151,36 +151,36 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
                 </div>
 
 
-                <div className="banner-content absolute col-12 lg:col-10 xl:col-10 pb-10 pt-[36rem] md:pt-[12rem]  xl:pt-[12rem]  text-Left hidden lg:block ">
+                <div className="banner-content absolute col-12 lg:col-11 xl:col-13 pb-10 pt-[36rem] md:pt-[12rem] lg:pt-[4rem] xl:pt-[4rem]  text-Left hidden lg:block ">
 
-                <video src="/videos/find.mp4" width="450" height="200" controls={false} muted  autoPlay loop>
+                <video src="/videos/find.mp4" width="350" height="100" controls={false} muted  autoPlay loop>
                 </video>
 
                 </div>
-                <div className="banner-content absolute col-12 md:col-13 lg:col-11 xl:col-11 pb-10 pt-[38rem] lg:pt-[38rem] xl:pt-[38rem]  text-Left ">
+                <div className="banner-content absolute col-12 md:col-11 lg:col-11 xl:col-13 pb-10 pt-[38rem] sm:pt-[36rem] md:pt-[31rem] lg:pt-[26rem] xl:pt-[26rem]  text-Left ">
 
                   
                   {markdownify(
                     bannerData.title,
                     "h1",
-                    "mb-0 ml-4  sm:ml-10 xl:ml-0 banner-title text-primary opacity-0 text-wrap"
+                    "mb-0 ml-4  sm:ml-10 xl:ml-5 banner-title text-primary opacity-0 text-wrap"
                   )}
                   {markdownify(
                     "Simplified!",
                     "h1",
-                    "mb-4 ml-4 sm:ml-10 xl:ml-0 banner-title text-primary opacity-0 "
+                    "mb-4 ml-4 sm:ml-10 xl:ml-5 banner-title text-primary opacity-0 "
                   )}
                                     {markdownify(
                     bannerData.paragraph,
                     "h6",
-                    "mb-0 ml-4 sm:ml-10 xl:ml-0 banner-title  font-sans  text-grey opacity-0 justify-left"
+                    "mb-0 ml-4 sm:ml-10 xl:ml-5 banner-title  font-sans  text-grey opacity-0 justify-left"
                   )}
                   {markdownify(
                     bannerData.paragraph1,
                     "h6",
-                    "mb-4 ml-4 sm:ml-10 xl:ml-0  banner-title font-sans  text-grey opacity-0 justify-left"
+                    "mb-4 ml-4 sm:ml-10 xl:ml-5  banner-title font-sans  text-grey opacity-0 justify-left"
                   )}
-                  <div className="banner-btn ml-4 sm:ml-10 xl:ml-0 space-x-7 opacity-0">
+                  <div className="banner-btn ml-4 sm:ml-10 xl:ml-5 space-x-7 opacity-0">
 
                     <button
   class="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
