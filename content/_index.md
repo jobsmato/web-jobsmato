@@ -38,25 +38,25 @@ features:
   title: Training and </br> Development Programs
   description: Comprehensive training solutions to enhance candidate capabilities.
   list:
-    - icon: 'book' # feather icon: https://feathericons.com/
+    - icon: 'target' # feather icon: https://feathericons.com/
       title: Targeted Training Programs
       content:  JobsMato provides specialized training tailored to meet specific industry needs.
-    - icon: 'bar-chart'
+    - icon: 'chevrons-up'
       title: Enhancing Skills
       content: Focus on developing essential skills that prepare candidates for their roles.
-    - icon: 'server'
+    - icon: 'user-check'
       title: Industry Standards
       content: Training content is designed to meet current industry benchmarks and requirements.
-    - icon: 'settings'
+    - icon: 'book'
       title:  Technical Training
       content: Offers in-depth technical training relevant to various job roles.
     - icon: 'users'
       title: Soft Skills Training
       content: Emphasizes the importance of soft skills for professional success.
-    - icon: 'target'
+    - icon: 'tool'
       title: Industry-Specific Training
       content:  Provides training focused on the unique demands of different industries.
-    - icon: 'truck'
+    - icon: 'user-plus'
       title:  Equipped Candidates
       content:   Equips candidates with necessary tools and knowledge to succeed immediately.
 
