@@ -6,6 +6,8 @@ import TwSizeIndicator from "@layouts/components/TwSizeIndicator";
 import Footer from "@layouts/partials/Footer";
 import Header from "@layouts/partials/Header/index";
 import "../styles/style.scss";
+import FloatingButton from "@layouts/partials/floatinbutton"
+
 
 export default function RootLayout({ children }) {
   // import google font css
@@ -57,6 +59,8 @@ export default function RootLayout({ children }) {
         <TwSizeIndicator />
         <Header />
         {children}
+        <FloatingButton />
+
         <Footer />
       </body>
     </html>
