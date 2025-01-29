@@ -200,7 +200,7 @@ style={{width: "320px",zIndex :'3'}}
 
 
 
-                <div className="banner-content absolute col-11 md:col-11  xl:col-11 2xl:col-10 pb-[18vh] md:pb-[45vh] pt-[75vh] sm:pt-[74vh] md:pt-[90vh] lg:pt-[60vh] xl:pt-[60vh] 2xl:pl-[20vh] text-Left ">
+                <div className="banner-content absolute left-[3vh] pb-[18vh] md:pb-[45vh] pt-[75vh] sm:pt-[74vh] md:pt-[90vh] lg:pt-[60vh] xl:pt-[60vh] xl:pl-[10vh]  xl:pl-[5vh] 2xl:pl-[20vh] text-Left ">
                 <div className="hidden lg:block  ">
                 <lottie-player
 autoplay
