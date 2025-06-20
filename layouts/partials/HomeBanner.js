@@ -238,7 +238,7 @@ style={{width: "320px",zIndex :'3'}}
                   <div className="banner-btn mt-2 ml-3  xl:ml-5 space-x-7 opacity-0">
 
                                           <button
-                        class="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
+                        className="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
                       >
                                           <Link
                                             href={bannerData.link.href}

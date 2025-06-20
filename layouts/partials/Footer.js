@@ -55,13 +55,22 @@ const Footer = () => {
         </div>
         
         {/* copyright */}
-        <div className="  text-center">
-        <div className="animate px-[10rem] sm:px-[18rem] md:px-[28rem]  xl:px-[38rem] ">
-        <img src="/images/brands/ashvi.svg" width="150" height="60">
-        </img>         
-         </div>
-          {markdownify(copyright, "p", "footer-copy-write")}
-        </div>
+<div className="text-center">
+  <div className="flex justify-center items-center gap-6 flex-wrap px-4 sm:px-8 md:px-16 xl:px-24">
+    <img
+      src="/images/Referns.jpeg"
+      alt="Referns"
+      className="h-auto w-[150px] max-w-[100%] object-contain"
+    />
+    <img
+      src="/images/brands/ashvi.svg"
+      alt="Ashvi"
+      className="h-auto w-[150px] max-w-[100%] object-contain"
+    />
+  </div>
+
+  {markdownify(copyright, "p", "footer-copy-write")}
+</div>
 
       </div>
     </footer>
