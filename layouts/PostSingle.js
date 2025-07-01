@@ -1,3 +1,4 @@
+"use client";
 import config from "@config/config.json";
 import dateFormat from "@lib/utils/dateFormat";
 import readingTime from "@lib/utils/readingTime";
