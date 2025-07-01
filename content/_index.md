@@ -10,7 +10,7 @@ banner:
 
   link:
     label: Need job?
-    href: "/candidate"
+    href: "/login-user"
   link2:
     label: Need Hire?
     href: "/company"
@@ -85,7 +85,7 @@ speciality:
 #Testimonial
 testimonial:
   title: OUR TESTIMONIALS
-  subtitle: Don’t Take Our Word For It
+  subtitle: Don't Take Our Word For It
   description: Our success stories
   list:
     - author: Hamender Sharma
@@ -95,7 +95,7 @@ testimonial:
     - author: Divyanshi gupta
       avatar: /images/t2.jpeg
       profession: BDE, Wheelseye Technology
-      content: Starting my journey as a Business Development Executive was daunting, but Jobsmato made it so easy! They connected me with the right opportunities, and the process was smooth and efficient. Thanks to them, I landed my first BDE role where I’m learning and growing every day.
+      content: Starting my journey as a Business Development Executive was daunting, but Jobsmato made it so easy! They connected me with the right opportunities, and the process was smooth and efficient. Thanks to them, I landed my first BDE role where I'm learning and growing every day.
     - author: Khatri Yash
       avatar: /images/t3.jpeg
       profession: ASM, Wheelseye Logistics
@@ -111,7 +111,7 @@ testimonial:
     - author: Piyush Sharma
       avatar: /images/t6.jpeg
       profession: Software Developer, ApniBus
-      content: I’ve had a fantastic learning experience with JosMato. The platform provides top-notch resources and support that have really helped me improve my skills.
+      content: I've had a fantastic learning experience with JosMato. The platform provides top-notch resources and support that have really helped me improve my skills.
 
 
 ---
