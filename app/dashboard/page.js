@@ -78,28 +78,28 @@ const SkeletonOne = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-black/[0.2] flex-col space-y-2"
     >
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-neutral-900"
+        className="flex flex-row rounded-full border border-neutral-100 p-2  items-center space-x-2 bg-white"
       >
         <div className="h-6 w-6 rounded-full bg-primary shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full" />
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-neutral-900"
+        className="flex flex-row rounded-full border border-neutral-100 p-2 items-center space-x-2 w-3/4 ml-auto bg-white"
       >
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full" />
         <div className="h-6 w-6 rounded-full bg-primary shrink-0" />
       </motion.div>
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-neutral-900"
+        className="flex flex-row rounded-full border border-neutral-100 p-2 items-center space-x-2 bg-white"
       >
         <div className="h-6 w-6 rounded-full bg-primary shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full" />
       </motion.div>
     </motion.div>
   );
@@ -128,7 +128,7 @@ const SkeletonTwo = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-black/[0.2] flex-col space-y-2"
     >
       {arr.map((_, i) => (
         <motion.div
@@ -137,7 +137,7 @@ const SkeletonTwo = () => {
           style={{
             maxWidth: Math.random() * (100 - 40) + 40 + "%",
           }}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-neutral-900 w-full h-4"
+          className="flex flex-row rounded-full border border-neutral-100 p-2  items-center space-x-2 bg-neutral-100 w-full h-4"
         ></motion.div>
       ))}
     </motion.div>
@@ -162,7 +162,7 @@ const SkeletonThree = () => {
         repeat: Infinity,
         repeatType: "reverse",
       }}
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
       style={{
         background:
           "linear-gradient(-45deg, #3356f2, #3b82f6, #60a5fa, #93c5fd)",
@@ -199,11 +199,11 @@ const SkeletonFour = () => {
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-black/[0.2] flex-row space-x-2"
     >
       <motion.div
         variants={first}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+        className="h-full w-1/3 rounded-2xl bg-white p-4 border border-neutral-200 flex flex-col items-center justify-center"
       >
         <img
           src="/images/google-icon-logo-svgrepo-com.svg"
@@ -219,7 +219,7 @@ const SkeletonFour = () => {
           Sales
         </p>
       </motion.div>
-      <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center">
+      <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 border border-neutral-200 flex flex-col items-center justify-center">
         <img
           src="/images/mcdonald-s-15-logo-svgrepo-com.svg"
           alt="avatar"
@@ -236,7 +236,7 @@ const SkeletonFour = () => {
       </motion.div>
       <motion.div
         variants={second}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
+        className="h-full w-1/3 rounded-2xl bg-white p-4 border border-neutral-200 flex flex-col items-center justify-center"
       >
         <img
           src="/images/apple-black-logo-svgrepo-com.svg"
@@ -285,11 +285,11 @@ const SkeletonFive = () => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[6rem] bg-dot-black/[0.2] flex-col space-y-2"
     >
       <motion.div
         variants={variants}
-        className="flex flex-row rounded-2xl border border-neutral-100 dark:border-white/[0.2] p-2  items-start space-x-2 bg-white dark:bg-neutral-900"
+        className="flex flex-row rounded-2xl border border-neutral-100 p-2  items-start space-x-2 bg-white"
       >
         <img
           src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
@@ -304,7 +304,7 @@ const SkeletonFive = () => {
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-white dark:bg-neutral-900"
+        className="flex flex-row rounded-full border border-neutral-100 p-2 items-center justify-end space-x-2 w-3/4 ml-auto bg-white"
       >
         <p className="text-xs text-neutral-500">Yes.</p>
         <div className="h-6 w-6 rounded-full bg-primary shrink-0" />
