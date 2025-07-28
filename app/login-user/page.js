@@ -1,17 +1,76 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+// API call for user login
+async function loginUser(credentials) {
+  try {
+    const formData = new URLSearchParams();
+    formData.append('grant_type', '');
+    formData.append('username', credentials.email);
+    formData.append('password', credentials.password);
+    formData.append('scope', '');
+    formData.append('client_id', '');
+    formData.append('client_secret', '');
+
+    const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Login failed');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+}
+
 export default function LoginUser() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would normally validate credentials
-    // For now, just redirect to /dashboard
-    router.push("/dashboard");
+    setIsSubmitting(true);
+    setError("");
+    
+    // Get form data
+    const formData = new FormData(e.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    
+    try {
+      // Call the login API
+      const response = await loginUser({ email, password });
+      
+      console.log("Login successful:", response);
+      
+      // Store the access token if needed
+      if (response.access_token) {
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user_type', 'user');
+      }
+      
+      // Redirect to dashboard
+      router.push("/dashboard");
+      
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError(error.message || "Login failed. Please check your credentials.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -44,7 +103,21 @@ export default function LoginUser() {
             <label className="block text-gray-700 mb-2" htmlFor="password">Password</label>
             <input className="w-full px-3 py-2 border rounded" type="password" id="password" name="password" required />
           </div>
-          <button className="w-full bg-primary text-white py-2 rounded hover:bg-primary/90 transition mb-4" type="submit">Login as User</button>
+          
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+          
+          <button 
+            className="w-full bg-primary text-white py-2 rounded hover:bg-primary/90 transition mb-4 disabled:opacity-50" 
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Logging in..." : "Login as User"}
+          </button>
         </form>
         {/* Social Login Buttons */}
         <div className="my-4 flex flex-col gap-2">

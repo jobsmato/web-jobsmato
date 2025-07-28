@@ -4,38 +4,77 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-// Mock API call for sending welcome email
-async function sendWelcomeEmail(email) {
-  // Simulate API call
-  console.log("Sending welcome email to:", email);
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Welcome email sent successfully");
-      resolve();
-    }, 1000);
-  });
+// API call for user registration
+async function registerUser(userData) {
+  try {
+    const response = await fetch('http://localhost:8000/api/v1/auth/register/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Registration failed');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
 }
 
 export default function SignupUser() {
   const [showOther, setShowOther] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [allowCommunications, setAllowCommunications] = useState(true);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError("");
     
     // Get form data
     const formData = new FormData(e.target);
     const email = formData.get('email');
+    const phone = formData.get('phone');
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+    const source = formData.get('source') === 'Other' ? formData.get('otherSource') : formData.get('source');
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+    
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setIsSubmitting(false);
+      return;
+    }
     
     try {
-      // Here you would normally handle signup logic
-      // For now, just simulate signup
+      // Prepare user data for API
+      const userData = {
+        email: email,
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone,
+        source: source,
+        allow_communication: allowCommunications,
+        password: password,
+        confirm_password: confirmPassword,
+        user_type: "user"
+      };
       
-      // Send welcome email
-      await sendWelcomeEmail(email);
+      // Call the registration API
+      const response = await registerUser(userData);
+      
+      console.log("Registration successful:", response);
       
       // Show success message
       setShowSuccess(true);
@@ -47,6 +86,7 @@ export default function SignupUser() {
       
     } catch (error) {
       console.error("Error during signup:", error);
+      setError(error.message || "Registration failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -140,6 +180,27 @@ export default function SignupUser() {
             <label className="block text-gray-700 mb-2" htmlFor="confirmPassword">Confirm Password</label>
             <input className="w-full px-3 py-2 border rounded" type="password" id="confirmPassword" name="confirmPassword" required />
           </div>
+          
+          {/* Communication Preferences */}
+          <div className="mb-6">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                className="mr-3 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
+                checked={allowCommunications}
+                onChange={(e) => setAllowCommunications(e.target.checked)}
+              />
+              <span className="text-gray-700">Allow to send communications via WhatsApp, email and SMS</span>
+            </label>
+          </div>
+          
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+          
           <button 
             className="w-full bg-primary text-white py-2 rounded hover:bg-primary/90 transition mb-4 disabled:opacity-50" 
             type="submit"
