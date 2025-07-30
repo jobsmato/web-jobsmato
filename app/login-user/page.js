@@ -40,6 +40,36 @@ export default function LoginUser() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  // Google login handler
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/auth/google/login', {
+        method: 'GET',
+        headers: {
+          'accept': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Google login failed');
+      }
+
+      const data = await response.json();
+      console.log('Google login response:', data);
+      
+      // Handle the response - redirect to Google OAuth URL
+      if (data.auth_url) {
+        window.location.href = data.auth_url;
+      } else {
+        throw new Error('No authentication URL received');
+      }
+      
+    } catch (error) {
+      console.error('Google login error:', error);
+      setError('Google login failed. Please try again.');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -121,7 +151,11 @@ export default function LoginUser() {
         </form>
         {/* Social Login Buttons */}
         <div className="my-4 flex flex-col gap-2">
-          <button type="button" className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50">
+          <button 
+            type="button" 
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50"
+            onClick={handleGoogleLogin}
+          >
             <img src="/images/google.svg" alt="Google" className="h-5 w-5" />
             <span>Login with Google</span>
           </button>

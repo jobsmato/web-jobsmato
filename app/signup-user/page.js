@@ -35,6 +35,36 @@ export default function SignupUser() {
   const [allowCommunications, setAllowCommunications] = useState(true);
   const router = useRouter();
 
+  // Google login handler
+  const handleGoogleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/api/v1/auth/google/login', {
+        method: 'GET',
+        headers: {
+          'accept': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Google login failed');
+      }
+
+      const data = await response.json();
+      console.log('Google login response:', data);
+      
+      // Handle the response - redirect to Google OAuth URL
+      if (data.auth_url) {
+        window.location.href = data.auth_url;
+      } else {
+        throw new Error('No authentication URL received');
+      }
+      
+    } catch (error) {
+      console.error('Google login error:', error);
+      setError('Google login failed. Please try again.');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -79,9 +109,9 @@ export default function SignupUser() {
       // Show success message
       setShowSuccess(true);
       
-      // Redirect after 3 seconds
+      // Redirect to onboarding after 3 seconds
       setTimeout(() => {
-        router.push("/login-user");
+        router.push("/onboarding/candidate");
       }, 3000);
       
     } catch (error) {
@@ -113,7 +143,7 @@ export default function SignupUser() {
           </div>
           <h2 className="text-2xl font-bold mb-4 text-green-600">Signup Successful!</h2>
           <p className="text-gray-600 mb-4">Welcome email has been sent to your inbox.</p>
-          <p className="text-sm text-gray-500">Redirecting to login page...</p>
+          <p className="text-sm text-gray-500">Redirecting to onboarding...</p>
         </div>
       </div>
     );
@@ -211,7 +241,11 @@ export default function SignupUser() {
         </form>
         {/* Social Signup Buttons */}
         <div className="my-4 flex flex-col gap-2">
-          <button type="button" className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50">
+          <button 
+            type="button" 
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50"
+            onClick={handleGoogleLogin}
+          >
             <img src="/images/google.svg" alt="Google" className="h-5 w-5" />
             <span>Sign up with Google</span>
           </button>

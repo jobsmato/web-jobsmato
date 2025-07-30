@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export default function Dashboard() {
   return (
-    <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-16 pt-32 md:pt-16 overflow-hidden">
+    <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
       {/* Hero Background */}
       <div
         className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
