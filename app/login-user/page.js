@@ -93,7 +93,7 @@ export default function LoginUser() {
       }
       
       // Redirect to dashboard
-      router.push("/dashboard");
+    router.push("/dashboard");
       
     } catch (error) {
       console.error("Error during login:", error);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChevronRightIcon, CheckCircleIcon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { UserIcon, BriefcaseIcon, AcademicCapIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
@@ -14,7 +14,7 @@ const optionCardStyles = "group cursor-pointer border-2 rounded-2xl p-6 transiti
 const selectedCardStyles = "border-indigo-500 bg-indigo-50 shadow-lg";
 const unselectedCardStyles = "border-gray-200 hover:border-indigo-300";
 const inputStyles = "w-full px-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:border-indigo-500 focus:ring-0 transition-all duration-300";
-const buttonStyles = "inline-flex items-center px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl";
+const buttonStyles = "inline-flex items-center px-8 py-4 bg-primary hover:bg-blue-700 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl";
 
 // Wizard state management (same as before)
 const onboardingSteps = {
@@ -69,13 +69,91 @@ function onboardingReducer(state, action) {
         isLastStep: Math.max(0, state.stepIndex - 1) === onboardingSteps[state.mode].length - 1
       };
       
+    case 'UPDATE_FIELD':
+      return {
+        ...state,
+        answers: { ...state.answers, ...action.payload }
+      };
+      
+    case 'NEXT_STEP':
+      const nextStepIndex = Math.min(state.stepIndex + 1, onboardingSteps[state.mode].length - 1);
+      return {
+        ...state,
+        stepIndex: nextStepIndex,
+        isLastStep: nextStepIndex === onboardingSteps[state.mode].length - 1
+      };
+      
+    case 'LOAD_EXISTING_DATA':
+      const loadedAnswers = action.payload;
+      let loadedMode = 'choose';
+      
+      if (loadedAnswers.workStatus) {
+        loadedMode = loadedAnswers.workStatus === 'fresher' ? 'fresher' : 'experienced';
+      }
+      
+      // Determine the last completed step to show the user
+      let lastCompletedStep = 0;
+      if (loadedMode === 'fresher') {
+        if (loadedAnswers.education?.degree && loadedAnswers.education?.course && 
+            loadedAnswers.education?.university && loadedAnswers.education?.startYear && 
+            loadedAnswers.education?.passingYear && loadedAnswers.education?.cgpa && 
+            loadedAnswers.education?.skills) {
+          lastCompletedStep = onboardingSteps[loadedMode].length - 1; // Show last step (education)
+        }
+      } else if (loadedMode === 'experienced') {
+        const steps = onboardingSteps[loadedMode];
+        for (let i = 0; i < steps.length; i++) {
+          const stepKey = steps[i].key;
+          let stepComplete = false;
+          
+          switch (stepKey) {
+            case 'workStatus':
+              stepComplete = !!loadedAnswers.workStatus;
+              break;
+            case 'isEmployed':
+              stepComplete = loadedAnswers.isEmployed !== undefined;
+              break;
+            case 'workExperience':
+              stepComplete = loadedAnswers.workExperience?.years !== undefined && 
+                           loadedAnswers.workExperience?.months !== undefined;
+              break;
+            case 'companyRole':
+              stepComplete = !!loadedAnswers.companyRole?.company && 
+                           !!loadedAnswers.companyRole?.jobTitle && 
+                           !!loadedAnswers.companyRole?.city;
+              break;
+            case 'duration':
+              stepComplete = !!loadedAnswers.duration?.from;
+              break;
+            case 'compensation':
+              stepComplete = !!loadedAnswers.compensation?.salary && 
+                           !!loadedAnswers.compensation?.noticePeriod;
+              break;
+          }
+          
+          if (stepComplete) {
+            lastCompletedStep = i;
+          } else {
+            break;
+          }
+        }
+      }
+      
+      return {
+        ...state,
+        answers: loadedAnswers,
+        mode: loadedMode,
+        stepIndex: lastCompletedStep,
+        isLastStep: lastCompletedStep === onboardingSteps[loadedMode].length - 1
+      };
+      
     default: 
       return state;
   }
 }
 
 // Modern Step Renderer with conversational UI
-const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBack }) => {
+const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBack, onFieldUpdate, dispatch, isLastStep }) => {
   
   if (step.key === 'workStatus') {
     return (
@@ -176,16 +254,33 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
   if (step.key === 'workExperience') {
     return (
       <div className={cardStyles}>
-        {/* Back Button */}
-        {canGoBack && (
-          <button
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-800 mb-4 transition-colors"
-          >
-            <ChevronLeftIcon className="w-5 h-5 mr-2" />
-            Back
-          </button>
-        )}
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mb-4">
+          {canGoBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <ChevronLeftIcon className="w-5 h-5 mr-2" />
+              Back
+            </button>
+          )}
+          
+          {!isLastStep && answer?.years !== undefined && answer?.months !== undefined && (
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors"
+            >
+              Next
+              <ChevronRightIcon className="w-5 h-5 ml-2" />
+            </button>
+          )}
+        </div>
         
         <h2 className={questionStyles}>⏰ How much experience do you have?</h2>
         <p className={subtitleStyles}>Tell us about your total work experience</p>
@@ -226,6 +321,23 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
             </p>
           </div>
         )}
+        
+        {/* Continue Button */}
+        {answer?.years !== undefined && answer?.months !== undefined && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="px-8 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            >
+              Continue
+            </button>
+          </div>
+        )}
       </div>
     );
   }
@@ -233,16 +345,33 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
   if (step.key === 'companyRole') {
     return (
       <div className={cardStyles}>
-        {/* Back Button */}
-        {canGoBack && (
-          <button
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-800 mb-4 transition-colors"
-          >
-            <ChevronLeftIcon className="w-5 h-5 mr-2" />
-            Back
-          </button>
-        )}
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mb-4">
+          {canGoBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <ChevronLeftIcon className="w-5 h-5 mr-2" />
+              Back
+            </button>
+          )}
+          
+          {!isLastStep && answer?.company && answer?.jobTitle && answer?.city && (
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors"
+            >
+              Next
+              <ChevronRightIcon className="w-5 h-5 ml-2" />
+            </button>
+          )}
+        </div>
         
         <h2 className={questionStyles}>🏢 Tell us about your current role</h2>
         <p className={subtitleStyles}>Help us understand your professional background</p>
@@ -287,6 +416,23 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
             />
           </div>
         </div>
+        
+        {/* Continue Button */}
+        {answer?.company && answer?.jobTitle && answer?.city && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="px-8 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            >
+              Continue
+            </button>
+          </div>
+        )}
       </div>
     );
   }
@@ -294,16 +440,33 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
   if (step.key === 'duration') {
     return (
       <div className={cardStyles}>
-        {/* Back Button */}
-        {canGoBack && (
-          <button
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-800 mb-4 transition-colors"
-          >
-            <ChevronLeftIcon className="w-5 h-5 mr-2" />
-            Back
-          </button>
-        )}
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mb-4">
+          {canGoBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <ChevronLeftIcon className="w-5 h-5 mr-2" />
+              Back
+            </button>
+          )}
+          
+          {!isLastStep && answer?.from && (
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors"
+            >
+              Next
+              <ChevronRightIcon className="w-5 h-5 ml-2" />
+            </button>
+          )}
+        </div>
         
         <h2 className={questionStyles}>📅 When did you start working there?</h2>
         <p className={subtitleStyles}>Let us know your employment duration</p>
@@ -352,6 +515,23 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
             </p>
           </div>
         )}
+        
+        {/* Continue Button */}
+        {answer?.from && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="px-8 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
+            >
+              Continue
+            </button>
+          </div>
+        )}
       </div>
     );
   }
@@ -361,16 +541,33 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
     
     return (
       <div className={cardStyles}>
-        {/* Back Button */}
-        {canGoBack && (
-          <button
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-800 mb-4 transition-colors"
-          >
-            <ChevronLeftIcon className="w-5 h-5 mr-2" />
-            Back
-          </button>
-        )}
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mb-4">
+          {canGoBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <ChevronLeftIcon className="w-5 h-5 mr-2" />
+              Back
+            </button>
+          )}
+          
+          {!isLastStep && answer?.salary && answer?.noticePeriod && (
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors"
+            >
+              Next
+              <ChevronRightIcon className="w-5 h-5 ml-2" />
+            </button>
+          )}
+        </div>
         
         <h2 className={questionStyles}>💰 Let's talk compensation</h2>
         <p className={subtitleStyles}>Help us understand your expectations</p>
@@ -417,6 +614,8 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
             </div>
           </div>
         </div>
+        
+
       </div>
     );
   }
@@ -427,16 +626,33 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
     
     return (
       <div className={cardStyles}>
-        {/* Back Button */}
-        {canGoBack && (
-          <button
-            onClick={onBack}
-            className="flex items-center text-gray-600 hover:text-gray-800 mb-4 transition-colors"
-          >
-            <ChevronLeftIcon className="w-5 h-5 mr-2" />
-            Back
-          </button>
-        )}
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mb-4">
+          {canGoBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              <ChevronLeftIcon className="w-5 h-5 mr-2" />
+              Back
+            </button>
+          )}
+          
+          {!isLastStep && answer?.degree && answer?.course && answer?.university && answer?.startYear && answer?.passingYear && answer?.cgpa && answer?.skills && (
+            <button
+              onClick={() => {
+                dispatch({ type: 'NEXT_STEP' });
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+              className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors"
+            >
+              Next
+              <ChevronRightIcon className="w-5 h-5 ml-2" />
+            </button>
+          )}
+        </div>
         
         <h2 className={questionStyles}>🎓 Tell us about your education</h2>
         <p className={subtitleStyles}>Share your academic background with us</p>
@@ -450,7 +666,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
               <select
                 className={inputStyles}
                 value={answer?.degree || ''}
-                onChange={(e) => onNext({ [step.key]: { ...answer, degree: e.target.value }})}
+                onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, degree: e.target.value }})}
               >
                 <option value="">Select qualification</option>
                 {degrees.map(degree => (
@@ -466,7 +682,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
               <select
                 className={inputStyles}
                 value={answer?.course || ''}
-                onChange={(e) => onNext({ [step.key]: { ...answer, course: e.target.value }})}
+                onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, course: e.target.value }})}
               >
                 <option value="">Select course</option>
                 {courses.map(course => (
@@ -485,7 +701,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
               placeholder="e.g. Delhi University, IIT Delhi"
               className={inputStyles}
               value={answer?.university || ''}
-              onChange={(e) => onNext({ [step.key]: { ...answer, university: e.target.value }})}
+              onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, university: e.target.value }})}
             />
           </div>
 
@@ -497,7 +713,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
               <select
                 className={inputStyles}
                 value={answer?.startYear || ''}
-                onChange={(e) => onNext({ [step.key]: { ...answer, startYear: e.target.value }})}
+                onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, startYear: e.target.value }})}
               >
                 <option value="">Select year</option>
                 {[...Array(8)].map((_, i) => {
@@ -514,7 +730,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
               <select
                 className={inputStyles}
                 value={answer?.passingYear || ''}
-                onChange={(e) => onNext({ [step.key]: { ...answer, passingYear: e.target.value }})}
+                onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, passingYear: e.target.value }})}
               >
                 <option value="">Select year</option>
                 {[...Array(8)].map((_, i) => {
@@ -536,7 +752,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
                 placeholder="e.g. 8.5"
                 className={inputStyles}
                 value={answer?.cgpa || ''}
-                onChange={(e) => onNext({ [step.key]: { ...answer, cgpa: e.target.value }})}
+                onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, cgpa: e.target.value }})}
               />
             </div>
           </div>
@@ -550,13 +766,15 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
               placeholder="e.g. JavaScript, React, Node.js, Python (separate with commas)"
               className={inputStyles}
               value={answer?.skills || ''}
-              onChange={(e) => onNext({ [step.key]: { ...answer, skills: e.target.value }})}
+              onChange={(e) => onFieldUpdate({ [step.key]: { ...answer, skills: e.target.value }})}
             />
             <p className="mt-2 text-sm text-gray-600">
               💡 Add skills that showcase your expertise
             </p>
           </div>
         </div>
+        
+
       </div>
     );
   }
@@ -570,26 +788,139 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
   
   const [state, dispatch] = useReducer(onboardingReducer, initialState);
   const [loading, setLoading] = React.useState(false);
+  const [initialLoading, setInitialLoading] = React.useState(true);
+  const [dataLoaded, setDataLoaded] = React.useState(false);
+  const [originalData, setOriginalData] = React.useState(null);
+  const [dataModified, setDataModified] = React.useState(false);
   const router = useRouter();
 
+  // Load existing onboarding data on component mount
+  React.useEffect(() => {
+    const loadExistingData = async () => {
+      try {
+        const token = localStorage.getItem('access_token');
+        let candidateId = localStorage.getItem('candidate_id');
+        
+        console.log('Loading existing data - Token:', !!token, 'Candidate ID:', candidateId);
+        
+        if (!token) {
+          console.log('No token found, skipping data load');
+          setInitialLoading(false);
+          return;
+        }
+        
+        // If no candidate_id in localStorage, try to get it from user profile
+        if (!candidateId) {
+          console.log('No candidate_id in localStorage, trying to get from user profile');
+          try {
+            const profileRes = await fetch('http://localhost:8000/api/v1/auth/me', {
+              method: 'GET',
+              headers: { 
+                'Authorization': `Bearer ${token}`,
+                'accept': 'application/json'
+              }
+            });
+            
+            if (profileRes.ok) {
+              const profileData = await profileRes.json();
+              console.log('User profile data:', profileData);
+              
+              // Use candidate_id specifically, not user id
+              candidateId = profileData.candidate_id;
+              console.log('Got candidate_id from profile:', candidateId);
+              
+              if (candidateId) {
+                localStorage.setItem('candidate_id', candidateId);
+                console.log('Stored candidate_id in localStorage:', candidateId);
+              } else {
+                console.log('No candidate_id found in profile, user may not have candidate profile yet');
+              }
+            }
+          } catch (profileError) {
+            console.error('Error getting user profile:', profileError);
+          }
+        }
+        
+        if (!candidateId) {
+          console.log('No candidate_id available, showing empty form for new candidate');
+          setInitialLoading(false);
+          return;
+        }
+        
+        console.log('Attempting to load onboarding data for candidate_id:', candidateId);
+        
+        const res = await fetch(`http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`, {
+          method: 'GET',
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json'
+          }
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Loaded existing onboarding data:', data);
+          
+          // Set the loaded data to state
+          console.log('Dispatching LOAD_EXISTING_DATA with payload:', data);
+          dispatch({ type: 'LOAD_EXISTING_DATA', payload: data });
+          setOriginalData(JSON.parse(JSON.stringify(data))); // Deep copy for comparison
+          setDataLoaded(true);
+          
+          // Also log the state after dispatch
+          setTimeout(() => {
+            console.log('State after loading data:', state);
+          }, 100);
+        } else if (res.status === 404) {
+          console.log('No onboarding data found for candidate_id:', candidateId, '- showing empty form');
+          // Remove the candidate_id since no onboarding data exists
+          localStorage.removeItem('candidate_id');
+        } else {
+          console.log('Error loading onboarding data:', res.status, res.statusText);
+        }
+      } catch (error) {
+        console.error('Error loading existing data:', error);
+      } finally {
+        setInitialLoading(false);
+      }
+    };
+    
+    loadExistingData();
+  }, []);
+  
+  // Debug effect to log state changes
+  React.useEffect(() => {
+    if (dataLoaded) {
+      console.log('State updated after data load:', state);
+      console.log('Current step:', state.stepIndex);
+      console.log('Current mode:', state.mode);
+      console.log('Current answers:', state.answers);
+    }
+  }, [state, dataLoaded]);
+  
+  // Track data modifications
+  React.useEffect(() => {
+    if (originalData && dataLoaded) {
+      const changed = hasDataChanged();
+      setDataModified(changed);
+      console.log('Data modified:', changed);
+    }
+  }, [state.answers, originalData, dataLoaded]);
+
   const handleNext = (payload = {}) => {
-    // For education step, we need to handle it differently since it has multiple fields
-    if (onboardingSteps[state.mode][state.stepIndex]?.key === 'education') {
-      // Just update the answer without validation for individual field changes
+    // For selection steps (workStatus, isEmployed), proceed to next step immediately
+    const currentStepKey = onboardingSteps[state.mode][state.stepIndex]?.key;
+    if (currentStepKey === 'workStatus' || currentStepKey === 'isEmployed') {
       dispatch({ type: 'SET_ANSWER', payload });
+      // Smooth scroll to next section
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
       return;
     }
     
-    // Validate current step before proceeding (for other steps)
-    if (!validateCurrentStep()) {
-      return;
-    }
-    
-    dispatch({ type: 'SET_ANSWER', payload });
-    // Smooth scroll to next section
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
+    // For multi-field steps, just update the field without advancing
+    dispatch({ type: 'UPDATE_FIELD', payload });
   };
 
   const handleBack = () => {
@@ -598,6 +929,43 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
+  };
+
+  const handleFieldUpdate = (payload = {}) => {
+    // Just update the answer without advancing to next step
+    dispatch({ type: 'SET_ANSWER', payload });
+  };
+
+  const checkStepCompletion = (stepKey, answers) => {
+    switch (stepKey) {
+      case 'workExperience':
+        return answers.workExperience?.years !== undefined && 
+               answers.workExperience?.months !== undefined;
+      
+      case 'companyRole':
+        return answers.companyRole?.company && 
+               answers.companyRole?.jobTitle && 
+               answers.companyRole?.city;
+      
+      case 'duration':
+        return answers.duration?.from;
+      
+      case 'compensation':
+        return answers.compensation?.salary && 
+               answers.compensation?.noticePeriod;
+      
+      case 'education':
+        return answers.education?.degree && 
+               answers.education?.course && 
+               answers.education?.university && 
+               answers.education?.startYear && 
+               answers.education?.passingYear && 
+               answers.education?.cgpa && 
+               answers.education?.skills;
+      
+      default:
+        return false;
+    }
   };
 
   const validateCurrentStep = () => {
@@ -645,30 +1013,207 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
     return true;
   };
 
+  const hasDataChanged = () => {
+    if (!originalData) return true; // If no original data, consider it changed
+    return JSON.stringify(state.answers) !== JSON.stringify(originalData);
+  };
+
+  const validateOnboardingData = (data) => {
+    const errors = [];
+    
+    if (!data.workStatus) {
+      errors.push('workStatus is required');
+    }
+    
+    if (data.workStatus === 'experienced') {
+      if (data.isEmployed === undefined) {
+        errors.push('isEmployed is required for experienced candidates');
+      }
+      
+      if (!data.workExperience?.years || !data.workExperience?.months) {
+        errors.push('workExperience years and months are required');
+      }
+      
+      if (!data.companyRole?.company || !data.companyRole?.jobTitle || !data.companyRole?.city) {
+        errors.push('companyRole company, jobTitle, and city are required');
+      }
+      
+      if (!data.duration?.from) {
+        errors.push('duration from date is required');
+      }
+      
+      if (!data.compensation?.salary || !data.compensation?.noticePeriod) {
+        errors.push('compensation salary and noticePeriod are required');
+      }
+    }
+    
+    if (data.workStatus === 'fresher') {
+      if (!data.education?.degree || !data.education?.course || !data.education?.university || 
+          !data.education?.startYear || !data.education?.passingYear || !data.education?.cgpa || !data.education?.skills) {
+        errors.push('all education fields are required for fresher candidates');
+      }
+    }
+    
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if data has actually changed
+    if (!hasDataChanged()) {
+      console.log('No changes detected, redirecting to dashboard');
+      router.push('/candidate/dashboard');
+      return;
+    }
+    
     setLoading(true);
     
     try {
       // Get the access token from localStorage
       const token = localStorage.getItem('access_token');
       
-      const res = await fetch('http://localhost:8000/api/v1/onboarding/candidate', {
-        method: 'POST',
-        headers: { 
+      if (!token) {
+        throw new Error('No access token found. Please login again.');
+      }
+      
+      console.log('Submitting onboarding data:', state.answers);
+      
+      // Validate data before sending
+      const validationErrors = validateOnboardingData(state.answers);
+      if (validationErrors.length > 0) {
+        throw new Error(`Validation failed: ${validationErrors.join(', ')}`);
+      }
+      
+      // Validate and clean the data before sending
+      const cleanedData = { ...state.answers };
+      
+      // Ensure all string values are properly formatted
+      if (cleanedData.workExperience) {
+        if (cleanedData.workExperience.years !== undefined) {
+          cleanedData.workExperience.years = String(cleanedData.workExperience.years);
+        }
+        if (cleanedData.workExperience.months !== undefined) {
+          cleanedData.workExperience.months = String(cleanedData.workExperience.months);
+        }
+      }
+      
+      if (cleanedData.compensation && cleanedData.compensation.salary) {
+        cleanedData.compensation.salary = String(cleanedData.compensation.salary);
+      }
+      
+      if (cleanedData.education) {
+        if (cleanedData.education.startYear) {
+          cleanedData.education.startYear = String(cleanedData.education.startYear);
+        }
+        if (cleanedData.education.passingYear) {
+          cleanedData.education.passingYear = String(cleanedData.education.passingYear);
+        }
+        if (cleanedData.education.cgpa) {
+          cleanedData.education.cgpa = String(cleanedData.education.cgpa);
+        }
+      }
+      
+      console.log('Cleaned data being sent:', cleanedData);
+      
+      // Check if candidate already has onboarding data
+      const candidateId = localStorage.getItem('candidate_id');
+      console.log('Current candidate_id in localStorage:', candidateId);
+      let method = 'POST';
+      let url = 'http://localhost:8000/api/v1/candidates/onboarding';
+      
+      // If we have a candidate_id, check if the candidate exists
+      if (candidateId) {
+        try {
+          const checkRes = await fetch(`http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`, {
+            method: 'GET',
+            headers: { 
+              'Authorization': `Bearer ${token}`,
+              'accept': 'application/json'
+            }
+          });
+          
+          if (checkRes.ok) {
+            // Candidate exists, use PUT for update
+            method = 'PUT';
+            url = `http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`;
+            console.log('Candidate exists, using PUT for update');
+          } else if (checkRes.status === 404) {
+            // Candidate doesn't exist, use POST for new
+            console.log('Candidate onboarding not found, using POST for new submission');
+            localStorage.removeItem('candidate_id'); // Remove invalid candidate_id
+          } else {
+            // Other error, use POST for new
+            console.log('Error checking candidate, using POST for new submission');
+            localStorage.removeItem('candidate_id');
+          }
+        } catch (checkError) {
+          console.error('Error checking candidate existence:', checkError);
+          // If check fails, use POST for new
+          localStorage.removeItem('candidate_id');
+        }
+      }
+      
+              console.log(`Making ${method} request to:`, url);
+        console.log('Request headers:', { 
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
           'accept': 'application/json'
-        },
-        body: JSON.stringify(state.answers)
-      });
+        });
+        console.log('Request body:', cleanedData);
+        
+        const res = await fetch(url, {
+          method: method,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json'
+          },
+          body: JSON.stringify(cleanedData)
+        });
       
-      if (!res.ok) throw new Error('Could not submit. Please try again.');
+      console.log('Response status:', res.status);
+      console.log('Response headers:', res.headers);
       
-      // Redirect to dashboard after successful onboarding
-      router.push('/dashboard');
+      if (!res.ok) {
+        const errorData = await res.text();
+        console.error('API Error Response:', errorData);
+        
+        // Try to parse as JSON for better error display
+        try {
+          const errorJson = JSON.parse(errorData);
+          console.error('Parsed error details:', errorJson);
+          
+          // Format validation errors if they exist
+          if (errorJson.detail && Array.isArray(errorJson.detail)) {
+            const validationErrors = errorJson.detail.map(err => `${err.loc?.join('.')}: ${err.msg}`).join(', ');
+            throw new Error(`Validation Error: ${validationErrors}`);
+          } else if (errorJson.detail) {
+            throw new Error(`API Error: ${errorJson.detail}`);
+          } else {
+            throw new Error(`API Error: ${res.status} - ${errorData}`);
+          }
+        } catch (parseError) {
+          throw new Error(`API Error: ${res.status} - ${errorData}`);
+        }
+      }
+      
+      const responseData = await res.json();
+      console.log('Success response:', responseData);
+      
+      // Store candidate_id if it's a new submission
+      if (method === 'POST' && responseData.candidate_id) {
+        localStorage.setItem('candidate_id', responseData.candidate_id);
+        console.log('Stored new candidate_id:', responseData.candidate_id);
+      } else if (method === 'PUT') {
+        console.log('Updated existing candidate data');
+      }
+      
+      // Redirect to candidate dashboard after successful onboarding
+      router.push('/candidate/dashboard');
     } catch (e) {
       console.error('Onboarding submission error:', e);
+      alert(`Submission failed: ${e.message}`);
       setLoading(false);
     }
   };
@@ -676,6 +1221,8 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
   const currentSteps = onboardingSteps[state.mode];
   const progressPercentage = currentSteps.length === 1 ? 5 : (state.stepIndex / (currentSteps.length - 1)) * 100;
   const currentStep = currentSteps[state.stepIndex];
+
+
 
   // Check if all required fields are filled
   const isAllFieldsFilled = () => {
@@ -710,6 +1257,29 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
     return false;
   };
 
+  // Show loading state while fetching existing data
+  if (initialLoading) {
+    return (
+      <div className="min-h-screen overflow-hidden pt-36">
+        <div
+          className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat z-[-1]"
+          style={{ backgroundImage: "url('/images/backgr.jpg')" }}
+          aria-hidden="true"
+        ></div>
+        <div className="text-center mt-20">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+        </div>
+        
+        <div className={containerStyles}>
+          <div className="text-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 text-lg">Loading your onboarding data...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen overflow-hidden pt-36">
 
@@ -720,6 +1290,16 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
       ></div>
       <div className="text-center mt-20">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+        {dataLoaded && (
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-2xl max-w-md mx-auto">
+            <p className="text-green-800 font-semibold">
+              ✅ Your existing data has been loaded successfully!
+            </p>
+            <p className="text-green-700 text-sm mt-2">
+              You are currently on step {state.stepIndex + 1} of {onboardingSteps[state.mode]?.length || 1}
+            </p>
+          </div>
+        )}
       </div>
       
       <div className={containerStyles}>
@@ -741,14 +1321,17 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
           </div>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <div>
           <ModernStepRenderer
             step={currentStep}
             answer={state.answers[currentStep.key]}
             onNext={handleNext}
             onBack={handleBack}
+            onFieldUpdate={handleFieldUpdate}
             isEmployed={state.answers.isEmployed}
             canGoBack={state.stepIndex > 0}
+            dispatch={dispatch}
+            isLastStep={state.isLastStep}
           />
 
           {/* Submit Button */}
@@ -758,23 +1341,25 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
             return state.isLastStep && isAllFieldsFilled();
           })() && (
             <div className="text-center mt-8">
-              <button
-                type="submit"
-                disabled={loading}
-                className={`${buttonStyles} ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
-              >
-                {loading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    🚀 Submit Application
-                    <ChevronRightIcon className="w-5 h-5 ml-2" />
-                  </>
-                )}
-              </button>
+              <form onSubmit={handleSubmit}>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`${buttonStyles} ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
+                >
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      {dataModified ? '🚀 Update Application' : '🚀 Submit Application'}
+                      <ChevronRightIcon className="w-5 h-5 ml-2" />
+                    </>
+                  )}
+                </button>
+              </form>
               <p className="mt-4 text-gray-600">
                 We're excited to learn more about you! 🎉
               </p>
@@ -789,7 +1374,7 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
               </p>
             </div>
           )}
-        </form>
+        </div>
       </div>
     </div>
   );
