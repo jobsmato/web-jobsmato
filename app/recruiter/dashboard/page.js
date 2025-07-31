@@ -1,8 +1,25 @@
 "use client";
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RecruiterDashboard() {
+  const router = useRouter();
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const handleGoToEnroll = () => {
+    console.log('Go to Enroll button clicked');
+    setIsNavigating(true);
+    
+    try {
+      console.log('Attempting to navigate to /recruiter');
+      router.push('/recruiter');
+      console.log('Navigation initiated');
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // Fallback to window.location if router fails
+      window.location.href = '/recruiter';
+    }
+  };
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-gray-50 overflow-hidden pt-32">
       {/* Hero Background */}
@@ -24,9 +41,12 @@ export default function RecruiterDashboard() {
               <p className="mt-1 text-gray-500">
                 Add a new candidate to your recruitment pipeline.
               </p>
-              <Link className="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="/recruiter">
+              <a 
+                href="/recruiter"
+                className="mt-2 py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" 
+              >
                 Go to Enroll
-              </Link>
+              </a>
             </div>
           </div>
           {/* Card 2: Placeholder */}

@@ -126,9 +126,9 @@ export default function SignupRecruiter() {
       <div className="relative z-20 bg-white p-8 rounded shadow-md w-full max-w-xl">
         {/* Toggle Navigation */}
         <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
-          <Link href="/signup-user" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
-            User Signup
-          </Link>
+        <Link href="/login-recruiter" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
+          Recruiter Login
+        </Link>
           <Link href="/signup-recruiter" className="flex-1 text-center py-2 px-4 bg-primary text-white rounded-md">
             Recruiter Signup
           </Link>

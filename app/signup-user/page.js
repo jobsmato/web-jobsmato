@@ -106,12 +106,25 @@ export default function SignupUser() {
       
       console.log("Registration successful:", response);
       
+      // Store the access token and user_id if provided
+      if (response.access_token) {
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user_type', 'user');
+        if (response.user_id) {
+          localStorage.setItem('user_id', response.user_id);
+        }
+        
+        // Dispatch login event for other components
+        window.dispatchEvent(new Event('userLogin'));
+      }
+      
       // Show success message
       setShowSuccess(true);
       
-      // Redirect to onboarding after 3 seconds
+      // Redirect to onboarding with user_id after 3 seconds
+      const userId = response.user_id || '';
       setTimeout(() => {
-        router.push("/onboarding/candidate");
+        router.push(`/onboarding/candidate?user_id=${userId}`);
       }, 3000);
       
     } catch (error) {
@@ -161,12 +174,13 @@ export default function SignupUser() {
       <div className="relative z-20 bg-white p-8 rounded shadow-md w-full max-w-xl">
         {/* Toggle Navigation */}
         <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
+        <Link href="/login-user" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
+            User Login
+          </Link>
           <Link href="/signup-user" className="flex-1 text-center py-2 px-4 bg-primary text-white rounded-md">
             User Signup
           </Link>
-          <Link href="/signup-recruiter" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
-            Recruiter Signup
-          </Link>
+
         </div>
         <h2 className="text-2xl font-bold mb-6 text-center">User Signup</h2>
         <form onSubmit={handleSubmit}>
@@ -249,11 +263,19 @@ export default function SignupUser() {
             <img src="/images/google.svg" alt="Google" className="h-5 w-5" />
             <span>Sign up with Google</span>
           </button>
-          <button type="button" className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50">
+          <button 
+            type="button" 
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-gray-100 text-gray-400 cursor-not-allowed opacity-50"
+            disabled
+          >
             <img src="/images/linkedin.svg" alt="LinkedIn" className="h-5 w-5" />
             <span>Sign up with LinkedIn</span>
           </button>
-          <button type="button" className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50">
+          <button 
+            type="button" 
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-gray-100 text-gray-400 cursor-not-allowed opacity-50"
+            disabled
+          >
             <img src="/images/facebook.svg" alt="Facebook" className="h-5 w-5" />
             <span>Sign up with Facebook</span>
           </button>

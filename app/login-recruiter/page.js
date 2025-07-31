@@ -59,10 +59,13 @@ export default function LoginRecruiter() {
       if (response.access_token) {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user_type', 'recruiter');
+        
+        // Dispatch login event for other components
+        window.dispatchEvent(new Event('userLogin'));
       }
       
       // Redirect to recruiter dashboard
-      router.push("/recruiter/dashboard");
+    router.push("/recruiter/dashboard");
       
     } catch (error) {
       console.error("Error during login:", error);
@@ -85,11 +88,12 @@ export default function LoginRecruiter() {
       <div className="relative z-20 bg-white p-8 rounded shadow-md w-full max-w-sm">
         {/* Toggle Navigation */}
         <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
-          <Link href="/login-user" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
-            User Login
-          </Link>
+
           <Link href="/login-recruiter" className="flex-1 text-center py-2 px-4 bg-primary text-white rounded-md">
             Recruiter Login
+          </Link>
+          <Link href="/signup-recruiter" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
+          Recruiter Signup
           </Link>
         </div>
         <h2 className="text-2xl font-bold mb-6 text-center">Recruiter Login</h2>

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useReducer, useRef, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useReducer, useRef, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronRightIcon, CheckCircleIcon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { UserIcon, BriefcaseIcon, AcademicCapIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
 
@@ -145,6 +145,15 @@ function onboardingReducer(state, action) {
         mode: loadedMode,
         stepIndex: lastCompletedStep,
         isLastStep: lastCompletedStep === onboardingSteps[loadedMode].length - 1
+      };
+      
+    case 'RESET_STATE':
+      return {
+        ...initialState,
+        stepIndex: 0,
+        answers: {},
+        mode: 'choose',
+        isLastStep: false
       };
       
     default: 
@@ -792,16 +801,90 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
   const [dataLoaded, setDataLoaded] = React.useState(false);
   const [originalData, setOriginalData] = React.useState(null);
   const [dataModified, setDataModified] = React.useState(false);
+  const [currentUserId, setCurrentUserId] = React.useState(null);
+  const [authLoading, setAuthLoading] = React.useState(true);
+  const [authError, setAuthError] = React.useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Reset all state to prevent data contamination
+  const resetState = () => {
+    console.log('Resetting all state to prevent data contamination');
+    dispatch({ type: 'RESET_STATE' });
+    setDataLoaded(false);
+    setOriginalData(null);
+    setDataModified(false);
+    setCurrentUserId(null);
+  };
+
+  // Handle auth/me and URL update on component mount
+  React.useEffect(() => {
+    const handleAuthMe = async () => {
+      try {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+          router.push('/login-user');
+          return;
+        }
+
+        // Call auth/me API
+        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          console.log('User profile data:', userData);
+          
+          // Check if user_id is passed from URL (e.g., from recruiter page)
+          const urlUserId = searchParams.get('user_id');
+          if (urlUserId) {
+            // Use the user_id from URL (this is the candidate's user_id from recruiter)
+            localStorage.setItem('user_id', urlUserId);
+            console.log('Using user_id from URL (candidate):', urlUserId);
+          } else if (userData.id && !localStorage.getItem('user_id')) {
+            // Use the user_id from auth/me (this is the current user's ID)
+            localStorage.setItem('user_id', userData.id);
+            console.log('Using user_id from auth/me (current user):', userData.id);
+          }
+          
+          // Update URL with user_id if not present
+          const currentUserId = searchParams.get('user_id');
+          if (!currentUserId && userData.id) {
+            const newUrl = `/onboarding/candidate?user_id=${userData.id}`;
+            router.replace(newUrl);
+          }
+          
+          setAuthLoading(false);
+        } else {
+          throw new Error('Failed to fetch user profile');
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        setAuthError('Failed to load user profile');
+        setAuthLoading(false);
+      }
+    };
+
+    handleAuthMe();
+  }, [router, searchParams]);
 
   // Load existing onboarding data on component mount
   React.useEffect(() => {
     const loadExistingData = async () => {
       try {
-        const token = localStorage.getItem('access_token');
-        let candidateId = localStorage.getItem('candidate_id');
+        // Reset state first to prevent data contamination
+        resetState();
         
-        console.log('Loading existing data - Token:', !!token, 'Candidate ID:', candidateId);
+        const token = localStorage.getItem('access_token');
+        
+        console.log('=== STARTING FRESH DATA LOAD ===');
+        console.log('Token exists:', !!token);
+        console.log('Current localStorage candidate_id:', localStorage.getItem('candidate_id'));
         
         if (!token) {
           console.log('No token found, skipping data load');
@@ -809,37 +892,69 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
           return;
         }
         
-        // If no candidate_id in localStorage, try to get it from user profile
-        if (!candidateId) {
-          console.log('No candidate_id in localStorage, trying to get from user profile');
-          try {
-            const profileRes = await fetch('http://localhost:8000/api/v1/auth/me', {
-              method: 'GET',
-              headers: { 
-                'Authorization': `Bearer ${token}`,
-                'accept': 'application/json'
-              }
-            });
-            
-            if (profileRes.ok) {
-              const profileData = await profileRes.json();
-              console.log('User profile data:', profileData);
-              
-              // Use candidate_id specifically, not user id
-              candidateId = profileData.candidate_id;
-              console.log('Got candidate_id from profile:', candidateId);
-              
-              if (candidateId) {
-                localStorage.setItem('candidate_id', candidateId);
-                console.log('Stored candidate_id in localStorage:', candidateId);
-              } else {
-                console.log('No candidate_id found in profile, user may not have candidate profile yet');
-              }
-            }
-          } catch (profileError) {
-            console.error('Error getting user profile:', profileError);
-          }
+        // Check if this is a recruiter accessing for a candidate (user_id in URL)
+        const urlUserId = searchParams.get('user_id');
+        const userType = localStorage.getItem('user_type');
+        
+        if (urlUserId && userType === 'recruiter') {
+          console.log('=== RECRUITER ACCESSING FOR CANDIDATE ===');
+          console.log('URL user_id (candidate):', urlUserId);
+          console.log('User type:', userType);
+          console.log('Skipping existing data load - creating new candidate entry');
+          
+          // Clear any existing candidate_id to force new creation
+          localStorage.removeItem('candidate_id');
+          setInitialLoading(false);
+          return;
         }
+        
+        // Always get fresh user profile to ensure we have the correct candidate_id
+        console.log('Getting fresh user profile to ensure correct candidate_id');
+        let candidateId = null;
+        
+        try {
+          const profileRes = await fetch('http://localhost:8000/api/v1/auth/me', {
+            method: 'GET',
+            headers: { 
+              'Authorization': `Bearer ${token}`,
+              'accept': 'application/json'
+            }
+          });
+          
+          if (profileRes.ok) {
+            const profileData = await profileRes.json();
+            console.log('=== USER PROFILE DATA ===');
+            console.log('User ID:', profileData.id);
+            console.log('Email:', profileData.email);
+            console.log('Candidate ID:', profileData.candidate_id);
+            console.log('Has candidate profile:', profileData.has_candidate_profile);
+            
+            // Track current user ID to prevent data mixing
+            setCurrentUserId(profileData.id);
+            
+            // Use candidate_id specifically, not user id
+            candidateId = profileData.candidate_id;
+            console.log('Using candidate_id:', candidateId);
+            
+            // Update localStorage with the correct candidate_id
+            if (candidateId) {
+              localStorage.setItem('candidate_id', candidateId);
+              console.log('✅ Updated candidate_id in localStorage:', candidateId);
+            } else {
+              // Clear any old candidate_id if user doesn't have one
+              localStorage.removeItem('candidate_id');
+              console.log('❌ Cleared old candidate_id, user has no candidate profile yet');
+            }
+          } else {
+            console.log('❌ Failed to get user profile, clearing old data');
+            localStorage.removeItem('candidate_id');
+          }
+        } catch (profileError) {
+          console.error('Error getting user profile:', profileError);
+          localStorage.removeItem('candidate_id');
+        }
+        
+
         
         if (!candidateId) {
           console.log('No candidate_id available, showing empty form for new candidate');
@@ -847,7 +962,10 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
           return;
         }
         
-        console.log('Attempting to load onboarding data for candidate_id:', candidateId);
+        console.log('=== LOADING ONBOARDING DATA ===');
+        console.log('For candidate_id:', candidateId);
+        console.log('Current user ID:', currentUserId);
+        console.log('API URL:', `http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`);
         
         const res = await fetch(`http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`, {
           method: 'GET',
@@ -859,7 +977,15 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
         
         if (res.ok) {
           const data = await res.json();
-          console.log('Loaded existing onboarding data:', data);
+          console.log('=== ONBOARDING DATA LOADED ===');
+          console.log('Response status:', res.status);
+          console.log('Data received:', data);
+          console.log('Data keys:', Object.keys(data));
+          
+          // Verify this data belongs to the current user
+          console.log('=== VERIFYING DATA OWNERSHIP ===');
+          console.log('Current user ID:', currentUserId);
+          console.log('Data user ID (if exists):', data.user_id || 'Not found in data');
           
           // Set the loaded data to state
           console.log('Dispatching LOAD_EXISTING_DATA with payload:', data);
@@ -886,6 +1012,12 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
     };
     
     loadExistingData();
+    
+    // Cleanup function to clear data when component unmounts
+    return () => {
+      console.log('Cleaning up onboarding component');
+      // Don't clear candidate_id here as it might be needed for other components
+    };
   }, []);
   
   // Debug effect to log state changes
@@ -1014,6 +1146,15 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
   };
 
   const hasDataChanged = () => {
+    // Check if this is a recruiter accessing for a candidate
+    const recruiterUserId = searchParams.get('user_id');
+    const currentUserType = localStorage.getItem('user_type');
+    
+    if (recruiterUserId && currentUserType === 'recruiter') {
+      console.log('Recruiter creating new candidate - always allow submission');
+      return true; // Always allow submission for new candidate creation
+    }
+    
     if (!originalData) return true; // If no original data, consider it changed
     return JSON.stringify(state.answers) !== JSON.stringify(originalData);
   };
@@ -1060,10 +1201,20 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Check if data has actually changed
+    // Get URL parameters and user type once at the beginning
+    const urlUserId = searchParams.get('user_id');
+    const userType = localStorage.getItem('user_type');
+    
+    // Check if data has actually changed (moved after variable declarations)
     if (!hasDataChanged()) {
-      console.log('No changes detected, redirecting to dashboard');
-      router.push('/candidate/dashboard');
+      // Check if this is a recruiter access and redirect accordingly
+      if (urlUserId && userType === 'recruiter') {
+        console.log('No changes detected, recruiter redirecting to /recruiter');
+        router.push('/recruiter');
+      } else {
+        console.log('No changes detected, normal user redirecting to /dashboard');
+        router.push('/dashboard');
+      }
       return;
     }
     
@@ -1087,6 +1238,15 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
       
       // Validate and clean the data before sending
       const cleanedData = { ...state.answers };
+      
+      // Add user_id to the request if we have it
+      const userId = localStorage.getItem('user_id');
+      if (userId) {
+        cleanedData.user_id = parseInt(userId);
+        console.log('Added user_id to request (candidate):', userId);
+      } else {
+        console.log('No user_id found in localStorage');
+      }
       
       // Ensure all string values are properly formatted
       if (cleanedData.workExperience) {
@@ -1122,8 +1282,17 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
       let method = 'POST';
       let url = 'http://localhost:8000/api/v1/candidates/onboarding';
       
-      // If we have a candidate_id, check if the candidate exists
-      if (candidateId) {
+      // Force POST (new candidate creation) if recruiter is accessing for a candidate
+      if (urlUserId && userType === 'recruiter') {
+        console.log('=== RECRUITER CREATING NEW CANDIDATE ===');
+        console.log('Forcing POST method for new candidate creation');
+        method = 'POST';
+        url = 'http://localhost:8000/api/v1/candidates/onboarding';
+        // Clear any existing candidate_id to ensure new creation
+        localStorage.removeItem('candidate_id');
+      }
+      // If we have a candidate_id and it's not a recruiter access, check if the candidate exists
+      else if (candidateId) {
         try {
           const checkRes = await fetch(`http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`, {
             method: 'GET',
@@ -1209,8 +1378,14 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
         console.log('Updated existing candidate data');
       }
       
-      // Redirect to candidate dashboard after successful onboarding
-      router.push('/candidate/dashboard');
+      // Check if this is a recruiter access and redirect accordingly
+      if (urlUserId && userType === 'recruiter') {
+        console.log('Recruiter submission successful - redirecting to /recruiter');
+        router.push('/recruiter');
+      } else {
+        console.log('Normal user submission successful - redirecting to /dashboard');
+        router.push('/dashboard');
+      }
     } catch (e) {
       console.error('Onboarding submission error:', e);
       alert(`Submission failed: ${e.message}`);
@@ -1275,6 +1450,35 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
             <p className="text-gray-600 text-lg">Loading your onboarding data...</p>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading state for auth
+  if (authLoading) {
+    return (
+      <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading onboarding...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state for auth
+  if (authError) {
+    return (
+      <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{authError}</p>
+          <button 
+            onClick={() => router.push('/login-user')}
+            className="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition"
+          >
+            Back to Login
+          </button>
         </div>
       </div>
     );

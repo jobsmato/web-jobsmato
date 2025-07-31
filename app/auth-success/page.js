@@ -21,13 +21,21 @@ export default function AuthSuccess() {
 
         console.log('Token received:', token);
 
+        // Clear any old data first to prevent data contamination
+        localStorage.removeItem('candidate_id');
+        localStorage.removeItem('user_type');
+        localStorage.removeItem('user_email');
+        
         // Store the token in localStorage
         localStorage.setItem('access_token', token);
         localStorage.setItem('user_type', 'user'); // Default to user, you might want to determine this from the token or API call
+        
+        // Dispatch login event for other components
+        window.dispatchEvent(new Event('userLogin'));
 
-        // Optional: Verify the token with your backend
+        // Get user profile to check if they have a candidate profile
         try {
-          const response = await fetch('http://localhost:8000/api/v1/auth/verify-token', {
+          const response = await fetch('http://localhost:8000/api/v1/auth/me', {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -37,31 +45,49 @@ export default function AuthSuccess() {
 
           if (response.ok) {
             const userData = await response.json();
-            console.log('User data:', userData);
+            console.log('User profile data:', userData);
             
-            // Store additional user information if needed
+            // Store additional user information
             if (userData.user_type) {
               localStorage.setItem('user_type', userData.user_type);
             }
             if (userData.email) {
               localStorage.setItem('user_email', userData.email);
             }
+            if (userData.candidate_id) {
+              localStorage.setItem('candidate_id', userData.candidate_id);
+            }
+            if (userData.id) {
+              localStorage.setItem('user_id', userData.id);
+            }
+            
+            // Check if user has completed onboarding
+            if (userData.has_candidate_profile && userData.candidate_id) {
+              // User has completed onboarding, redirect to dashboard
+              console.log('User has completed onboarding, redirecting to dashboard');
+              const userId = userData.id || '';
+              setTimeout(() => {
+                router.push(`/dashboard?user_id=${userId}`);
+              }, 2000);
+              return;
+            } else {
+              // User hasn't completed onboarding, redirect to onboarding
+              console.log('User needs to complete onboarding, redirecting to onboarding');
+              const userId = userData.id || '';
+              setTimeout(() => {
+                router.push(`/onboarding/candidate?user_id=${userId}`);
+              }, 2000);
+              return;
+            }
           }
-        } catch (verifyError) {
-          console.warn('Token verification failed, but continuing with stored token:', verifyError);
+        } catch (profileError) {
+          console.warn('Profile fetch failed, redirecting to onboarding:', profileError);
         }
 
-        // Show success briefly, then redirect
+        // If profile check failed, default to onboarding
+        console.log('Profile check failed, defaulting to onboarding');
         setTimeout(() => {
-          // Redirect based on user type or default to user dashboard
-          const userType = localStorage.getItem('user_type');
-          if (userType === 'recruiter') {
-            router.push('/recruiter/dashboard');
-          } else {
-            // For new users, redirect to onboarding first
-            // You might want to check if user has completed onboarding
-            router.push('/onboarding/candidate');
-          }
+          router.push('/onboarding/candidate');
         }, 2000);
 
       } catch (error) {

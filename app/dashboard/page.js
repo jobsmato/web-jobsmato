@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "../../lib/utils/cn";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 import {
   IconBoxAlignRightFilled,
@@ -11,8 +11,89 @@ import {
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Dashboard() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const handleAuthMe = async () => {
+      try {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+          router.push('/login-user');
+          return;
+        }
+
+        // Call auth/me API
+        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          console.log('User profile data:', userData);
+          
+          // Store user_id if not already in localStorage
+          if (userData.id && !localStorage.getItem('user_id')) {
+            localStorage.setItem('user_id', userData.id);
+          }
+          
+          // Update URL with user_id if not present
+          const currentUserId = searchParams.get('user_id');
+          if (!currentUserId && userData.id) {
+            const newUrl = `/dashboard?user_id=${userData.id}`;
+            router.replace(newUrl);
+          }
+          
+          setIsLoading(false);
+        } else {
+          throw new Error('Failed to fetch user profile');
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        setError('Failed to load user profile');
+        setIsLoading(false);
+      }
+    };
+
+    handleAuthMe();
+  }, [router, searchParams]);
+
+  if (isLoading) {
+    return (
+      <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <button 
+            onClick={() => router.push('/login-user')}
+            className="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition"
+          >
+            Back to Login
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
       {/* Hero Background */}
@@ -23,7 +104,7 @@ export default function Dashboard() {
       ></div>
       <div className="relative z-20 max-w-6xl mx-auto px-4 w-full">
         <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem]">
-          <Link href="/candidate" className="h-full">
+          <Link href="/onboarding/candidate" className="h-full">
             <BentoGridItem
               title={items[0].title}
               description={items[0].description}

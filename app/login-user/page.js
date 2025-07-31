@@ -86,14 +86,21 @@ export default function LoginUser() {
       
       console.log("Login successful:", response);
       
-      // Store the access token if needed
+      // Store the access token and user_id if needed
       if (response.access_token) {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user_type', 'user');
+        if (response.user_id) {
+          localStorage.setItem('user_id', response.user_id);
+        }
+        
+        // Dispatch login event for other components
+        window.dispatchEvent(new Event('userLogin'));
       }
       
-      // Redirect to dashboard
-    router.push("/dashboard");
+      // Redirect to dashboard with user_id
+      const userId = response.user_id || '';
+      router.push(`/dashboard?user_id=${userId}`);
       
     } catch (error) {
       console.error("Error during login:", error);
@@ -119,8 +126,8 @@ export default function LoginUser() {
           <Link href="/login-user" className="flex-1 text-center py-2 px-4 bg-primary text-white rounded-md">
             User Login
           </Link>
-          <Link href="/login-recruiter" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
-            Recruiter Login
+          <Link href="/signup-user" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
+            User Signup
           </Link>
         </div>
         <h2 className="text-2xl font-bold mb-6 text-center">User Login</h2>
@@ -159,11 +166,19 @@ export default function LoginUser() {
             <img src="/images/google.svg" alt="Google" className="h-5 w-5" />
             <span>Login with Google</span>
           </button>
-          <button type="button" className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50">
+          <button 
+            type="button" 
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-gray-100 text-gray-400 cursor-not-allowed opacity-50"
+            disabled
+          >
             <img src="/images/linkedin.svg" alt="LinkedIn" className="h-5 w-5" />
             <span>Login with LinkedIn</span>
           </button>
-          <button type="button" className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-white hover:bg-gray-50">
+          <button 
+            type="button" 
+            className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded py-2 bg-gray-100 text-gray-400 cursor-not-allowed opacity-50"
+            disabled
+          >
             <img src="/images/facebook.svg" alt="Facebook" className="h-5 w-5" />
             <span>Login with Facebook</span>
           </button>
