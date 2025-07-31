@@ -9,6 +9,12 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
+    title: "Dashboard",
+    path: "/dashboard",
+    newTab: false,
+  },
+  {
+    id: 3,
     title: "Enrollment",
     newTab: false,
     submenu: [
@@ -27,19 +33,19 @@ const menuData: Menu[] = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     title: "About",
     path: "/about",
     newTab: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "FAQ",
     path: "/terms-policy",
     newTab: false,
   },
   {
-    id: 5,
+    id: 6,
     title: "Support",
     path: "/contact",
     newTab: false,

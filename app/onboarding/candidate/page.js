@@ -1043,11 +1043,11 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
     // For selection steps (workStatus, isEmployed), proceed to next step immediately
     const currentStepKey = onboardingSteps[state.mode][state.stepIndex]?.key;
     if (currentStepKey === 'workStatus' || currentStepKey === 'isEmployed') {
-      dispatch({ type: 'SET_ANSWER', payload });
-      // Smooth scroll to next section
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
+    dispatch({ type: 'SET_ANSWER', payload });
+    // Smooth scroll to next section
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
       return;
     }
     
@@ -1434,7 +1434,7 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
 
   // Show loading state while fetching existing data
   if (initialLoading) {
-    return (
+  return (
       <div className="min-h-screen overflow-hidden pt-36">
         <div
           className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat z-[-1]"
@@ -1546,23 +1546,23 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
           })() && (
             <div className="text-center mt-8">
               <form onSubmit={handleSubmit}>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className={`${buttonStyles} ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
-                >
-                  {loading ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
+              <button
+                type="submit"
+                disabled={loading}
+                className={`${buttonStyles} ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105'}`}
+              >
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                    Submitting...
+                  </>
+                ) : (
+                  <>
                       {dataModified ? '🚀 Update Application' : '🚀 Submit Application'}
-                      <ChevronRightIcon className="w-5 h-5 ml-2" />
-                    </>
-                  )}
-                </button>
+                    <ChevronRightIcon className="w-5 h-5 ml-2" />
+                  </>
+                )}
+              </button>
               </form>
               <p className="mt-4 text-gray-600">
                 We're excited to learn more about you! 🎉
@@ -1576,7 +1576,7 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
               <p className="text-gray-600 mb-4">
                 Please complete all required fields to submit your application.
               </p>
-            </div>
+      </div>
           )}
         </div>
       </div>

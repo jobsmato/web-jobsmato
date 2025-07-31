@@ -148,6 +148,56 @@ const Header = () => {
     }
   };
 
+  // Handle Dashboard navigation based on user type
+  const handleDashboardClick = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('access_token');
+    const userType = localStorage.getItem('user_type');
+    
+    if (!token) {
+      // User not logged in, redirect to login
+      router.push('/login-user');
+      return;
+    }
+    
+    if (userType === 'recruiter') {
+      // Recruiter goes to recruiter dashboard
+      router.push('/recruiter/dashboard');
+    } else {
+      // Regular user goes to user dashboard
+      try {
+        // Get current user profile to check completion status
+        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          const userId = userData.id || '';
+          
+          if (userData.has_candidate_profile && userData.candidate_id) {
+            // User has completed onboarding, redirect to dashboard
+            router.push(`/dashboard?user_id=${userId}`);
+          } else {
+            // User hasn't completed onboarding, redirect to onboarding
+            router.push(`/onboarding/candidate?user_id=${userId}`);
+          }
+        } else {
+          // If API call fails, default to onboarding
+          router.push('/onboarding/candidate');
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        // If API call fails, default to onboarding
+        router.push('/onboarding/candidate');
+      }
+    }
+  };
+
   return (
     <>
       <header
@@ -218,6 +268,18 @@ const Header = () => {
                     {menuData.map((menuItem, index) => (
                       <li key={index} className="group relative">
                         {menuItem.path ? (
+                          menuItem.title === "Dashboard" ? (
+                            <button
+                              onClick={handleDashboardClick}
+                              className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
+                                usePathName === menuItem.path
+                                  ? "text-primary "
+                                  : "hover:text-primary"
+                              }`}
+                            >
+                              {menuItem.title}
+                            </button>
+                          ) : (
                           <Link
                             href={menuItem.path}
                             className={`flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 ${
@@ -228,6 +290,7 @@ const Header = () => {
                           >
                             {menuItem.title}
                           </Link>
+                          )
                         ) : (
                           <>
                             <p

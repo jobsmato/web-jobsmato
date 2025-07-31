@@ -216,8 +216,8 @@ export default function RecruiterPage() {
       }));
       
       // Generate candidate ID and update state
-      const id = generateCandidateId();
-      setCandidateId(id);
+    const id = generateCandidateId();
+    setCandidateId(id);
       
       // Store candidate ID for display
       setEnrollmentData(prev => ({
@@ -225,14 +225,14 @@ export default function RecruiterPage() {
         candidateId: id
       }));
       
-      setSubmitted(true);
+    setSubmitted(true);
       
-      if (form.callConnected && form.interested) {
-        setSignedUp(true);
-        signUpCandidate({ ...form, candidateId: id });
-      } else {
-        setSignedUp(false);
-        storeCandidateInfo({ ...form, candidateId: id });
+    if (form.callConnected && form.interested) {
+      setSignedUp(true);
+      signUpCandidate({ ...form, candidateId: id });
+    } else {
+      setSignedUp(false);
+      storeCandidateInfo({ ...form, candidateId: id });
       }
       
     } catch (error) {
