@@ -13,25 +13,25 @@ const menuData: Menu[] = [
     path: "/dashboard",
     newTab: false,
   },
-  {
-    id: 3,
-    title: "Enrollment",
-    newTab: false,
-    submenu: [
-      {
-        id: 41,
-        title: "Candidate",
-        path: "/candidate",
-        newTab: false,
-      },
-      {
-        id: 42,
-        title: "Company",
-        path: "/company",
-        newTab: false,
-      },
-    ],
-  },
+  // {
+  //   id: 3,
+  //   title: "Enrollment",
+  //   newTab: false,
+  //   submenu: [
+  //     {
+  //       id: 41,
+  //       title: "Candidate",
+  //       path: "/candidate",
+  //       newTab: false,
+  //     },
+  //     {
+  //       id: 42,
+  //       title: "Company",
+  //       path: "/company",
+  //       newTab: false,
+  //     },
+  //   ],
+  // },
   {
     id: 4,
     title: "About",
@@ -49,6 +49,6 @@ const menuData: Menu[] = [
     title: "Support",
     path: "/contact",
     newTab: false,
-  }
+  },
 ];
 export default menuData;

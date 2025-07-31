@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useReducer, useRef, useEffect, useState } from 'react';
+import React, { useReducer, useRef, useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronRightIcon, CheckCircleIcon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { UserIcon, BriefcaseIcon, AcademicCapIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
@@ -791,7 +791,7 @@ const ModernStepRenderer = ({ step, answer, onNext, onBack, isEmployed, canGoBac
   return null;
 };
 
-const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboarding' } } }) => {
+const CandidateOnboardingContent = ({ data = { frontmatter: { title: 'Candidate Onboarding' } } }) => {
   const { frontmatter } = data;
   const { title } = frontmatter;
   
@@ -1581,6 +1581,36 @@ const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboard
         </div>
       </div>
     </div>
+  );
+};
+
+function OnboardingLoadingFallback() {
+  return (
+    <div className="min-h-screen overflow-hidden pt-36">
+      <div
+        className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat z-[-1]"
+        style={{ backgroundImage: "url('/images/backgr.jpg')" }}
+        aria-hidden="true"
+      ></div>
+      <div className="text-center mt-20">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Candidate Onboarding</h1>
+      </div>
+      
+      <div className="max-w-2xl mx-auto px-6 py-4">
+        <div className="text-center py-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 text-lg">Loading onboarding...</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const CandidateOnboarding = ({ data = { frontmatter: { title: 'Candidate Onboarding' } } }) => {
+  return (
+    <Suspense fallback={<OnboardingLoadingFallback />}>
+      <CandidateOnboardingContent data={data} />
+    </Suspense>
   );
 };
 

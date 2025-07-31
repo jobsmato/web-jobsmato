@@ -18,7 +18,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const HomeBanner = ({ banner: bannerData, brands }) => {
   const router = useRouter();
-
+  const [isClient, setIsClient] = useState(false);
   const [fontSize, setFontSize] = useState("2rem"); // Default font size
 
   // Handle Need Job button click
@@ -65,6 +65,16 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
   };
 
   useEffect(() => {
+    setIsClient(true);
+    
+    // Load lottie-player script
+    if (typeof window !== 'undefined' && !window.customElements.get('lottie-player')) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    
     // Adjust font size based on screen height
     const adjustFontSize = () => {
       const screenHeight = window.innerHeight;
@@ -247,15 +257,16 @@ style={{width: "320px",zIndex :'3'}}
 
                 <div className="banner-content absolute left-[3vh] pb-[18vh] md:pb-[45vh] pt-[75vh] sm:pt-[74vh] md:pt-[90vh] lg:pt-[60vh] xl:pt-[60vh] xl:pl-[10vh]  xl:pl-[5vh] 2xl:pl-[20vh] text-Left ">
                 <div className="hidden lg:block  ">
-                <lottie-player
-autoplay
-controls={false}
-loop
-mode="normal"
-src="/videos/ResumeEvaluation.json"
-style={{width: "320px",zIndex :'3'}}
-></lottie-player>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                {isClient && (
+                  <lottie-player
+                    autoplay
+                    controls={false}
+                    loop
+                    mode="normal"
+                    src="/videos/ResumeEvaluation.json"
+                    style={{width: "320px",zIndex :'3'}}
+                  ></lottie-player>
+                )}
 </div>    
                           <h1
                       className="mb-0 ml-4 text-primary banner-title"

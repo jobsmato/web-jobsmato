@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "../../lib/utils/cn";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 import {
   IconBoxAlignRightFilled,
@@ -13,7 +13,7 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Dashboard() {
+function DashboardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -126,6 +126,30 @@ export default function Dashboard() {
         </BentoGrid>
       </div>
     </div>
+  );
+}
+
+function DashboardLoadingFallback() {
+  return (
+    <div className="relative min-h-screen bg-gray-50 flex items-center justify-center py-8 pt-36 md:pt-20 overflow-hidden">
+      <div
+        className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+        style={{ backgroundImage: "url('/images/backgr.jpg')" }}
+        aria-hidden="true"
+      ></div>
+      <div className="relative z-20 text-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
+        <p className="mt-4 text-gray-600">Loading dashboard...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <Suspense fallback={<DashboardLoadingFallback />}>
+      <DashboardContent />
+    </Suspense>
   );
 }
 

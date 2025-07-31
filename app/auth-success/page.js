@@ -1,9 +1,9 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-export default function AuthSuccess() {
+function AuthSuccessContent() {
   const [isProcessing, setIsProcessing] = useState(true);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -147,5 +147,29 @@ export default function AuthSuccess() {
         <p className="text-sm text-gray-500">Redirecting to onboarding...</p>
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="relative flex min-h-screen items-center justify-center bg-gray-50 overflow-hidden pt-36">
+      <div
+        className="banner-bg absolute left-0 top-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+        style={{ backgroundImage: "url('/images/backgr.jpg')" }}
+        aria-hidden="true"
+      ></div>
+      <div className="relative z-20 bg-white p-8 rounded shadow-md w-full max-w-md text-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading authentication...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function AuthSuccess() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <AuthSuccessContent />
+    </Suspense>
   );
 } 

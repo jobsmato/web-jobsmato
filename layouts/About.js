@@ -8,8 +8,15 @@ import Circle from "./components/Circle";
 import Cta from "./components/Cta";
 import ImageFallback from "./components/ImageFallback";
 import VideoPopup from "./components/VideoPopup";
+import { useState, useEffect } from "react";
 
 const About = ({ data }) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const { frontmatter } = data;
   const {
     title,
@@ -201,36 +208,59 @@ const About = ({ data }) => {
             {markdownify(clients.title, "h2", "section-title mt-4")}
           </div>
           <div className="animate from-right col-12 mt-16">
-            <Swiper
-              loop={true}
-              slidesPerView={3}
-              breakpoints={{
-                992: {
-                  slidesPerView: 5,
-                },
-              }}
-              spaceBetween={20}
-              modules={[Autoplay]}
-              autoplay={{ delay: 3000 }}
-            >
-              {clients.brands.map((brand, index) => (
-                <SwiperSlide
-                  className=" h-20 cursor-pointer px-6 py-6 grayscale  transition hover:grayscale-0 lg:px-10"
-                  key={"brand-" + index}
-                >
-                  <div className="relative h-full">
-                    <ImageFallback
-                      className="object-contain"
-                      src={brand}
-                      sizes="100vw"
-                      alt=""
-                      fill={true}
-                      priority={true}
-                    />
+            {isClient ? (
+              <Swiper
+                loop={true}
+                slidesPerView={3}
+                breakpoints={{
+                  992: {
+                    slidesPerView: 5,
+                  },
+                }}
+                spaceBetween={20}
+                modules={[Autoplay]}
+                autoplay={{ delay: 3000 }}
+              >
+                {clients.brands.map((brand, index) => (
+                  <SwiperSlide
+                    className=" h-20 cursor-pointer px-6 py-6 grayscale  transition hover:grayscale-0 lg:px-10"
+                    key={"brand-" + index}
+                  >
+                    <div className="relative h-full">
+                      <ImageFallback
+                        className="object-contain"
+                        src={brand}
+                        sizes="100vw"
+                        alt=""
+                        fill={true}
+                        priority={true}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              // Fallback content for server-side rendering
+              <div className="flex justify-center items-center space-x-4">
+                {clients.brands.slice(0, 5).map((brand, index) => (
+                  <div
+                    key={"brand-fallback-" + index}
+                    className="h-20 cursor-pointer px-6 py-6 grayscale lg:px-10 flex-shrink-0"
+                  >
+                    <div className="relative h-full w-20">
+                      <ImageFallback
+                        className="object-contain"
+                        src={brand}
+                        sizes="100vw"
+                        alt=""
+                        fill={true}
+                        priority={true}
+                      />
+                    </div>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
