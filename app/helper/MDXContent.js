@@ -127,7 +127,7 @@ const MDXContent = ({ content }) => {
   };
 
   return (
-    <>
+    <div>
       {/* @ts-ignore */}
       <MDXRemote
         source={content}
@@ -162,7 +162,7 @@ const MDXContent = ({ content }) => {
           {isLoggedIn ? 'Logout' : 'Get Enrolled'}
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
