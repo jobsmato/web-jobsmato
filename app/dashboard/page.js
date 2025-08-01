@@ -12,6 +12,7 @@ import {
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 function DashboardContent() {
   const router = useRouter();
@@ -29,7 +30,7 @@ function DashboardContent() {
         }
 
         // Call auth/me API
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 // import { ArrowUp } from "lucide-react";
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 const FloatingButton = () => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const FloatingButton = () => {
     if (token) {
       try {
         // Get current user profile to check completion status
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

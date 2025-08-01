@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography, Paper, Chip, Avatar, CircularProgress, Alert, Grid, Stack, Card, CardContent, IconButton, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { CheckCircle, Cancel, Person, Email, Phone, Business, TrendingUp, TrendingDown, Remove, Refresh, FilterList, Download, School, Work, CalendarToday, LocationOn } from '@mui/icons-material';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 // Custom stat card component
 const StatCard = ({ title, value, subtitle, trend, color = 'primary', icon }) => {
@@ -290,7 +291,7 @@ export default function CandidateDashboard() {
         params.append('status_filter', filters.status);
       }
 
-      const apiUrl = `http://localhost:8000/api/v1/candidates/?${params}`;
+      const apiUrl = buildApiUrl(API_ENDPOINTS.CANDIDATES.LIST) + `?${params}`;
       console.log('API URL:', apiUrl);
       
       const response = await fetch(apiUrl, {

@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 // API call for recruiter registration
 async function registerRecruiter(recruiterData) {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/auth/register/recruiter', {
+    const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.RECRUITER_SIGNUP), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

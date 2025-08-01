@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import menuData from "./menuData";
+import { buildApiUrl, API_ENDPOINTS } from '../../../config/api';
 
 const Header = () => {
   const router = useRouter();
@@ -109,7 +110,7 @@ const Header = () => {
       // For regular users, check profile completion
       try {
         // Get current user profile to check completion status
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -167,7 +168,7 @@ const Header = () => {
       // Regular user goes to user dashboard
       try {
         // Get current user profile to check completion status
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

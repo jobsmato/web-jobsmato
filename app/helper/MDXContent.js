@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 const MDXContent = ({ content }) => {
   const router = useRouter();
@@ -86,7 +87,7 @@ const MDXContent = ({ content }) => {
       // For regular users, check profile completion
       try {
         // Get current user profile to check completion status
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
