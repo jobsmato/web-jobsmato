@@ -2,6 +2,7 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 function AuthSuccessContent() {
   const [isProcessing, setIsProcessing] = useState(true);
@@ -35,7 +36,7 @@ function AuthSuccessContent() {
 
         // Get user profile to check if they have a candidate profile
         try {
-          const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+          const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography, Paper, Chip, Avatar, CircularProgress, Alert, Grid, Stack, Card, CardContent, IconButton, Tooltip, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel } from '@mui/material';
 import { CheckCircle, Cancel, Person, Email, Phone, Business, TrendingUp, TrendingDown, Remove, Refresh, FilterList, Download } from '@mui/icons-material';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 // Custom stat card component
 const StatCard = ({ title, value, subtitle, trend, color = 'primary', icon }) => {
@@ -64,6 +65,7 @@ const StatCard = ({ title, value, subtitle, trend, color = 'primary', icon }) =>
         border: `1px solid ${color}.main`,
       }
     }}>
+    
       <CardContent sx={{ p: 2 }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
           <Box sx={{ 
@@ -331,7 +333,7 @@ export default function LeadDashboard() {
       const params = new URLSearchParams();
 
       // No filters applied - show all leads
-      const apiUrl = `http://localhost:8000/api/v1/leads/?${params}`;
+      const apiUrl = buildApiUrl(API_ENDPOINTS.LEADS.LIST) + `?${params}`;
       console.log('API URL:', apiUrl);
       
       const response = await fetch(apiUrl, {

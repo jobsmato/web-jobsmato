@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 // API call for recruiter login
 async function loginRecruiter(credentials) {
@@ -14,7 +15,7 @@ async function loginRecruiter(credentials) {
     formData.append('client_id', '');
     formData.append('client_secret', '');
 
-    const response = await fetch('http://localhost:8000/api/v1/auth/login/recruiter', {
+    const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.RECRUITER_LOGIN), {
       method: 'POST',
       headers: {
         'accept': 'application/json',

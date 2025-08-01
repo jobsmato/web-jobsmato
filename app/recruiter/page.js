@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 // Mock database storage
 function storeCandidateInfo(candidate) {
@@ -72,7 +73,7 @@ export default function RecruiterPage() {
       // Get recruiter's user ID from the token or API
       let recruiterUserId = 0;
       try {
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -90,7 +91,7 @@ export default function RecruiterPage() {
       
       // Check if email already exists in leads
       try {
-        const emailCheckResponse = await fetch(`http://localhost:8000/api/v1/leads/check-email/${encodeURIComponent(form.email)}`, {
+        const emailCheckResponse = await fetch(buildApiUrl(API_ENDPOINTS.LEADS.CHECK_EMAIL(form.email)), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -131,7 +132,7 @@ export default function RecruiterPage() {
             allow_communication: true
           };
           
-          const createUserResponse = await fetch('http://localhost:8000/api/v1/auth/create-user', {
+          const createUserResponse = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.CREATE_USER), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -190,7 +191,7 @@ export default function RecruiterPage() {
       console.log('Final lead data:', leadData);
       
       // Call the leads API
-      const leadsResponse = await fetch('http://localhost:8000/api/v1/leads/', {
+              const leadsResponse = await fetch(buildApiUrl(API_ENDPOINTS.LEADS.CREATE), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -6,6 +6,7 @@ import Circle from "./Circle";
 import ImageFallback from "./ImageFallback";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 function Cta() {
   const router = useRouter();
@@ -83,7 +84,7 @@ function Cta() {
       // For regular users, check profile completion
       try {
         // Get current user profile to check completion status
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,

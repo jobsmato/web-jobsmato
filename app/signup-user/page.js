@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 // API call for user registration
 async function registerUser(userData) {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/auth/register/user', {
+    const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.USER_SIGNUP), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ export default function SignupUser() {
   // Google login handler
   const handleGoogleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/google/login', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.GOOGLE_OAUTH), {
         method: 'GET',
         headers: {
           'accept': 'application/json',

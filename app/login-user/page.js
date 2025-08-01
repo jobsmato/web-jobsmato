@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { buildApiUrl, API_ENDPOINTS } from '../config/api';
 
 // API call for user login
 async function loginUser(credentials) {
@@ -15,7 +16,7 @@ async function loginUser(credentials) {
     formData.append('client_id', '');
     formData.append('client_secret', '');
 
-    const response = await fetch('http://localhost:8000/api/v1/auth/login', {
+    const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.LOGIN), {
       method: 'POST',
       headers: {
         'accept': 'application/json',
@@ -43,7 +44,7 @@ export default function LoginUser() {
   // Google login handler
   const handleGoogleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/auth/google/login', {
+      const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.GOOGLE_OAUTH), {
         method: 'GET',
         headers: {
           'accept': 'application/json',

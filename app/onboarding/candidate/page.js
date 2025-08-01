@@ -4,6 +4,7 @@ import React, { useReducer, useRef, useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronRightIcon, CheckCircleIcon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { UserIcon, BriefcaseIcon, AcademicCapIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 // Modern styling with better visual hierarchy
 const containerStyles = "max-w-2xl mx-auto px-6 py-4";
@@ -828,7 +829,7 @@ const CandidateOnboardingContent = ({ data = { frontmatter: { title: 'Candidate 
         }
 
         // Call auth/me API
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -913,7 +914,7 @@ const CandidateOnboardingContent = ({ data = { frontmatter: { title: 'Candidate 
         let candidateId = null;
         
         try {
-          const profileRes = await fetch('http://localhost:8000/api/v1/auth/me', {
+          const profileRes = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
             method: 'GET',
             headers: { 
               'Authorization': `Bearer ${token}`,
@@ -965,9 +966,9 @@ const CandidateOnboardingContent = ({ data = { frontmatter: { title: 'Candidate 
         console.log('=== LOADING ONBOARDING DATA ===');
         console.log('For candidate_id:', candidateId);
         console.log('Current user ID:', currentUserId);
-        console.log('API URL:', `http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`);
+        console.log('API URL:', buildApiUrl(API_ENDPOINTS.CANDIDATES.GET_BY_ID(candidateId)));
         
-        const res = await fetch(`http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`, {
+        const res = await fetch(buildApiUrl(API_ENDPOINTS.CANDIDATES.GET_BY_ID(candidateId)), {
           method: 'GET',
           headers: { 
             'Authorization': `Bearer ${token}`,
@@ -1280,21 +1281,21 @@ const CandidateOnboardingContent = ({ data = { frontmatter: { title: 'Candidate 
       const candidateId = localStorage.getItem('candidate_id');
       console.log('Current candidate_id in localStorage:', candidateId);
       let method = 'POST';
-      let url = 'http://localhost:8000/api/v1/candidates/onboarding';
+      let url = buildApiUrl(API_ENDPOINTS.CANDIDATES.ONBOARDING);
       
       // Force POST (new candidate creation) if recruiter is accessing for a candidate
       if (urlUserId && userType === 'recruiter') {
         console.log('=== RECRUITER CREATING NEW CANDIDATE ===');
         console.log('Forcing POST method for new candidate creation');
         method = 'POST';
-        url = 'http://localhost:8000/api/v1/candidates/onboarding';
+        url = buildApiUrl(API_ENDPOINTS.CANDIDATES.ONBOARDING);
         // Clear any existing candidate_id to ensure new creation
         localStorage.removeItem('candidate_id');
       }
       // If we have a candidate_id and it's not a recruiter access, check if the candidate exists
       else if (candidateId) {
         try {
-          const checkRes = await fetch(`http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`, {
+          const checkRes = await fetch(buildApiUrl(API_ENDPOINTS.CANDIDATES.GET_BY_ID(candidateId)), {
             method: 'GET',
             headers: { 
               'Authorization': `Bearer ${token}`,
@@ -1305,7 +1306,7 @@ const CandidateOnboardingContent = ({ data = { frontmatter: { title: 'Candidate 
           if (checkRes.ok) {
             // Candidate exists, use PUT for update
             method = 'PUT';
-            url = `http://localhost:8000/api/v1/candidates/${candidateId}/onboarding`;
+            url = buildApiUrl(API_ENDPOINTS.CANDIDATES.GET_BY_ID(candidateId));
             console.log('Candidate exists, using PUT for update');
           } else if (checkRes.status === 404) {
             // Candidate doesn't exist, use POST for new

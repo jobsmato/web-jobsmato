@@ -5,6 +5,7 @@ import ImageFallback from "@layouts/components/ImageFallback";
 import ImageFallback1 from "@layouts/components/ImageFallback1";
 import useScreenSize from './ScreenSize';
 import { useRouter } from "next/navigation";
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 
 
@@ -27,7 +28,7 @@ const HomeBanner = ({ banner: bannerData, brands }) => {
     if (token) {
       try {
         // Get current user profile to check completion status
-        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+        const response = await fetch(buildApiUrl(API_ENDPOINTS.AUTH.ME), {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
