@@ -12,7 +12,7 @@ import {
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { buildApiUrl, API_ENDPOINTS } from '../config/api';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 function DashboardContent() {
   const router = useRouter();

@@ -4,7 +4,7 @@ import React, { useReducer, useRef, useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChevronRightIcon, CheckCircleIcon, ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { UserIcon, BriefcaseIcon, AcademicCapIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
-import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
+import { buildApiUrl, API_ENDPOINTS } from '../../../config/api';
 
 // Modern styling with better visual hierarchy
 const containerStyles = "max-w-2xl mx-auto px-6 py-4";
