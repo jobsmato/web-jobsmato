@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { buildApiUrl, API_ENDPOINTS } from '../config/api';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 // API call for user login
 async function loginUser(credentials) {

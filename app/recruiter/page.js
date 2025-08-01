@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { buildApiUrl, API_ENDPOINTS } from '../config/api';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 
 // Mock database storage
 function storeCandidateInfo(candidate) {

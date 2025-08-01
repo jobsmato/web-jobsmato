@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { buildApiUrl, API_ENDPOINTS } from '../config/api';
+import { buildApiUrl, API_ENDPOINTS } from '../../config/api';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 // API call for recruiter registration
