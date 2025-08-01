@@ -4,37 +4,72 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-// Mock API call for sending welcome email
-async function sendWelcomeEmail(email) {
-  // Simulate API call
-  console.log("Sending welcome email to:", email);
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("Welcome email sent successfully");
-      resolve();
-    }, 1000);
-  });
+// API call for recruiter registration
+async function registerRecruiter(recruiterData) {
+  try {
+    const response = await fetch('http://localhost:8000/api/v1/auth/register/recruiter', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+      },
+      body: JSON.stringify(recruiterData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.detail || 'Registration failed');
+    }
+
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
 }
 
 export default function SignupRecruiter() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError("");
     
     // Get form data
     const formData = new FormData(e.target);
     const email = formData.get('email');
+    const phone = formData.get('phone');
+    const firstName = formData.get('firstName');
+    const lastName = formData.get('lastName');
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+    
+    // Validate passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setIsSubmitting(false);
+      return;
+    }
     
     try {
-      // Here you would normally handle signup logic
-      // For now, just simulate signup
+      // Prepare recruiter data for API
+      const recruiterData = {
+        email: email,
+        first_name: firstName,
+        last_name: lastName,
+        phone: phone,
+        password: password,
+        confirm_password: confirmPassword,
+        user_type: "recruiter"
+      };
       
-      // Send welcome email
-      await sendWelcomeEmail(email);
+      // Call the registration API
+      const response = await registerRecruiter(recruiterData);
+      
+      console.log("Registration successful:", response);
       
       // Show success message
       setShowSuccess(true);
@@ -46,6 +81,7 @@ export default function SignupRecruiter() {
       
     } catch (error) {
       console.error("Error during signup:", error);
+      setError(error.message || "Registration failed. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -90,9 +126,9 @@ export default function SignupRecruiter() {
       <div className="relative z-20 bg-white p-8 rounded shadow-md w-full max-w-xl">
         {/* Toggle Navigation */}
         <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
-          <Link href="/signup-user" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
-            User Signup
-          </Link>
+        <Link href="/login-recruiter" className="flex-1 text-center py-2 px-4 text-gray-600 hover:text-gray-800">
+          Recruiter Login
+        </Link>
           <Link href="/signup-recruiter" className="flex-1 text-center py-2 px-4 bg-primary text-white rounded-md">
             Recruiter Signup
           </Link>
@@ -125,6 +161,14 @@ export default function SignupRecruiter() {
             <label className="block text-gray-700 mb-2" htmlFor="confirmPassword">Confirm Password</label>
             <input className="w-full px-3 py-2 border rounded" type="password" id="confirmPassword" name="confirmPassword" required />
           </div>
+          
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
+          
           <button 
             className="w-full bg-primary text-white py-2 rounded hover:bg-primary/90 transition mb-4 disabled:opacity-50" 
             type="submit"

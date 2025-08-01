@@ -5,6 +5,10 @@
       "url": "/"
     },
     {
+      "name": "Dashboard",
+      "url": "/dashboard"
+    },
+    {
       "name": "Enrollment",
       "url": "",
       "hasChildren": true,

@@ -4,6 +4,7 @@ import Circle from "@layouts/components/Circle";
 import ImageFallback from "@layouts/components/ImageFallback";
 import ImageFallback1 from "@layouts/components/ImageFallback1";
 import useScreenSize from './ScreenSize';
+import { useRouter } from "next/navigation";
 
 
 
@@ -16,10 +17,64 @@ import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const HomeBanner = ({ banner: bannerData, brands }) => {
-
+  const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
   const [fontSize, setFontSize] = useState("2rem"); // Default font size
 
+  // Handle Need Job button click
+  const handleNeedJob = async () => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      try {
+        // Get current user profile to check completion status
+        const response = await fetch('http://localhost:8000/api/v1/auth/me', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const userData = await response.json();
+          console.log('User profile data:', userData);
+
+          // Check if user has completed onboarding
+          if (userData.has_candidate_profile && userData.candidate_id) {
+            // User has completed onboarding, redirect to dashboard
+            console.log('User has completed onboarding, redirecting to dashboard');
+            router.push('/dashboard');
+            return;
+          } else {
+            // User hasn't completed onboarding, redirect to onboarding
+            console.log('User needs to complete onboarding, redirecting to onboarding');
+            router.push('/onboarding/candidate');
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+        // If API call fails, default to onboarding
+        router.push('/onboarding/candidate');
+        return;
+      }
+    } else {
+      // User is not logged in, redirect to login
+      router.push('/login-user');
+    }
+  };
+
   useEffect(() => {
+    setIsClient(true);
+    
+    // Load lottie-player script
+    if (typeof window !== 'undefined' && !window.customElements.get('lottie-player')) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    
     // Adjust font size based on screen height
     const adjustFontSize = () => {
       const screenHeight = window.innerHeight;
@@ -202,15 +257,16 @@ style={{width: "320px",zIndex :'3'}}
 
                 <div className="banner-content absolute left-[3vh] pb-[18vh] md:pb-[45vh] pt-[75vh] sm:pt-[74vh] md:pt-[90vh] lg:pt-[60vh] xl:pt-[60vh] xl:pl-[10vh]  xl:pl-[5vh] 2xl:pl-[20vh] text-Left ">
                 <div className="hidden lg:block  ">
-                <lottie-player
-autoplay
-controls={false}
-loop
-mode="normal"
-src="/videos/ResumeEvaluation.json"
-style={{width: "320px",zIndex :'3'}}
-></lottie-player>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                {isClient && (
+                  <lottie-player
+                    autoplay
+                    controls={false}
+                    loop
+                    mode="normal"
+                    src="/videos/ResumeEvaluation.json"
+                    style={{width: "320px",zIndex :'3'}}
+                  ></lottie-player>
+                )}
 </div>    
                           <h1
                       className="mb-0 ml-4 text-primary banner-title"
@@ -238,13 +294,11 @@ style={{width: "320px",zIndex :'3'}}
                   <div className="banner-btn mt-2 ml-3  xl:ml-5 space-x-7 opacity-0">
 
                                           <button
+                        onClick={handleNeedJob}
                         className="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
                       >
-                                          <Link
-                                            href={bannerData.link.href}
-                                          >
                                             {bannerData.link.label}
-                                          </Link></button>
+                                          </button>
      
                   </div>
     </div>
