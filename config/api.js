@@ -6,7 +6,7 @@ const API_CONFIG = {
   },
   // Production environment
   production: {
-    baseUrl: 'http://20.57.16.254:8000'
+    baseUrl: 'http://api.jobsmato.com'
   }
 };
 
