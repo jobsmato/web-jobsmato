@@ -259,14 +259,14 @@ style={{width: "320px",zIndex :'3'}}
                 <div className="banner-content absolute left-[3vh] pb-[18vh] md:pb-[45vh] pt-[75vh] sm:pt-[74vh] md:pt-[90vh] lg:pt-[60vh] xl:pt-[60vh] xl:pl-[10vh]  xl:pl-[5vh] 2xl:pl-[20vh] text-Left ">
                 <div className="hidden lg:block  ">
                 {isClient && (
-                  <lottie-player
-                    autoplay
-                    controls={false}
-                    loop
-                    mode="normal"
-                    src="/videos/ResumeEvaluation.json"
-                    style={{width: "320px",zIndex :'3'}}
-                  ></lottie-player>
+                <lottie-player
+autoplay
+controls={false}
+loop
+mode="normal"
+src="/videos/ResumeEvaluation.json"
+style={{width: "320px",zIndex :'3'}}
+></lottie-player>
                 )}
 </div>    
                           <h1
@@ -297,7 +297,7 @@ style={{width: "320px",zIndex :'3'}}
                                           <button
                         onClick={handleNeedJob}
                         className="relative rounded-full bg-primary  px-12 py-4 font-mono font-bold text-white transition-colors duration-300 ease-linear before:absolute before:right-1/2 before:top-1/2 before:-z-[1] before:h-3/4 before:w-2/3 before:origin-bottom-left before:-translate-y-1/2 before:translate-x-1/2 before:animate-ping before:rounded-full before:bg-blue-500 hover:bg-blue-700 hover:before:bg-blue-700"
-                      >
+                                          >
                                             {bannerData.link.label}
                                           </button>
      

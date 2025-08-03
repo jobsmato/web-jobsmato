@@ -6,7 +6,7 @@ const API_CONFIG = {
   },
   // Production environment
   production: {
-    baseUrl: 'https://api.jobsmato.com'
+    baseUrl: 'http://20.57.16.254:8000'
   }
 };
 
@@ -14,8 +14,11 @@ const API_CONFIG = {
 const getEnvironment = () => {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
-    // In browser, check for environment variable or default to development
-    return process.env.NODE_ENV || 'development';
+    // Check if we're on the production domain
+    if (window.location.hostname === 'www.jobsmato.com' || window.location.hostname === 'jobsmato.com') {
+      return 'production';
+    }
+    return 'development';
   }
   // In server-side rendering, use NODE_ENV
   return process.env.NODE_ENV || 'development';
@@ -48,7 +51,7 @@ export const API_ENDPOINTS = {
     SIGNUP: '/api/v1/auth/signup',
     ME: '/api/v1/auth/me',
     CREATE_USER: '/api/v1/auth/create-user',
-    GOOGLE_OAUTH: '/api/v1/auth/google',
+    GOOGLE_OAUTH: '/api/v1/auth/google/login',
     RECRUITER_LOGIN: '/api/v1/auth/login/recruiter',
     RECRUITER_SIGNUP: '/api/v1/auth/register/recruiter',
     USER_SIGNUP: '/api/v1/auth/register/user'
