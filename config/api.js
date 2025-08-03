@@ -6,7 +6,7 @@ const API_CONFIG = {
   },
   // Production environment
   production: {
-    baseUrl: 'http://api.jobsmato.com'
+    baseUrl: 'https://api.jobsmato.com'
   }
 };
 
