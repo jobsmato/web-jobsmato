@@ -5,3 +5,257 @@ strong {
 code {
   @apply after:border-none;
 }
+
+/* Floating animations for hero images */
+@keyframes float-1 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-5px) translateX(-8px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(3px) rotate(1deg);
+  }
+}
+
+@keyframes float-2 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-12px) translateX(-6px) rotate(-2deg);
+  }
+  66% {
+    transform: translateY(-8px) translateX(10px) rotate(3deg);
+  }
+}
+
+@keyframes float-3 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  20% {
+    transform: translateY(-8px) translateX(4px) rotate(1deg);
+  }
+  40% {
+    transform: translateY(-16px) translateX(-5px) rotate(-2deg);
+  }
+  60% {
+    transform: translateY(-6px) translateX(8px) rotate(2deg);
+  }
+  80% {
+    transform: translateY(-12px) translateX(-3px) rotate(-1deg);
+  }
+}
+
+.animate-float-1 {
+  animation: float-1 infinite ease-in-out;
+}
+
+.animate-float-2 {
+  animation: float-2 infinite ease-in-out;
+}
+
+.animate-float-3 {
+  animation: float-3 infinite ease-in-out;
+}
+
+/* Custom dropdown styling for state selector */
+.banner-btn select {
+  /* Force dropdown to appear below */
+  direction: ltr;
+}
+
+.banner-btn select option {
+  /* Style individual options */
+  padding: 8px 12px;
+  line-height: 1.5;
+  max-height: 40px;
+}
+
+/* Custom scrollable dropdown */
+.banner-btn select[size="1"] {
+  /* Show maximum 5 options when opened */
+  overflow-y: auto;
+}
+
+/* Webkit browsers (Chrome, Safari) dropdown styling */
+.banner-btn select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.banner-btn select::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.banner-btn select::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+.banner-btn select::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Glass Liquid Effect for Select State Button */
+.glass-liquid-button {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glass-liquid-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s;
+  border-radius: inherit;
+}
+
+.glass-liquid-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: liquid-wave 4s ease-in-out infinite;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.glass-liquid-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: rgba(59, 130, 246, 0.3);
+}
+
+.glass-liquid-button:hover::before {
+  left: 100%;
+}
+
+.glass-liquid-button:active {
+  transform: translateY(0px);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Liquid wave animation */
+@keyframes liquid-wave {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: rotate(270deg) scale(1.05);
+    opacity: 0.4;
+  }
+}
+
+/* Additional liquid bubble effect */
+.glass-liquid-button:hover::after {
+  animation: liquid-bubble 2s ease-in-out infinite;
+}
+
+@keyframes liquid-bubble {
+  0%, 100% {
+    transform: scale(1) translateX(0) translateY(0);
+    opacity: 0.2;
+  }
+  33% {
+    transform: scale(1.2) translateX(10px) translateY(-5px);
+    opacity: 0.4;
+  }
+  66% {
+    transform: scale(0.8) translateX(-8px) translateY(3px);
+    opacity: 0.3;
+  }
+}
+
+/* Select State Button Styles */
+.select-state-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  background-color: #006aff;
+  border: 8px solid #c0dfff;
+  color: white;
+  gap: 8px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: visible;
+}
+
+.select-state-text {
+  font-size: 1.7em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.select-state-icon {
+  padding-top: 5px;
+  height: 100%;
+  width: fit-content;
+}
+
+.select-state-icon svg {
+  width: 50px;
+  height: 30px;
+}
+
+.select-state-btn:hover {
+  border: 8px solid #b1d8ff;
+  background-color: #1b7aff;
+}
+
+.select-state-btn:active {
+  border: 5px solid #c0dfff;
+}
+
+.select-state-btn:hover .select-state-icon svg {
+  animation: state-jello-vertical 0.9s both;
+  transform-origin: left;
+}
+
+@keyframes state-jello-vertical {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
